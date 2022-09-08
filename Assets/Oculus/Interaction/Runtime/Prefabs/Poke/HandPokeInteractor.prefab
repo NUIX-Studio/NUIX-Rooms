@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7879687895361821095}
   m_RootOrder: 0
@@ -46,7 +47,6 @@ MonoBehaviour:
   _hand: {fileID: 5346183831593185114}
   _pokeInteractor: {fileID: 482801000701448007}
   _syntheticHand: {fileID: 0}
-  _maxDistanceFromTouchPoint: 0.1
 --- !u!1 &5419937293532398298
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,6 +76,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5419937294994736466}
   - {fileID: 7879687895361821095}
@@ -111,6 +112,7 @@ MonoBehaviour:
   _interactableFilters: []
   _pointTransform: {fileID: 5419937294994736466}
   _touchReleaseThreshold: 0.002
+  _zThreshold: 0.001
   _dragStartCurve:
     _animationCurve:
       serializedVersion: 2
@@ -180,6 +182,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5419937293532398301}
   m_RootOrder: 0
@@ -226,6 +229,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1564414892678918720}
   m_Father: {fileID: 5419937293532398301}
