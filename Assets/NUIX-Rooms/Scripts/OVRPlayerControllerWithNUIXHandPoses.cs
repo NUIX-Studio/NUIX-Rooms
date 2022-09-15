@@ -167,6 +167,7 @@ public class OVRPlayerControllerWithNUIXHandPoses : MonoBehaviour
 	{
 		HandPoseRotateLeft = state;
 	}
+
 	void Start()
 	{
 		// Add eye-depth as a camera offset from the player controller
@@ -321,6 +322,9 @@ public class OVRPlayerControllerWithNUIXHandPoses : MonoBehaviour
 
 		Vector3 predictedXZ = Vector3.Scale((Controller.transform.localPosition + moveDirection), new Vector3(1, 0, 1));
 
+
+
+
 		// Move contoller
 		Controller.Move(moveDirection);
 		Vector3 actualXZ = Vector3.Scale(Controller.transform.localPosition, new Vector3(1, 0, 1));
@@ -382,9 +386,19 @@ public class OVRPlayerControllerWithNUIXHandPoses : MonoBehaviour
 				moveInfluence *= 2.0f;
 
 			Quaternion ort = transform.rotation;
-			Vector3 ortEuler = ort.eulerAngles;
-			ortEuler.z = ortEuler.x = 0f;
-			ort = Quaternion.Euler(ortEuler);
+			
+
+			if (HandPoseMoveForward || HandPoseMoveBackward)
+			{
+				Transform centerEye = CameraRig.centerEyeAnchor;
+				ort = Quaternion.AngleAxis(centerEye.rotation.eulerAngles.y, Vector3.up) * ort;
+			}
+            else
+            {
+				Vector3 ortEuler = ort.eulerAngles;
+				ortEuler.z = ortEuler.x = 0f;
+				ort = Quaternion.Euler(ortEuler);
+			}
 
 			if (moveForward)
 				MoveThrottle += ort * (transform.lossyScale.z * moveInfluence * Vector3.forward);

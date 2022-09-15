@@ -1019,7 +1019,7 @@ Transform:
   - {fileID: 4075748678329533835}
   - {fileID: 5651055855147841460}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1672063927632077120
 GameObject:
@@ -3606,6 +3606,9 @@ GameObject:
   - component: {fileID: 4075748678322777167}
   - component: {fileID: 4114397800436038411}
   - component: {fileID: 2704831939048426970}
+  - component: {fileID: 984741271}
+  - component: {fileID: 984741276}
+  - component: {fileID: 984741281}
   m_Layer: 0
   m_Name: OVRCameraRig
   m_TagString: Untagged
@@ -3721,6 +3724,69 @@ MonoBehaviour:
   usePerEyeCameras: 0
   useFixedUpdateForTracking: 0
   disableEyeAnchorCameras: 0
+--- !u!143 &984741271
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4075748678329833899}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.15
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.01
+  m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &984741276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4075748678329833899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d8d4d59aeaf9c4db6372c6933ef7b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraRig: {fileID: 2704831939048426970}
+  targetHand: {fileID: 4075748678329841139}
+  locomotionMenu: {fileID: 0}
+  offsetFromHand: {x: 0, y: 0.12, z: 0.05}
+  onLocomotionAction: {fileID: 0}
+--- !u!114 &984741281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4075748678329833899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed7eeec6648e724e9e8748e464c1bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Acceleration: 0.1
+  Damping: 1
+  BackAndSideDampen: 0.5
+  JumpForce: 0.3
+  RotationAmount: 1.5
+  RotationRatchet: 45
+  SnapRotation: 0
+  RotateAroundGuardianCenter: 1
+  FixedSpeedSteps: 0
+  HmdResetsY: 0
+  HmdRotatesY: 0
+  GravityModifier: 0.379
+  useProfileData: 1
+  EnableLinearMovement: 1
+  EnableRotation: 1
+  RotationEitherThumbstick: 1
 --- !u!1 &4075748678329833901
 GameObject:
   m_ObjectHideFlags: 0

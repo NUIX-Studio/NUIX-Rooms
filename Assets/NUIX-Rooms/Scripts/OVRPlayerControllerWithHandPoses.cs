@@ -151,22 +151,27 @@ public class OVRPlayerControllerWithHandPoses : MonoBehaviour
 	private bool HandPoseMoveBackward = false;
 	private bool HandPoseRotateRight = false;
 	private bool HandPoseRotateLeft = false;
+	private bool isHandUsed = false;
 
 	public void SetHandPoseMoveForward(bool state)
 	{
 		HandPoseMoveForward = state;
+		isHandUsed = state;
 	}
 	public void SetHandPoseMoveBackward(bool state)
 	{
 		HandPoseMoveBackward = state;
+		isHandUsed = state;
 	}
 	public void SetHandPoseRotateRight(bool state)
 	{
 		HandPoseRotateRight = state;
+		isHandUsed = state;
 	}
 	public void SetHandPoseRotateLeft(bool state)
 	{
 		HandPoseRotateLeft = state;
+		isHandUsed = state;
 	}
 
 	void Start()
@@ -324,6 +329,14 @@ public class OVRPlayerControllerWithHandPoses : MonoBehaviour
 
 		Vector3 predictedXZ = Vector3.Scale((Controller.transform.localPosition + moveDirection), new Vector3(1, 0, 1));
 
+		if (isHandUsed)
+        {
+			Transform centerEye = CameraRig.centerEyeAnchor;
+			moveDirection = Quaternion.Euler(0.0f, centerEye.rotation.eulerAngles.y, 0.0f) * moveDirection;
+
+		}
+
+		moveDirection = Vector3.zero;
 		// Move contoller
 		Controller.Move(moveDirection);
 		Vector3 actualXZ = Vector3.Scale(Controller.transform.localPosition, new Vector3(1, 0, 1));
