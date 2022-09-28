@@ -13,7 +13,6 @@ public class JSONSaving : MonoBehaviour
     void Start()
     {
         SetPaths();
-        SaveData();
     }
 
     private void SetPaths()
@@ -46,5 +45,11 @@ public class JSONSaving : MonoBehaviour
         string json = reader.ReadToEnd();
         GetComponent<ItemsStorage>().itemsData = JsonUtility.FromJson<ItemsData>(json);
         Debug.Log(GetComponent<ItemsStorage>().itemsData.ToString());
+    }
+
+    public void InstantiateData()
+    {
+        LoadData();
+        GetComponent<ItemsStorage>().AddItemsToScene();
     }
 }

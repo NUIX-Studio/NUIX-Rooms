@@ -2,6 +2,6 @@
 public enum ItemType
 {
     DEFAULT = 0,
-    TEXT,
+    TEXTPLATE,
     LIGHT
 }
