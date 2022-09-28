@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using TMPro;
 
+/// <summary>
+/// Requires JSONSaving component, while JsonSaving requires this one. (TODO)
+/// </summary>
+[RequireComponent(typeof(ItemsStorage))]
 public class JSONSaving : MonoBehaviour
 {
 
     private string path;
     private string persistentPath;
+
+    public TMPro.TMP_Text LogText;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +41,7 @@ public class JSONSaving : MonoBehaviour
         Debug.Log("saving Data at " + savePath);
         string json = JsonUtility.ToJson(GetComponent<ItemsStorage>().itemsData);
         Debug.Log(json);
+        LogText.text = json;
 
         using StreamWriter writer = new(savePath);
         writer.Write(json);
@@ -45,6 +53,7 @@ public class JSONSaving : MonoBehaviour
         string json = reader.ReadToEnd();
         GetComponent<ItemsStorage>().itemsData = JsonUtility.FromJson<ItemsData>(json);
         Debug.Log(GetComponent<ItemsStorage>().itemsData.ToString());
+        LogText.text = GetComponent<ItemsStorage>().itemsData.ToString();
     }
 
     public void InstantiateData()

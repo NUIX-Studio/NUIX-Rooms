@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class ItemData
@@ -11,10 +12,12 @@ public class ItemData
     public float rotation_z;
     public float rotation_w;
     public ItemType itemType;
+    [System.NonSerialized] public GameObject gameObject;
 
     public ItemData(ItemType itemType = ItemType.DEFAULT, 
         float position_x = 0f, float position_y = 0f, float position_z = 0f, 
-        float rotation_x = 0f, float rotation_y = 0f, float rotation_z = 0f, float rotation_w = 0f)
+        float rotation_x = 0f, float rotation_y = 0f, float rotation_z = 0f, float rotation_w = 0f,
+        GameObject gameObject = null)
     {
         this.position_x = position_x;
         this.position_y = position_y;
@@ -24,6 +27,7 @@ public class ItemData
         this.rotation_z = rotation_z;
         this.rotation_w = rotation_w;
         this.itemType = itemType;
+        this.gameObject = gameObject;
     }
 
     public override string ToString()

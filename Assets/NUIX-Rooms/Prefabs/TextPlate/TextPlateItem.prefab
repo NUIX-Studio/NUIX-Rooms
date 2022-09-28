@@ -12674,7 +12674,6 @@ GameObject:
   - component: {fileID: 5173079405420882266}
   - component: {fileID: 5173079405420882265}
   - component: {fileID: 5173079405420882264}
-  - component: {fileID: 5173079405420882267}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -12726,7 +12725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactableView: {fileID: 5173079405420882265}
-  _editor: {fileID: 5173079405420882267}
+  _editor: {fileID: 0}
   _colorShaderPropertyName: _Color
   _normalColorState:
     Color: {r: 1, g: 1, b: 1, a: 1}
@@ -12809,24 +12808,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     ColorTime: 0.1
---- !u!114 &5173079405420882267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5173079405420882269}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5e48d93b64a9ae4f9fd5a728c8f51af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _renderers:
-  - {fileID: 0}
-  _vectorProperties: []
-  _colorProperties: []
-  _floatProperties: []
-  _updateEveryFrame: 1
 --- !u!1 &5173079405443428901
 GameObject:
   m_ObjectHideFlags: 0
