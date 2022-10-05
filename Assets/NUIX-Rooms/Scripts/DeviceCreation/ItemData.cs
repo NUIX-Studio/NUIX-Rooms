@@ -38,13 +38,47 @@ public class ItemData
 }
 
 [System.Serializable]
+public class TextPlateItemData : ItemData
+{
+    public string text = "";
+    public bool isKeyboardOpen = true;
+
+    public TextPlateItemData(ItemType itemType,
+    float position_x, float position_y, float position_z,
+    float rotation_x, float rotation_y, float rotation_z, float rotation_w,
+    GameObject gameObject, string text, bool isKeyboardOpen) : base (itemType, position_x, position_y, position_z,
+    rotation_x, rotation_y, rotation_z, rotation_w, gameObject)
+    {
+        this.text = text;
+        this.isKeyboardOpen = isKeyboardOpen;
+    }
+    public TextPlateItemData(ItemData itemData, string text, bool isKeyboardOpen) 
+        : base (itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w, 
+    itemData.gameObject)
+    {
+        this.text = text;
+        this.isKeyboardOpen = isKeyboardOpen;
+    }
+    public override string ToString()
+    {
+        return $"Item of type {itemType} at position x = {position_x}, y = {position_y}, z = {position_z}, " +
+            $"rotation x = {rotation_x}, y = {rotation_y}, z = {rotation_z}, w = {rotation_w}," +
+            $"text = {text}, keyboard is open = {isKeyboardOpen}";
+    }
+}
+
+[System.Serializable]
 public class ItemsData
 {
     public List<ItemData> itemsData;
 
+    public List<TextPlateItemData> textPlateItemsData;
+
     public ItemsData()
     {
         this.itemsData = new List<ItemData>();
+        this.textPlateItemsData = new List<TextPlateItemData>();
     }
 
     public override string ToString()
@@ -52,10 +86,12 @@ public class ItemsData
         string res = "";
         foreach (ItemData itemData in itemsData)
         {
-            res += $"Item of type {itemData.itemType} at position x = {itemData.position_x}, " +
-                $"y = {itemData.position_y}, z = {itemData.position_z}, " +
-            $"rotation x = {itemData.rotation_x}, y = {itemData.rotation_y}, " +
-            $"z = {itemData.rotation_z}, w = {itemData.rotation_w}";
+            res += itemData.ToString();
+        }
+
+        foreach (TextPlateItemData itemData in textPlateItemsData)
+        {
+            res += itemData.ToString();
         }
         return res;
     }

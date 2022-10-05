@@ -12250,6 +12250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyboard: {fileID: 5173079404872383816}
+  plateText: {fileID: 5173079405768798180}
 --- !u!54 &5173079405099329112
 Rigidbody:
   m_ObjectHideFlags: 0

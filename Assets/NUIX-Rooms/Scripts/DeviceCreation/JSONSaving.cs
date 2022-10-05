@@ -35,6 +35,8 @@ public class JSONSaving : MonoBehaviour
 
     public void SaveData()
     {
+        /// Wrap the code inside if this method is executed 
+        GetComponent<ItemsStorage>().RetrieveItemsParams();
         print("saving data");
         string savePath = path;
 

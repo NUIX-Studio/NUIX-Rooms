@@ -1050,7 +1050,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93837870}
   m_LocalRotation: {x: -0.6168781, y: -0, z: -0, w: 0.7870587}
-  m_LocalPosition: {x: 0.16, y: 0.872, z: 1.484}
+  m_LocalPosition: {x: 0.685, y: 0.872, z: 1.484}
   m_LocalScale: {x: 0.036567, y: 0.036567, z: 0.036567}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7641,7 +7641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemsData:
     itemsData: []
-  ItemsDataGameObjects: []
+    textPlateItemsData: []
   textPlateItemDescription: {fileID: 272060347}
   lightItemDescription: {fileID: 745268694}
   defaultItemDescription: {fileID: 1715913916}
@@ -8772,7 +8772,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1775890980}
         m_TargetAssemblyTypeName: ItemsStorage, Assembly-CSharp
-        m_MethodName: AddItem
+        m_MethodName: CreateItem
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 272060345}
@@ -11747,7 +11747,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Alpha Cutout
+  m_text: Log Data
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -20055,7 +20055,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1775890980}
         m_TargetAssemblyTypeName: ItemsStorage, Assembly-CSharp
-        m_MethodName: AddItem
+        m_MethodName: CreateItem
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 745268692}
