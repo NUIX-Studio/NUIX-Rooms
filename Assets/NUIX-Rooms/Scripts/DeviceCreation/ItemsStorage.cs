@@ -40,16 +40,20 @@ public class ItemsStorage : MonoBehaviour
     {
         // Consider replace the iteration through lists to enumerable.concat
 
-        foreach (ItemData itemData in itemsData.itemsData)
+        foreach (ItemData itemData in itemsData.ConcatItemsData())
         {
             SetPositionAndRotationValuesForItemData(itemData);
         }
 
         foreach (TextPlateItemData itemData in itemsData.textPlateItemsData)
         {
-            SetPositionAndRotationValuesForItemData(itemData);
             itemData.text = itemData.gameObject.GetComponent<TextPlateItem>().plateText.text;
             itemData.isKeyboardOpen = itemData.gameObject.transform.Find("Visuals/Keyboard").gameObject.activeInHierarchy;
+        }
+
+        foreach (LightItemData itemData in itemsData.lightItemsData)
+        {
+            itemData.isTurnedON = itemData.gameObject.GetComponentInChildren<Light>().enabled;
         }
     }
 
@@ -60,18 +64,29 @@ public class ItemsStorage : MonoBehaviour
     public void CreateItem(GameObject item)
     {
         GameObject instantiatedItem = Instantiate(item.GetComponent<ItemDescription>().itemPrefab, SpawningAreaPosition, Quaternion.identity);
-        ItemData itemData = new ItemData(item.GetComponent<ItemDescription>().itemType,
+        ItemData itemData = new(item.GetComponent<ItemDescription>().itemType,
                 item.transform.position.x, item.transform.position.y, item.transform.position.z,
                 item.transform.rotation.x, item.transform.rotation.y, item.transform.rotation.z, item.transform.rotation.w,
                 instantiatedItem);
-        if (item.GetComponent<ItemDescription>().itemType == ItemType.TEXTPLATE)
+        switch(item.GetComponent<ItemDescription>().itemType)
         {
-            TextPlateItemData itemData1 = new TextPlateItemData(itemData, "Sample text", true);
-            itemsData.textPlateItemsData.Add(itemData1);
-        }
-        else
-        {
-            itemsData.itemsData.Add(itemData);
+            case ItemType.TEXTPLATE:
+                {
+                    TextPlateItemData textPlateItemData = new(itemData, "Sample text", true);
+                    itemsData.textPlateItemsData.Add(textPlateItemData);
+                    break;
+                }
+            case ItemType.LIGHT:
+                {
+                    LightItemData lightItemData = new(itemData, true);
+                    itemsData.lightItemsData.Add(lightItemData);
+                    break;
+                }
+            default:
+                {
+                    itemsData.itemsData.Add(itemData);
+                    break;
+                }
         }
     }
 
@@ -98,6 +113,7 @@ public class ItemsStorage : MonoBehaviour
             case ItemType.LIGHT:
                 {
                     instantiatedItem = Instantiate(lightItemDescription.itemPrefab, storedPosition, storedRotation);
+                    instantiatedItem.GetComponentInChildren<Light>().enabled = ((LightItemData)itemData).isTurnedON;
                     break;
                 }
             default:
@@ -110,12 +126,7 @@ public class ItemsStorage : MonoBehaviour
     }
     public void AddItemsToScene()
     {
-        foreach (ItemData itemData in itemsData.itemsData)
-        {
-            AddItemToScene(itemData);
-        }
-
-        foreach (ItemData itemData in itemsData.textPlateItemsData)
+        foreach (ItemData itemData in itemsData.ConcatItemsData())
         {
             AddItemToScene(itemData);
         }

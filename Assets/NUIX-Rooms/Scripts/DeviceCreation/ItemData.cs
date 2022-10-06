@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -69,27 +70,74 @@ public class TextPlateItemData : ItemData
 }
 
 [System.Serializable]
+public class LightItemData : ItemData
+{
+    public bool isTurnedON;
+
+    public LightItemData(ItemData itemData, bool isTurnedON)
+        : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w,
+    itemData.gameObject)
+    {
+        this.isTurnedON = isTurnedON;
+    }
+    public override string ToString()
+    {
+        return $"Item of type {itemType} at position x = {position_x}, y = {position_y}, z = {position_z}, " +
+            $"rotation x = {rotation_x}, y = {rotation_y}, z = {rotation_z}, w = {rotation_w}," +
+            $"light is on : {isTurnedON}";
+    }
+}
+
+
+[System.Serializable]
+public class ButtonItemData : ItemData
+{
+    // TODO: change to enum
+    public int type;
+
+    public ButtonItemData(ItemData itemData, int type)
+        : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w,
+    itemData.gameObject)
+    {
+        this.type = type;
+    }
+    public override string ToString()
+    {
+        return $"Item of type {itemType} at position x = {position_x}, y = {position_y}, z = {position_z}, " +
+            $"rotation x = {rotation_x}, y = {rotation_y}, z = {rotation_z}, w = {rotation_w}," +
+            $"type : {type}";
+    }
+}
+
+
+[System.Serializable]
 public class ItemsData
 {
     public List<ItemData> itemsData;
 
     public List<TextPlateItemData> textPlateItemsData;
 
+    public List<LightItemData> lightItemsData;
+
+
+    public IEnumerable<ItemData> ConcatItemsData()
+    {
+        return itemsData.Concat(textPlateItemsData).Concat(lightItemsData);
+    }
+
     public ItemsData()
     {
         this.itemsData = new List<ItemData>();
         this.textPlateItemsData = new List<TextPlateItemData>();
+        this.lightItemsData = new List<LightItemData>();
     }
 
     public override string ToString()
     {
         string res = "";
-        foreach (ItemData itemData in itemsData)
-        {
-            res += itemData.ToString();
-        }
-
-        foreach (TextPlateItemData itemData in textPlateItemsData)
+        foreach (ItemData itemData in ConcatItemsData())
         {
             res += itemData.ToString();
         }
