@@ -12,6 +12,8 @@ public class ItemsStorage : MonoBehaviour
     public ItemDescription textPlateItemDescription;
     public ItemDescription lightItemDescription;
     public ItemDescription buttonItemDescription;
+    public ItemDescription imageItemDescription;
+    public ItemDescription audioItemDescription;
 
     public Vector3 SpawningAreaPosition;
 
@@ -61,6 +63,16 @@ public class ItemsStorage : MonoBehaviour
         {
             itemData.type = 0;
         }
+
+        foreach (ImageItemData itemData in itemsData.imageItemsData)
+        {
+            // does nothing
+        }
+
+        foreach (AudioItemData itemData in itemsData.audioItemsData)
+        {
+            // does nothing
+        }
     }
 
     /// <summary>
@@ -92,6 +104,18 @@ public class ItemsStorage : MonoBehaviour
                 {
                     ButtonItemData buttonItemData = new(itemData, 0);
                     itemsData.buttonItemsData.Add(buttonItemData);
+                    break;
+                }
+            case ItemType.IMAGE:
+                {
+                    ImageItemData imageItemData = new(itemData);
+                    itemsData.imageItemsData.Add(imageItemData);
+                    break;
+                }
+            case ItemType.AUDIO:
+                {
+                    AudioItemData audioItemData = new(itemData);
+                    itemsData.audioItemsData.Add(audioItemData);
                     break;
                 }
             default:
@@ -132,6 +156,16 @@ public class ItemsStorage : MonoBehaviour
                 {
                     instantiatedItem = Instantiate(buttonItemDescription.itemPrefab, storedPosition, storedRotation);
                     // change button type
+                    break;
+                }
+            case ItemType.IMAGE:
+                {
+                    instantiatedItem = Instantiate(imageItemDescription.itemPrefab, storedPosition, storedRotation);
+                    break;
+                }
+            case ItemType.AUDIO:
+                {
+                    instantiatedItem = Instantiate(audioItemDescription.itemPrefab, storedPosition, storedRotation);
                     break;
                 }
             default:

@@ -4,5 +4,7 @@ public enum ItemType
     DEFAULT = 0,
     TEXTPLATE,
     LIGHT,
-    BUTTON
+    BUTTON,
+    IMAGE,
+    AUDIO
 }

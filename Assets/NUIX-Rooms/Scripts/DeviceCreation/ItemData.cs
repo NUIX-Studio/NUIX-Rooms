@@ -111,6 +111,42 @@ public class ButtonItemData : ItemData
     }
 }
 
+[System.Serializable]
+public class ImageItemData : ItemData
+{
+
+    public ImageItemData(ItemData itemData)
+        : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w,
+    itemData.gameObject)
+    {
+        
+    }
+    public override string ToString()
+    {
+        return $"Item of type {itemType} at position x = {position_x}, y = {position_y}, z = {position_z}, " +
+            $"rotation x = {rotation_x}, y = {rotation_y}, z = {rotation_z}, w = {rotation_w},";
+    }
+}
+
+[System.Serializable]
+public class AudioItemData : ItemData
+{
+
+    public AudioItemData(ItemData itemData)
+        : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w,
+    itemData.gameObject)
+    {
+        
+    }
+    public override string ToString()
+    {
+        return $"Item of type {itemType} at position x = {position_x}, y = {position_y}, z = {position_z}, " +
+            $"rotation x = {rotation_x}, y = {rotation_y}, z = {rotation_z}, w = {rotation_w},";
+    }
+}
+
 
 [System.Serializable]
 public class ItemsData
@@ -123,10 +159,18 @@ public class ItemsData
 
     public List<ButtonItemData> buttonItemsData;
 
+    public List<ImageItemData> imageItemsData;
+
+    public List<AudioItemData> audioItemsData;
+
 
     public IEnumerable<ItemData> ConcatItemsData()
     {
-        return itemsData.Concat(textPlateItemsData).Concat(lightItemsData).Concat(buttonItemsData);
+        return itemsData.Concat(textPlateItemsData).
+            Concat(lightItemsData).
+            Concat(buttonItemsData).
+            Concat(imageItemsData).
+            Concat(audioItemsData);
     }
 
     public ItemsData()
@@ -135,6 +179,8 @@ public class ItemsData
         this.textPlateItemsData = new List<TextPlateItemData>();
         this.lightItemsData = new List<LightItemData>();
         this.buttonItemsData = new List<ButtonItemData>();
+        this.imageItemsData = new List<ImageItemData>();
+        this.audioItemsData = new List<AudioItemData>();
     }
 
     public override string ToString()
