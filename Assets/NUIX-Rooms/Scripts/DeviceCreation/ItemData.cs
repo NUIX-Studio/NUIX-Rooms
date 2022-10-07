@@ -121,10 +121,12 @@ public class ItemsData
 
     public List<LightItemData> lightItemsData;
 
+    public List<ButtonItemData> buttonItemsData;
+
 
     public IEnumerable<ItemData> ConcatItemsData()
     {
-        return itemsData.Concat(textPlateItemsData).Concat(lightItemsData);
+        return itemsData.Concat(textPlateItemsData).Concat(lightItemsData).Concat(buttonItemsData);
     }
 
     public ItemsData()
@@ -132,6 +134,7 @@ public class ItemsData
         this.itemsData = new List<ItemData>();
         this.textPlateItemsData = new List<TextPlateItemData>();
         this.lightItemsData = new List<LightItemData>();
+        this.buttonItemsData = new List<ButtonItemData>();
     }
 
     public override string ToString()

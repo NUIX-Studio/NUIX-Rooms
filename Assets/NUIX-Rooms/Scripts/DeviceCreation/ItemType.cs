@@ -3,5 +3,6 @@ public enum ItemType
 {
     DEFAULT = 0,
     TEXTPLATE,
-    LIGHT
+    LIGHT,
+    BUTTON
 }

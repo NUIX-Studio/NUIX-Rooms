@@ -8,9 +8,10 @@ public class ItemsStorage : MonoBehaviour
     public ItemsData itemsData;
 
 
+    public ItemDescription defaultItemDescription;
     public ItemDescription textPlateItemDescription;
     public ItemDescription lightItemDescription;
-    public ItemDescription defaultItemDescription;
+    public ItemDescription buttonItemDescription;
 
     public Vector3 SpawningAreaPosition;
 
@@ -55,20 +56,25 @@ public class ItemsStorage : MonoBehaviour
         {
             itemData.isTurnedON = itemData.gameObject.GetComponentInChildren<Light>().enabled;
         }
+
+        foreach (ButtonItemData itemData in itemsData.buttonItemsData)
+        {
+            itemData.type = 0;
+        }
     }
 
     /// <summary>
     /// Instantiates an item 
     /// </summary>
     /// <param name="item"></param>
-    public void CreateItem(GameObject item)
+    public void CreateItem(ItemDescription item)
     {
-        GameObject instantiatedItem = Instantiate(item.GetComponent<ItemDescription>().itemPrefab, SpawningAreaPosition, Quaternion.identity);
-        ItemData itemData = new(item.GetComponent<ItemDescription>().itemType,
-                item.transform.position.x, item.transform.position.y, item.transform.position.z,
-                item.transform.rotation.x, item.transform.rotation.y, item.transform.rotation.z, item.transform.rotation.w,
+        GameObject instantiatedItem = Instantiate(item.itemPrefab, SpawningAreaPosition, Quaternion.identity);
+        ItemData itemData = new(item.itemType,
+                instantiatedItem.transform.position.x, instantiatedItem.transform.position.y, instantiatedItem.transform.position.z,
+                instantiatedItem.transform.rotation.x, instantiatedItem.transform.rotation.y, instantiatedItem.transform.rotation.z, instantiatedItem.transform.rotation.w,
                 instantiatedItem);
-        switch(item.GetComponent<ItemDescription>().itemType)
+        switch(item.itemType)
         {
             case ItemType.TEXTPLATE:
                 {
@@ -80,6 +86,12 @@ public class ItemsStorage : MonoBehaviour
                 {
                     LightItemData lightItemData = new(itemData, true);
                     itemsData.lightItemsData.Add(lightItemData);
+                    break;
+                }
+            case ItemType.BUTTON:
+                {
+                    ButtonItemData buttonItemData = new(itemData, 0);
+                    itemsData.buttonItemsData.Add(buttonItemData);
                     break;
                 }
             default:
@@ -114,6 +126,12 @@ public class ItemsStorage : MonoBehaviour
                 {
                     instantiatedItem = Instantiate(lightItemDescription.itemPrefab, storedPosition, storedRotation);
                     instantiatedItem.GetComponentInChildren<Light>().enabled = ((LightItemData)itemData).isTurnedON;
+                    break;
+                }
+            case ItemType.BUTTON:
+                {
+                    instantiatedItem = Instantiate(buttonItemDescription.itemPrefab, storedPosition, storedRotation);
+                    // change button type
                     break;
                 }
             default:
