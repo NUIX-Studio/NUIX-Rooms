@@ -156,6 +156,7 @@ public class OVRSpatialAnchor : MonoBehaviour
 
 
 
+
     /// <summary>
     /// Erases the <see cref="OVRSpatialAnchor"/> from persistent storage.
     /// </summary>
@@ -187,6 +188,7 @@ public class OVRSpatialAnchor : MonoBehaviour
             onComplete?.Invoke(this, false);
         }
     }
+
 
     private static void ThrowIfBound(Guid uuid)
     {

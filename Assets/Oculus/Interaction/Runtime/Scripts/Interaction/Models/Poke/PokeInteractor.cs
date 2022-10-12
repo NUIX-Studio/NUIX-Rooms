@@ -90,33 +90,18 @@ namespace Oculus.Interaction
             IEnumerable<PokeInteractable> interactables = PokeInteractable.Registry.List(this);
             foreach (PokeInteractable interactable in interactables)
             {
-                _previousSurfaceOriginMap[interactable] = interactable.Surface.Origin;
+                _previousSurfaceOriginMap[interactable] = interactable.Surface.Transform.GetPose();
             }
         }
 
-        public override bool ShouldSelect
+        protected override bool ComputeShouldSelect()
         {
-            get
-            {
-                if (State != InteractorState.Hover)
-                {
-                    return false;
-                }
-
-                return _candidate == _interactable && _hitInteractable != null;
-            }
+            return _hitInteractable != null;
         }
 
-        public override bool ShouldUnselect {
-            get
-            {
-                if (State != InteractorState.Select)
-                {
-                    return false;
-                }
-
-                return _hitInteractable == null;
-            }
+        protected override bool ComputeShouldUnselect()
+        {
+            return _hitInteractable == null;
         }
 
         protected override void DoHoverUpdate()
@@ -173,10 +158,10 @@ namespace Oculus.Interaction
             {
                 Pose previousSurfaceOrigin = _previousSurfaceOriginMap.ContainsKey(interactable)
                     ? _previousSurfaceOriginMap[interactable]
-                    : interactable.Surface.Origin;
+                    : interactable.Surface.Transform.GetPose();
 
                 Vector3 adjustedOrigin = AdjustOrigin(_previousPokeOrigin, previousSurfaceOrigin,
-                    interactable.Surface.Origin);
+                    interactable.Surface.Transform.GetPose());
 
                 if (!PassesEnterHoverDistanceCheck(adjustedOrigin, interactable))
                 {
@@ -255,7 +240,7 @@ namespace Oculus.Interaction
                 return true;
             }
 
-            if(ComputeDistanceAbove(interactable, position) > -1f * interactable.EnterHoverDistance)
+            if (ComputeDistanceAbove(interactable, position) > -1f * interactable.EnterHoverDistance)
             {
                 return false;
             }
@@ -328,10 +313,10 @@ namespace Oculus.Interaction
             {
                 Vector3 worldPosition = interactable.ClosestSurfacePoint(Origin);
                 _previousTouchPoint = worldPosition;
-                _previousSurfaceOrigin = interactable.Surface.Origin;
+                _previousSurfaceOrigin = interactable.Surface.Transform.GetPose();
 
                 _capturedTouchPoint = worldPosition;
-                _capturedSurfaceOrigin = interactable.Surface.Origin;
+                _capturedSurfaceOrigin = interactable.Surface.Transform.GetPose();
             }
 
             base.InteractableSelected(interactable);
@@ -386,33 +371,37 @@ namespace Oculus.Interaction
             Vector3 worldPositionOnSurface = interactable.ClosestSurfacePoint(Origin);
 
             Vector3 adjustedPreviousTouchPoint = AdjustOrigin(_previousTouchPoint, _previousSurfaceOrigin,
-                interactable.Surface.Origin);
+                interactable.Surface.Transform.GetPose());
 
             Vector3 adjustedCapturedTouchPoint = AdjustOrigin(_capturedTouchPoint, _capturedSurfaceOrigin,
-                interactable.Surface.Origin);
-
-            Vector2 lateralDelta =
-                interactable.Surface.GetSurfaceDistanceBetween(worldPositionOnSurface,
-                                                               adjustedCapturedTouchPoint);
-
-            Vector2 frameDelta =
-                interactable.Surface.GetSurfaceDistanceBetween(worldPositionOnSurface,
-                                                               adjustedPreviousTouchPoint);
+                interactable.Surface.Transform.GetPose());
 
             float depthDelta = Mathf.Abs(ComputeDepth(interactable, Origin) -
                                          ComputeDepth(interactable, _previousPokeOrigin));
+
+            Vector3 localPositionOnSurface =
+                interactable.Surface.Transform.InverseTransformPoint(worldPositionOnSurface);
+            Vector3 prevLocalPositionOnSurface =
+                interactable.Surface.Transform.InverseTransformPoint(adjustedPreviousTouchPoint);
+            Vector3 localFrameDelta = localPositionOnSurface - prevLocalPositionOnSurface;
+            Vector3 worldFrameDelta =
+                interactable.Surface.Transform.TransformVector(localFrameDelta);
+
             bool outsideDelta = false;
-            if (!_dragging && frameDelta.magnitude > depthDelta)
+            if (!_dragging && worldFrameDelta.magnitude > depthDelta)
             {
+                Vector3 captureDelta = worldPositionOnSurface - adjustedCapturedTouchPoint;
+                float horizontalCaptureDelta = new Vector2(captureDelta.x, captureDelta.z).magnitude;
+                float verticalCaptureDelta = captureDelta.y;
                 while (!outsideDelta)
                 {
-                    if (lateralDelta.x > _selectedInteractable.HorizontalDragThreshold)
+                    if (horizontalCaptureDelta > _selectedInteractable.HorizontalDragThreshold)
                     {
                         outsideDelta = true;
                         break;
                     }
 
-                    if (lateralDelta.y > _selectedInteractable.VerticalDragThreshold)
+                    if (verticalCaptureDelta > _selectedInteractable.VerticalDragThreshold)
                     {
                         outsideDelta = true;
                         break;
@@ -461,7 +450,7 @@ namespace Oculus.Interaction
             }
 
             _previousTouchPoint = worldPositionOnSurface;
-            _previousSurfaceOrigin = interactable.Surface.Origin;
+            _previousSurfaceOrigin = interactable.Surface.Transform.GetPose();
 
             Vector3 closestPoint = interactable.ComputeClosestPoint(Origin);
             float distanceFromPoint = (closestPoint - Origin).magnitude;

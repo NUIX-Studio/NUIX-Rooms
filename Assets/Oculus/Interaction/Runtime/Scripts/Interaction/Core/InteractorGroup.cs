@@ -32,7 +32,7 @@ namespace Oculus.Interaction
     /// By default, Interactors are prioritized in list order (first = highest priority).
     /// Interactors can also be prioritized with an optional ICandidateComparer
     /// </summary>
-    public class InteractorGroup : MonoBehaviour, IInteractor
+    public class InteractorGroup : MonoBehaviour, IInteractor, IUpdateDriver
     {
         [SerializeField, Interface(typeof(IInteractor))]
         private List<MonoBehaviour> _interactors;
@@ -231,7 +231,7 @@ namespace Oculus.Interaction
 
         public bool HasCandidate => _candidateInteractor != null && _candidateInteractor.HasCandidate;
 
-        public object Candidate => HasCandidate ? _candidateInteractor.Candidate : null;
+        public object CandidateProperties => HasCandidate ? _candidateInteractor.CandidateProperties : null;
 
         public bool HasInteractable => _activeInteractor != null &&
                                        _activeInteractor.HasInteractable;
@@ -267,8 +267,13 @@ namespace Oculus.Interaction
         public virtual void AddInteractor(IInteractor interactor)
         {
             Interactors.Add(interactor);
-            _interactors.Add(interactor as MonoBehaviour);
             interactor.IsRootDriver = false;
+
+            MonoBehaviour interactorMono = interactor as MonoBehaviour;
+            if (interactorMono != null)
+            {
+                _interactors.Add(interactor as MonoBehaviour);
+            }
         }
 
         public virtual void RemoveInteractor(IInteractor interactor)
@@ -277,8 +282,13 @@ namespace Oculus.Interaction
             {
                 return;
             }
-            _interactors.Remove(interactor as MonoBehaviour);
+
             interactor.IsRootDriver = true;
+            MonoBehaviour interactorMono = interactor as MonoBehaviour;
+            if (interactorMono != null)
+            {
+                _interactors.Remove(interactor as MonoBehaviour);
+            }
         }
 
         private int Compare(IInteractor a, IInteractor b)
@@ -295,7 +305,7 @@ namespace Oculus.Interaction
                     return -1;
                 }
 
-                int result = CandidateComparer.Compare(a.Candidate, b.Candidate);
+                int result = CandidateComparer.Compare(a.CandidateProperties, b.CandidateProperties);
                 return result > 0 ? 1 : -1;
             }
 
@@ -309,6 +319,11 @@ namespace Oculus.Interaction
                 return;
             }
 
+            Drive();
+        }
+
+        public void Drive()
+        {
             Preprocess();
 
             InteractorState previousState = State;

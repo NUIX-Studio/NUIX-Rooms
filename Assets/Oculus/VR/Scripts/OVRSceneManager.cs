@@ -432,7 +432,7 @@ public class OVRSceneManager : MonoBehaviour
     private static bool IsComponentEnabled(OVRSpace space, OVRPlugin.SpaceComponentType componentType) =>
         OVRPlugin.GetSpaceComponentStatus(space, componentType, out var enabled, out _) && enabled;
 
-    private OVRSceneAnchor InstantiateSceneAnchor(OVRSpace space, Guid uuid, OVRSceneAnchor prefab)
+    internal OVRSceneAnchor InstantiateSceneAnchor(OVRSpace space, Guid uuid, OVRSceneAnchor prefab)
     {
         // Query for the semantic classification of the object
         var hasSemanticLabels = OVRPlugin.GetSpaceSemanticLabels(space, out var labelString);
@@ -512,12 +512,19 @@ public class OVRSceneManager : MonoBehaviour
 
         _individualRequestIds.Remove(requestId);
 
-        if (!result) return;
+        if (!result)
+        {
+            Development.LogError(nameof(OVRSceneManager),
+                $"{nameof(OVRPlugin.QuerySpaces)}() asynchronously returned a failed result. " +
+                $"Invoking {nameof(NoSceneModelToLoad)}.");
+            NoSceneModelToLoad?.Invoke();
+            return;
+        }
 
         if (!OVRPlugin.RetrieveSpaceQueryResults(requestId, out var results))
         {
             Development.LogError(nameof(OVRSceneManager),
-                $"{nameof(OVRPlugin.RetrieveSpaceQueryResults)}() Could not retrieve results.");
+                $"{nameof(OVRPlugin.RetrieveSpaceQueryResults)}() could not retrieve results.");
             return;
         }
 

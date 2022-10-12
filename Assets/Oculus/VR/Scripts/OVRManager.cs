@@ -317,6 +317,7 @@ public class OVRManager : MonoBehaviour, OVRMixedRealityCaptureConfiguration
 	public static event Action<UInt64, bool> SceneCaptureComplete;
 
 
+
 	/// <summary>
 	/// Occurs when Health & Safety Warning is dismissed.
 	/// </summary>

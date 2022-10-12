@@ -31,9 +31,9 @@ namespace Oculus.Interaction
         private MonoBehaviour _proximityField;
         public IProximityField ProximityField;
 
-        [SerializeField, Interface(typeof(IPointableSurface))]
+        [SerializeField, Interface(typeof(ISurface))]
         private MonoBehaviour _surface;
-        public IPointableSurface Surface;
+        public ISurface Surface;
 
         [SerializeField]
         private float _maxDistance = 0.1f;
@@ -87,7 +87,7 @@ namespace Oculus.Interaction
         {
             base.Awake();
             ProximityField = _proximityField as IProximityField;
-            Surface = _surface as IPointableSurface;
+            Surface = _surface as ISurface;
         }
 
         protected override void Start()
@@ -121,14 +121,14 @@ namespace Oculus.Interaction
 
         #region Inject
 
-        public void InjectAllPokeInteractable(IPointableSurface surface,
+        public void InjectAllPokeInteractable(ISurface surface,
                                               IProximityField proximityField)
         {
             InjectSurface(surface);
             InjectProximityField(proximityField);
         }
 
-        public void InjectSurface(IPointableSurface surface)
+        public void InjectSurface(ISurface surface)
         {
             _surface = surface as MonoBehaviour;
             Surface = surface;

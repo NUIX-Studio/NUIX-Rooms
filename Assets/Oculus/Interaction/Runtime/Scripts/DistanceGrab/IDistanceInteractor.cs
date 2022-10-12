@@ -18,10 +18,13 @@
  * limitations under the License.
  */
 
+using UnityEngine;
+
 namespace Oculus.Interaction
 {
     public interface IDistanceInteractor : IInteractorView
     {
-        ConicalFrustum PointerFrustum { get; }
+        Ray Pointer { get; }
+        IDistanceInteractable DistanceInteractable { get; }
     }
 }

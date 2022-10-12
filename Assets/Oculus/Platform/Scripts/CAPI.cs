@@ -330,6 +330,9 @@ namespace Oculus.Platform
 
 
     // Logging
+    public static void LogNewUnifiedEvent(LogEventName eventName, Dictionary<string, string> values) {
+      LogNewEvent(eventName.ToString(), values);
+    }
 
     public static void LogNewEvent(string eventName, Dictionary<string, string> values) {
       var eventNameNative = StringToNative(eventName);
@@ -936,6 +939,16 @@ namespace Oculus.Platform
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern ulong ovr_GroupPresence_Set(IntPtr groupPresenceOptions);
+
+    public static ulong ovr_GroupPresence_SetDeeplinkMessageOverride(string deeplink_message) {
+      IntPtr deeplink_message_native = StringToNative(deeplink_message);
+      var result = (ovr_GroupPresence_SetDeeplinkMessageOverride_Native(deeplink_message_native));
+      Marshal.FreeCoTaskMem(deeplink_message_native);
+      return result;
+    }
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_GroupPresence_SetDeeplinkMessageOverride")]
+    private static extern ulong ovr_GroupPresence_SetDeeplinkMessageOverride_Native(IntPtr deeplink_message);
 
     public static ulong ovr_GroupPresence_SetDestination(string api_name) {
       IntPtr api_name_native = StringToNative(api_name);
@@ -4011,6 +4024,12 @@ namespace Oculus.Platform
     public static extern void ovr_AdvancedAbuseReportOptions_SetReportType(IntPtr handle, AbuseReportType value);
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern void ovr_AdvancedAbuseReportOptions_AddSuggestedUser(IntPtr handle, UInt64 value);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern void ovr_AdvancedAbuseReportOptions_ClearSuggestedUsers(IntPtr handle);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern void ovr_AdvancedAbuseReportOptions_SetVideoMode(IntPtr handle, AbuseReportVideoMode value);
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
@@ -4097,6 +4116,15 @@ namespace Oculus.Platform
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern void ovr_GroupPresenceOptions_Destroy(IntPtr handle);
+
+    public static void ovr_GroupPresenceOptions_SetDeeplinkMessageOverride(IntPtr handle, string value) {
+      IntPtr value_native = StringToNative(value);
+      ovr_GroupPresenceOptions_SetDeeplinkMessageOverride_Native(handle, value_native);
+      Marshal.FreeCoTaskMem(value_native);
+    }
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_GroupPresenceOptions_SetDeeplinkMessageOverride")]
+    private static extern void ovr_GroupPresenceOptions_SetDeeplinkMessageOverride_Native(IntPtr handle, IntPtr value);
 
     public static void ovr_GroupPresenceOptions_SetDestinationApiName(IntPtr handle, string value) {
       IntPtr value_native = StringToNative(value);

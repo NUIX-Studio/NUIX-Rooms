@@ -24,6 +24,6 @@ namespace Oculus.Voice.Utility
 {
     public class VoiceSDKVersion : MonoBehaviour
     {
-        public const string VERSION = "43.0.0.172.173";
+        public const string VERSION = "44.0.0.172.455";
     }
 }

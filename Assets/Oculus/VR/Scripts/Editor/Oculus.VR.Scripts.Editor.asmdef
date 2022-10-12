@@ -36,6 +36,11 @@
             "name": "com.unity.xr.oculus",
             "expression": "1.7.0",
             "define": "PRIORITIZE_OCULUS_XR_SETTINGS"
+        },
+        {
+            "name": "Unity",
+            "expression": "",
+            "define": "OVR_UNITY_ASSET_STORE"
         }
     ],
     "noEngineReferences": false

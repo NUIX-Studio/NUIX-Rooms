@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-
-
+using System;
 
 public class ItemsStorage : MonoBehaviour
 {
@@ -173,6 +172,11 @@ public class ItemsStorage : MonoBehaviour
                     instantiatedItem = Instantiate(defaultItemDescription.itemPrefab, storedPosition, storedRotation);
                     break;
                 }
+        }
+        GameObject actionsUI = GameObject.Find("ActionsUI");
+        foreach (KeyValuePair<string, Action> entry in itemData.actions)
+        {
+            actionsUI.GetComponent<ActionsController>().AddActionView(entry.Key);
         }
         itemData.gameObject = instantiatedItem;
     }

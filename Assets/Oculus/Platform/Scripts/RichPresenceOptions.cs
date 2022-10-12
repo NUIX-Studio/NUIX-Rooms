@@ -24,8 +24,7 @@ namespace Oculus.Platform
       CAPI.ovr_RichPresenceOptions_SetCurrentCapacity(Handle, value);
     }
 
-    /// DEPRECATED: Use GroupPresenceOptions.SetLobbySessionId() or
-    /// GroupPresenceOptions.SetMatchSessionId() to specify the session
+    /// DEPRECATED: Use GroupPresenceOptions.SetDeeplinkMessageOverride()
     public void SetDeeplinkMessageOverride(string value) {
       CAPI.ovr_RichPresenceOptions_SetDeeplinkMessageOverride(Handle, value);
     }

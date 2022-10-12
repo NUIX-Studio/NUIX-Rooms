@@ -15,11 +15,18 @@ using UnityEngine.Serialization;
 namespace Facebook.WitAi.Events
 {
     [Serializable]
-    public class VoiceEvents : ITranscriptionEvent
+    public class VoiceEvents : ITranscriptionEvent, IAudioInputEvents
     {
         [Header("Activation Result Events")]
         [Tooltip("Called when a response from Wit.ai has been received")]
         public WitResponseEvent OnResponse = new WitResponseEvent();
+
+        [Tooltip("Called when response from Wit.ai has been received from partial transcription")]
+        [HideInInspector]
+        public WitResponseEvent OnPartialResponse = new WitResponseEvent();
+
+        [Tooltip("Called after an on partial response to validate data.  If data.validResponse is true, service will deactivate & use the partial data as final")]
+        public WitValidationEvent OnValidatePartialResponse = new WitValidationEvent();
 
         [Tooltip(
             "Called when there was an error with a WitRequest  or the RuntimeConfiguration is not properly configured.")]
@@ -87,9 +94,16 @@ namespace Facebook.WitAi.Events
         public WitByteDataEvent OnByteDataReady = new WitByteDataEvent();
         public WitByteDataEvent OnByteDataSent = new WitByteDataEvent();
 
-        #region Shared Event API
+        #region Shared Event API - Transcription
         public WitTranscriptionEvent OnPartialTranscription => onPartialTranscription;
         public WitTranscriptionEvent OnFullTranscription => onFullTranscription;
+        #endregion
+
+        #region Shared Event API - Audio Input
+        public WitMicLevelChangedEvent OnMicAudioLevelChanged => OnMicLevelChanged;
+        public UnityEvent OnMicStartedListening => OnStartListening;
+        public UnityEvent OnMicStoppedListening => OnStoppedListening;
+
         #endregion
     }
  }

@@ -47,7 +47,15 @@ namespace Oculus.Interaction
 
         private IMovement _movement;
 
-        public ConicalFrustum PointerFrustum => _selectionFrustum;
+        public Ray Pointer
+        {
+            get
+            {
+                return new Ray(_selectionFrustum.StartPoint,
+                    _selectionFrustum.Direction);
+            }
+        }
+        public IDistanceInteractable DistanceInteractable => this.Interactable;
 
         public float BestInteractableWeight { get; private set; } = float.MaxValue;
 

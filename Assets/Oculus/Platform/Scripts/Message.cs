@@ -138,6 +138,7 @@ namespace Oculus.Platform
       GroupPresence_LaunchRosterPanel                     = 0x35728882,
       GroupPresence_SendInvites                           = 0x0DCBD364,
       GroupPresence_Set                                   = 0x675F5C24,
+      GroupPresence_SetDeeplinkMessageOverride            = 0x521ADF0D,
       GroupPresence_SetDestination                        = 0x4C5B268A,
       GroupPresence_SetIsJoinable                         = 0x2A8F1055,
       GroupPresence_SetLobbySession                       = 0x48FF55BE,
@@ -613,6 +614,7 @@ namespace Oculus.Platform
         case Message.MessageType.GroupPresence_LaunchMultiplayerErrorDialog:
         case Message.MessageType.GroupPresence_LaunchRosterPanel:
         case Message.MessageType.GroupPresence_Set:
+        case Message.MessageType.GroupPresence_SetDeeplinkMessageOverride:
         case Message.MessageType.GroupPresence_SetDestination:
         case Message.MessageType.GroupPresence_SetIsJoinable:
         case Message.MessageType.GroupPresence_SetLobbySession:

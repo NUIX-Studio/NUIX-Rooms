@@ -22,13 +22,14 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Xml;
+using Oculus.VR.Editor;
 
 public class OVRManifestPreprocessor
 {
 	[MenuItem("Oculus/Tools/Create store-compatible AndroidManifest.xml", false, 100000)]
 	public static void GenerateManifestForSubmission()
 	{
-		var so = ScriptableObject.CreateInstance(typeof(OVRPluginUpdaterStub));
+		var so = ScriptableObject.CreateInstance(typeof(OVRPluginInfo));
 		var script = MonoScript.FromScriptableObject(so);
 		string assetPath = AssetDatabase.GetAssetPath(script);
 		string editorDir = Directory.GetParent(assetPath).FullName;

@@ -10,16 +10,18 @@ using System;
 using System.Collections.Generic;
 using Meta.Conduit;
 using Facebook.WitAi.Configuration;
+using Facebook.WitAi.Data;
 using Facebook.WitAi.Data.Configuration;
 using Facebook.WitAi.Data.Intents;
 using Facebook.WitAi.Events;
+using Facebook.WitAi.Events.UnityEventListeners;
 using Facebook.WitAi.Interfaces;
 using Facebook.WitAi.Lib;
 using UnityEngine;
 
 namespace Facebook.WitAi
 {
-    public abstract class VoiceService : MonoBehaviour, IVoiceService, IInstanceResolver
+    public abstract class VoiceService : MonoBehaviour, IVoiceService, IInstanceResolver, IAudioEventProvider
     {
         /// <summary>
         /// When set to true, Conduit will be used. Otherwise, the legacy dispatching will be used.
@@ -67,6 +69,16 @@ namespace Facebook.WitAi
             get => events;
             set => events = value;
         }
+
+        /// <summary>
+        /// A subset of events around collection of audio data
+        /// </summary>
+        public IAudioInputEvents AudioEvents => VoiceEvents;
+
+        /// <summary>
+        /// A subset of events around receiving transcriptions
+        /// </summary>
+        public ITranscriptionEvent TranscriptionEvents => VoiceEvents;
 
         /// <summary>
         /// Returns true if the audio input should be read in an activation
@@ -141,9 +153,26 @@ namespace Facebook.WitAi
             var witConfigProvider = this.GetComponent<IWitRuntimeConfigProvider>();
             _witConfiguration = witConfigProvider.RuntimeConfiguration.witConfiguration;
 
+            InitializeEventListeners();
+
             if (!UseConduit)
             {
                 MatchIntentRegistry.Initialize();
+            }
+        }
+
+        private void InitializeEventListeners()
+        {
+            var audioEventListener = GetComponent<AudioEventListener>();
+            if (!audioEventListener)
+            {
+                gameObject.AddComponent<AudioEventListener>();
+            }
+
+            var transcriptionEventListener = GetComponent<TranscriptionEventListener>();
+            if (!transcriptionEventListener)
+            {
+                gameObject.AddComponent<TranscriptionEventListener>();
             }
         }
 
@@ -151,19 +180,57 @@ namespace Facebook.WitAi
         {
             if (UseConduit)
             {
-
                 ConduitDispatcher.Initialize(_witConfiguration.manifestLocalPath);
             }
-
-            VoiceEvents.OnResponse.AddListener(OnResponse);
+            VoiceEvents.OnPartialResponse.AddListener(ValidateShortResponse);
+            VoiceEvents.OnResponse.AddListener(HandleResponse);
         }
 
         protected virtual void OnDisable()
         {
-            VoiceEvents.OnResponse.RemoveListener(OnResponse);
+            VoiceEvents.OnPartialResponse.RemoveListener(ValidateShortResponse);
+            VoiceEvents.OnResponse.RemoveListener(HandleResponse);
         }
 
-        protected virtual void OnResponse(WitResponseNode response)
+        protected virtual void ValidateShortResponse(WitResponseNode response)
+        {
+            if (VoiceEvents.OnValidatePartialResponse != null)
+            {
+                // Create short response data
+                VoiceSession validationData = new VoiceSession();
+                validationData.service = this;
+                validationData.response = response;
+                validationData.validResponse = false;
+
+                // Call short response
+                VoiceEvents.OnValidatePartialResponse.Invoke(validationData);
+
+                // Invoke
+                if (UseConduit)
+                {
+                    // Ignore without an intent
+                    WitIntentData intent = response.GetFirstIntentData();
+                    if (intent != null)
+                    {
+                        Dictionary<string, object> parameters = GetConduitResponseParameters(response);
+                        parameters[WitConduitParameterProvider.VoiceSessionReservedName] = validationData;
+                        ConduitDispatcher.InvokeAction(intent.name, parameters, intent.confidence, true);
+                    }
+                }
+
+                // Deactivate
+                if (validationData.validResponse)
+                {
+                    // Call response
+                    VoiceEvents.OnResponse?.Invoke(response);
+
+                    // Deactivate immediately
+                    DeactivateAndAbortRequest();
+                }
+            }
+        }
+
+        protected virtual void HandleResponse(WitResponseNode response)
         {
             HandleIntents(response);
         }
@@ -181,23 +248,7 @@ namespace Facebook.WitAi
         {
             if (UseConduit)
             {
-                var parameters = new Dictionary<string, object>();
-
-                foreach (var entity in response.AsObject["entities"].Childs)
-                {
-                    var parameterName = entity[0]["role"].Value;
-                    var parameterValue = entity[0]["value"].Value;
-                    parameters.Add(parameterName, parameterValue);
-
-                    Debug.Log($"{parameterName} = {parameterValue}");
-                }
-
-                parameters.Add(WitConduitParameterProvider.WitResponseNodeReservedName, response);
-
-                if (!ConduitDispatcher.InvokeAction(intent.name, parameters))
-                {
-                    Debug.Log($"Failed to dispatch intent {intent.name}");
-                }
+                ConduitDispatcher.InvokeAction(intent.name, GetConduitResponseParameters(response), intent.confidence, false);
             }
             else
             {
@@ -207,6 +258,20 @@ namespace Facebook.WitAi
                     ExecuteRegisteredMatch(method, intent, response);
                 }
             }
+        }
+
+        // Handle conduit response parameters
+        private Dictionary<string, object> GetConduitResponseParameters(WitResponseNode response)
+        {
+            var parameters = new Dictionary<string, object>();
+            foreach (var entity in response.AsObject["entities"].Childs)
+            {
+                var parameterName = entity[0]["role"].Value;
+                var parameterValue = entity[0]["value"].Value;
+                parameters.Add(parameterName, parameterValue);
+            }
+            parameters.Add(WitConduitParameterProvider.WitResponseNodeReservedName, response);
+            return parameters;
         }
 
         private void ExecuteRegisteredMatch(RegisteredMatchIntent registeredMethod,
@@ -223,13 +288,11 @@ namespace Facebook.WitAi
                         registeredMethod.method.Invoke(obj, Array.Empty<object>());
                         continue;
                     }
-
                     if (parameters[0].ParameterType != typeof(WitResponseNode) || parameters.Length > 2)
                     {
                         Debug.LogError("Match intent only supports methods with no parameters or with a WitResponseNode parameter. Enable Conduit or adjust the parameters");
                         continue;
                     }
-
                     if (parameters.Length == 1)
                     {
                         registeredMethod.method.Invoke(obj, new object[] {response});
@@ -290,6 +353,5 @@ namespace Facebook.WitAi
         /// <param name="text"></param>
         /// <param name="requestOptions"></param>
         void Activate(string text, WitRequestOptions requestOptions);
-
     }
 }

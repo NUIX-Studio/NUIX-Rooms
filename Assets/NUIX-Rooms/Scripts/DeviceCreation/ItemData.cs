@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class ItemData
     public float rotation_w;
     public ItemType itemType;
     [System.NonSerialized] public GameObject gameObject;
+    [System.NonSerialized] public Dictionary<string, Action> actions;
 
     public ItemData(ItemType itemType = ItemType.DEFAULT, 
         float position_x = 0f, float position_y = 0f, float position_z = 0f, 
@@ -29,12 +31,25 @@ public class ItemData
         this.rotation_w = rotation_w;
         this.itemType = itemType;
         this.gameObject = gameObject;
+        this.actions = new Dictionary<string, Action>();
     }
+
+    public ItemData()
+    {
+        this.actions = new Dictionary<string, Action>();
+    }
+
 
     public override string ToString()
     {
-        return $"Item of type {itemType} at position x = {position_x}, y = {position_y}, z = {position_z}, " +
-            $"rotation x = {rotation_x}, y = {rotation_y}, z = {rotation_z}, w = {rotation_w}";
+        return $"Item of type {itemType} at " +
+            $"position x = {string.Format("{0:0.00}", position_x)}, " +
+            $"y = {string.Format("{0:0.00}", position_y)}, " +
+            $"z = {string.Format("{0:0.00}", position_z)}, " +
+            $"rotation x = {string.Format("{0:0.00}", rotation_x)}, " +
+            $"y = {string.Format("{0:0.00}", rotation_y)}, " +
+            $"z = {string.Format("{0:0.00}", rotation_z)}, " +
+            $"w = {string.Format("{0:0.00}", rotation_w)}";
     }
 }
 
@@ -43,6 +58,11 @@ public class TextPlateItemData : ItemData
 {
     public string text = "";
     public bool isKeyboardOpen = true;
+
+    public void ToggleKeyboardVisibility()
+    {
+        isKeyboardOpen = !isKeyboardOpen;
+    }
 
     public TextPlateItemData(ItemType itemType,
     float position_x, float position_y, float position_z,
@@ -60,12 +80,11 @@ public class TextPlateItemData : ItemData
     {
         this.text = text;
         this.isKeyboardOpen = isKeyboardOpen;
+        actions.Add(nameof(ToggleKeyboardVisibility), ToggleKeyboardVisibility);
     }
     public override string ToString()
     {
-        return $"Item of type {itemType} at position x = {position_x}, y = {position_y}, z = {position_z}, " +
-            $"rotation x = {rotation_x}, y = {rotation_y}, z = {rotation_z}, w = {rotation_w}," +
-            $"text = {text}, keyboard is open = {isKeyboardOpen}";
+        return base.ToString() + $" text = {text}, keyboard is open = {isKeyboardOpen}";
     }
 }
 
@@ -74,18 +93,29 @@ public class LightItemData : ItemData
 {
     public bool isTurnedON;
 
+
+    public void Toggle()
+    {
+        isTurnedON = !isTurnedON;
+    }
+
     public LightItemData(ItemData itemData, bool isTurnedON)
         : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
     itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w,
     itemData.gameObject)
     {
         this.isTurnedON = isTurnedON;
+        actions.Add(nameof(this.Toggle), Toggle);
+    }
+
+    public LightItemData()
+    {
+        actions = new Dictionary<string, Action>();
+        actions.Add(nameof(this.Toggle), Toggle);
     }
     public override string ToString()
     {
-        return $"Item of type {itemType} at position x = {position_x}, y = {position_y}, z = {position_z}, " +
-            $"rotation x = {rotation_x}, y = {rotation_y}, z = {rotation_z}, w = {rotation_w}," +
-            $"light is on : {isTurnedON}";
+        return base.ToString() + $" light is on : {isTurnedON}, method: {nameof(this.Toggle)}";
     }
 }
 
@@ -105,9 +135,7 @@ public class ButtonItemData : ItemData
     }
     public override string ToString()
     {
-        return $"Item of type {itemType} at position x = {position_x}, y = {position_y}, z = {position_z}, " +
-            $"rotation x = {rotation_x}, y = {rotation_y}, z = {rotation_z}, w = {rotation_w}," +
-            $"type : {type}";
+        return base.ToString() + $" type : {type}";
     }
 }
 
@@ -124,8 +152,7 @@ public class ImageItemData : ItemData
     }
     public override string ToString()
     {
-        return $"Item of type {itemType} at position x = {position_x}, y = {position_y}, z = {position_z}, " +
-            $"rotation x = {rotation_x}, y = {rotation_y}, z = {rotation_z}, w = {rotation_w},";
+        return base.ToString();
     }
 }
 
@@ -142,8 +169,7 @@ public class AudioItemData : ItemData
     }
     public override string ToString()
     {
-        return $"Item of type {itemType} at position x = {position_x}, y = {position_y}, z = {position_z}, " +
-            $"rotation x = {rotation_x}, y = {rotation_y}, z = {rotation_z}, w = {rotation_w},";
+        return base.ToString();
     }
 }
 
@@ -188,7 +214,7 @@ public class ItemsData
         string res = "";
         foreach (ItemData itemData in ConcatItemsData())
         {
-            res += itemData.ToString();
+            res += itemData.ToString() + Environment.NewLine;
         }
         return res;
     }

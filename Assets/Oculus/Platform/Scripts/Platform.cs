@@ -1406,6 +1406,21 @@ namespace Oculus.Platform
       return null;
     }
 
+    /// Set the user's deeplink message while keeping the other group presence
+    /// parameters the same. If the destination of the user is not set, the
+    /// deeplink message cannot be set as there's no deeplink message to override.
+    ///
+    public static Request SetDeeplinkMessageOverride(string deeplink_message)
+    {
+      if (Core.IsInitialized())
+      {
+        return new Request(CAPI.ovr_GroupPresence_SetDeeplinkMessageOverride(deeplink_message));
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
     /// Replaces the user's current destination for the provided one. All other
     /// existing group presence parameters will remain the same.
     ///

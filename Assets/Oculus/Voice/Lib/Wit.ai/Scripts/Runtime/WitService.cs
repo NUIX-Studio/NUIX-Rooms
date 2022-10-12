@@ -9,7 +9,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using Facebook.WitAi.Configuration;
@@ -17,7 +16,7 @@ using Facebook.WitAi.Data;
 using Facebook.WitAi.Events;
 using Facebook.WitAi.Interfaces;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
+using System.IO;
 
 namespace Facebook.WitAi
 {
@@ -37,6 +36,7 @@ namespace Facebook.WitAi
         private IWitRuntimeConfigProvider _runtimeConfigProvider;
         private ITranscriptionProvider _activeTranscriptionProvider;
         private Coroutine _timeLimitCoroutine;
+        private IWitRequestProvider _witRequestProvider;
 
         // Transcription based endpointing
         private bool _receivedTranscription;
@@ -121,6 +121,12 @@ namespace Facebook.WitAi
                         OnMicStoppedListening);
                 }
             }
+        }
+
+        public IWitRequestProvider WitRequestProvider
+        {
+            get => _witRequestProvider;
+            set => _witRequestProvider = value;
         }
 
         public bool MicActive => AudioBuffer.Instance.IsRecording(this);
@@ -223,11 +229,13 @@ namespace Facebook.WitAi
 
             if (ShouldSendMicData)
             {
-                _recordingRequest = RuntimeConfiguration.witConfiguration.SpeechRequest(requestOptions, _dynamicEntityProviders);
+                _recordingRequest = WitRequestProvider != null ? WitRequestProvider.CreateWitRequest(RuntimeConfiguration.witConfiguration, requestOptions, _dynamicEntityProviders)
+                    : RuntimeConfiguration.witConfiguration.SpeechRequest(requestOptions, _dynamicEntityProviders);
                 _recordingRequest.audioEncoding = AudioBuffer.Instance.AudioEncoding;
                 _recordingRequest.onPartialTranscription = OnPartialTranscription;
                 _recordingRequest.onFullTranscription = OnFullTranscription;
                 _recordingRequest.onInputStreamReady = r => OnWitReadyForData();
+                _recordingRequest.onPartialResponse += HandlePartialResult;
                 _recordingRequest.onResponse += HandleResult;
                 VoiceEvents.OnRequestCreated?.Invoke(_recordingRequest);
                 _recordingRequest.Request();
@@ -544,6 +552,7 @@ namespace Facebook.WitAi
             // Create request & add response delegate
             WitRequest request = RuntimeConfiguration.witConfiguration.MessageRequest(transcription, requestOptions, _dynamicEntityProviders);
             request.onResponse += HandleResult;
+            request.onPartialResponse += HandlePartialResult;
 
             // Call on create delegate
             VoiceEvents?.OnRequestCreated?.Invoke(request);
@@ -616,6 +625,16 @@ namespace Facebook.WitAi
         #endregion
 
         #region RESPONSE
+        /// <summary>
+        /// Main thread call to handle partial response callbacks
+        /// </summary>
+        private void HandlePartialResult(WitRequest request)
+        {
+            if (request != null && request.ResponseData != null)
+            {
+                VoiceEvents?.OnPartialResponse?.Invoke(request.ResponseData);
+            }
+        }
         /// <summary>
         /// Main thread call to handle result callbacks
         /// </summary>

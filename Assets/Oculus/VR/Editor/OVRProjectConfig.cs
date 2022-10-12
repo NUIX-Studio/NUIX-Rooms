@@ -24,6 +24,7 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System;
+using Oculus.VR.Editor;
 using UnityEngine.Serialization;
 
 [System.Serializable]
@@ -104,6 +105,15 @@ public class OVRProjectConfig : ScriptableObject
 	public bool insightPassthroughEnabled = false;
 	public Texture2D systemSplashScreen;
 
+#if OVR_UNITY_PACKAGE_MANAGER
+	// Store the checksum of native plugins to compare and prompt for editor restarts when changed
+	[SerializeField]
+	internal string ovrPluginMd5Win64 = null;
+
+	[SerializeField]
+	internal string ovrPluginMd5Android = null;
+#endif
+
 	//public const string OculusProjectConfigAssetPath = "Assets/Oculus/OculusProjectConfig.asset";
 
 	static OVRProjectConfig()
@@ -123,14 +133,14 @@ public class OVRProjectConfig : ScriptableObject
 
 	private static string GetOculusProjectConfigAssetPath()
 	{
-		var so = ScriptableObject.CreateInstance(typeof(OVRPluginUpdaterStub));
+		var so = ScriptableObject.CreateInstance(typeof(OVRPluginInfo));
 		var script = MonoScript.FromScriptableObject(so);
 		string assetPath = AssetDatabase.GetAssetPath(script);
 		string editorDir = Directory.GetParent(assetPath).FullName;
 		string ovrDir = Directory.GetParent(editorDir).FullName;
 		string oculusDir = Directory.GetParent(ovrDir).FullName;
 
-		if (OVRPluginUpdaterStub.IsInsidePackageDistribution())
+		if (OVRPluginInfo.IsInsidePackageDistribution())
 		{
 			oculusDir = Path.GetFullPath(Path.Combine(Application.dataPath, "Oculus"));
 			if (!Directory.Exists(oculusDir))

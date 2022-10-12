@@ -29,7 +29,7 @@ namespace Oculus.Interaction.DistanceReticles
 
         public Transform Target => _targetPoint != null ? _targetPoint : this.transform;
 
-        public Vector3 GetTargetHit(ConicalFrustum frustum)
+        public Vector3 BestHitPoint(Ray ray)
         {
             return Target.position;
         }

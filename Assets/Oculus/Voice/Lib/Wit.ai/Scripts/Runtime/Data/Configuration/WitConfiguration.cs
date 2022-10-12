@@ -49,8 +49,8 @@ namespace Facebook.WitAi.Data.Configuration
         /// <summary>
         /// When set to true, will use Conduit to dispatch voice commands.
         /// </summary>
-        //[Tooltip("Conduit enables manifest-based dispatching to invoke callbacks with native types directly without requiring manual parsing.")]
-        public bool useConduit => false;
+        [Tooltip("Conduit enables manifest-based dispatching to invoke callbacks with native types directly without requiring manual parsing.")]
+        [SerializeField] public bool useConduit;
 
         /// <summary>
         /// The path to the Conduit manifest.
@@ -106,6 +106,15 @@ namespace Facebook.WitAi.Data.Configuration
             }
 
             #endif
+        }
+
+        public void ResetData()
+        {
+            application = null;
+            clientAccessToken = null;
+            entities = null;
+            intents = null;
+            traits = null;
         }
     }
 }

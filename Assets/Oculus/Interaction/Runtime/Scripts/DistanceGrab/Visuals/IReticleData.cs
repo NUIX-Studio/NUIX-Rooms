@@ -25,6 +25,6 @@ namespace Oculus.Interaction.DistanceReticles
     public interface IReticleData
     {
         Transform Target { get; }
-        Vector3 GetTargetHit(ConicalFrustum frustum);
+        Vector3 BestHitPoint(Ray ray);
     }
 }

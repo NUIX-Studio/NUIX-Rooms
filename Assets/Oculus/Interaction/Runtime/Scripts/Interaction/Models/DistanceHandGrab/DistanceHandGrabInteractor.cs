@@ -113,7 +113,15 @@ namespace Oculus.Interaction.HandGrab
 
         #endregion
 
-        public ConicalFrustum PointerFrustum => _detectionFrustums.SelectionFrustum;
+        public Ray Pointer
+        {
+            get
+            {
+                return new Ray(_detectionFrustums.SelectionFrustum.StartPoint,
+                    _detectionFrustums.SelectionFrustum.Direction);
+            }
+        }
+        public IDistanceInteractable DistanceInteractable => this.Interactable;
 
         #region IHandGrabSource
 
@@ -160,7 +168,6 @@ namespace Oculus.Interaction.HandGrab
             Assert.IsNotNull(Hand, "Hand can not be null");
             Assert.IsNotNull(_handGrabApi, "HandGrabAPI can not be null");
             Assert.IsNotNull(_grabOrigin);
-            Assert.IsNotNull(PointerFrustum, "The selector frustum can not be null");
             if (_velocityCalculator != null)
             {
                 Assert.IsNotNull(VelocityCalculator, "The provided Velocity Calculator is not an IVelocityCalculator");
@@ -193,30 +200,14 @@ namespace Oculus.Interaction.HandGrab
             }
         }
 
-        public override bool ShouldSelect
+        protected override bool ComputeShouldSelect()
         {
-            get
-            {
-                if (State != InteractorState.Hover)
-                {
-                    return false;
-                }
-
-                return _candidate == _interactable && _handGrabShouldSelect;
-            }
+            return _handGrabShouldSelect;
         }
 
-        public override bool ShouldUnselect
+        protected override bool ComputeShouldUnselect()
         {
-            get
-            {
-                if (State != InteractorState.Select)
-                {
-                    return false;
-                }
-
-                return _handGrabShouldUnselect;
-            }
+            return _handGrabShouldUnselect;
         }
 
         protected override void DoHoverUpdate()

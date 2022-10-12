@@ -70,9 +70,9 @@ namespace Oculus.Interaction.DistanceReticles
             return this.transform.localScale;
         }
 
-        public Vector3 GetTargetHit(ConicalFrustum frustum)
+        public Vector3 BestHitPoint(Ray ray)
         {
-            float bestScore = float.MinValue;
+            float bestScore = float.PositiveInfinity;
             Vector3 bestPoint = Target.position;
 
             if (_colliders == null)
@@ -82,13 +82,26 @@ namespace Oculus.Interaction.DistanceReticles
 
             foreach (Collider collider in _colliders)
             {
-                Vector3 point = frustum.NearestColliderHit(collider, out float score);
-                if (score > bestScore)
+                Vector3 point = NearestColliderHit(ray, collider, out float score);
+                if (score < bestScore)
                 {
+                    bestScore = score;
                     bestPoint = point;
                 }
             }
             return Vector3.Lerp(bestPoint, Target.position, _snappiness);
+        }
+
+        private Vector3 NearestColliderHit(Ray ray, Collider collider, out float score)
+        {
+            Vector3 centerPosition = collider.bounds.center;
+            Vector3 projectedCenter = ray.origin
+                + Vector3.Project(centerPosition - ray.origin, ray.direction);
+            Vector3 point = collider.ClosestPointOnBounds(projectedCenter);
+            Vector3 originToInteractable = point - ray.origin;
+            score = Vector3.Angle(originToInteractable.normalized, ray.direction);
+
+            return point;
         }
 
         #region Inject

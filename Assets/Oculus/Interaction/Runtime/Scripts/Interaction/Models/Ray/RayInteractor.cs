@@ -36,7 +36,7 @@ namespace Oculus.Interaction
         [SerializeField]
         private float _maxRayLength = 5f;
 
-        private RayCandidate _rayCandidate = null;
+        private RayCandidateProperties _rayCandidateProperties = null;
 
         private IMovement _movement;
         private SurfaceHit _movedHit;
@@ -83,18 +83,18 @@ namespace Oculus.Interaction
             Ray = new Ray(Origin, Forward);
         }
 
-        public class RayCandidate : ICandidatePosition
+        public class RayCandidateProperties : ICandidatePosition
         {
             public RayInteractable ClosestInteractable { get; }
             public Vector3 CandidatePosition { get; }
-            public RayCandidate(RayInteractable closestInteractable, Vector3 candidatePosition)
+            public RayCandidateProperties(RayInteractable closestInteractable, Vector3 candidatePosition)
             {
                 ClosestInteractable = closestInteractable;
                 CandidatePosition = candidatePosition;
             }
         }
 
-        public override object Candidate => _rayCandidate;
+        public override object CandidateProperties => _rayCandidateProperties;
 
         protected override RayInteractable ComputeCandidate()
         {
@@ -122,7 +122,7 @@ namespace Oculus.Interaction
             float rayDist = (closestInteractable != null ? closestDist : MaxRayLength);
             End = Origin + rayDist * Forward;
 
-            _rayCandidate = new RayCandidate(closestInteractable, candidatePosition);
+            _rayCandidateProperties = new RayCandidateProperties(closestInteractable, candidatePosition);
 
             return closestInteractable;
         }

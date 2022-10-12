@@ -58,9 +58,9 @@ namespace Oculus.Voice.Bindings.Android
 
         public ITranscriptionProvider TranscriptionProvider { get; set; }
 
-        public override void Connect()
+        public override void Connect(string version)
         {
-            base.Connect();
+            base.Connect(version);
             eventBinding = new VoiceSDKListenerBinding(this, this);
             eventBinding.VoiceEvents.OnStoppedListening.AddListener(OnStoppedListening);
             service.SetListener(eventBinding);
