@@ -17,6 +17,9 @@ public class ItemsStorage : MonoBehaviour
 
     public Vector3 SpawningAreaPosition;
 
+
+    public ActionsUIController actionsUIController;
+
     private void CreateItemsData()
     {
         itemsData = new ItemsData();
@@ -124,6 +127,17 @@ public class ItemsStorage : MonoBehaviour
                     break;
                 }
         }
+
+        // Now need to add actions for this item:
+        // Add actions for this item Actions controller methods
+        // Add actions for this item to other item Actions methods
+        // Add actions for otherm items actions to this item actions
+
+        ActionData actionData = new ActionData("id1", "method1", "id2", "method2", false);
+        actionsUIController.AddActionView(actionData);
+
+        Debug.Log("FEDYA ///////// " + instantiatedItem.GetComponent<ItemPresenter>().actions.ToString());
+        
     }
 
 
@@ -174,6 +188,10 @@ public class ItemsStorage : MonoBehaviour
                     break;
                 }
         }
+
+        instantiatedItem.GetComponent<ItemPresenter>().itemID = itemData.itemID;
+
+
         /*
         GameObject actionsUI = GameObject.Find("ActionsUI");
         foreach (KeyValuePair<string, Action> entry in itemData.actions)
@@ -190,5 +208,22 @@ public class ItemsStorage : MonoBehaviour
         {
             AddItemToScene(itemData);
         }
+        foreach (ActionData actionData in itemsData.actionData)
+        {
+            actionsUIController.AddActionView(actionData);
+        }
+    }
+
+
+    public ItemData GetItemDataByID(string itemID)
+    {
+        foreach (ItemData itemData in itemsData.ConcatItemsData())
+        {
+            if (itemData.itemID == itemID)
+            {
+                return itemData;
+            }
+        }
+        return null;
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class ItemData
 {
-    public string id;
+    public string itemID;
     public float position_x;
     public float position_y;
     public float position_z;
@@ -17,7 +17,6 @@ public class ItemData
     public ItemType itemType;
 
     // TODO: change to list
-    public ActionData actionData;
 
 
     [System.NonSerialized] public GameObject gameObject;
@@ -37,7 +36,7 @@ public class ItemData
         this.itemType = itemType;
         this.gameObject = gameObject;
 
-        this.id = Guid.NewGuid().ToString();
+        this.itemID = Guid.NewGuid().ToString();
     }
 
 
@@ -53,15 +52,6 @@ public class ItemData
             $"w = {string.Format("{0:0.00}", rotation_w)}";
     }
 
-
-    public void AddAction(Action actionMethod, string toItemID)
-    {
-        actionData.itemID = this.id;
-        actionData.toItemID = toItemID;
-        actionData.methodname = nameof(actionMethod);
-        actionData.action = actionMethod;
-    }
-
 }
 
 [System.Serializable]
@@ -69,11 +59,6 @@ public class TextPlateItemData : ItemData
 {
     public string text = "";
     public bool isKeyboardOpen = true;
-
-    public void ToggleKeyboardVisibility()
-    {
-        isKeyboardOpen = !isKeyboardOpen;
-    }
 
     public TextPlateItemData(ItemType itemType,
     float position_x, float position_y, float position_z,
@@ -91,7 +76,6 @@ public class TextPlateItemData : ItemData
     {
         this.text = text;
         this.isKeyboardOpen = isKeyboardOpen;
-        //actions.Add(nameof(ToggleKeyboardVisibility), ToggleKeyboardVisibility);
     }
     public override string ToString()
     {
@@ -104,29 +88,17 @@ public class LightItemData : ItemData
 {
     public bool isTurnedON;
 
-
-    public void Toggle()
-    {
-        isTurnedON = !isTurnedON;
-    }
-
     public LightItemData(ItemData itemData, bool isTurnedON)
         : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
     itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w,
     itemData.gameObject)
     {
         this.isTurnedON = isTurnedON;
-        //actions.Add(nameof(this.Toggle), Toggle);
     }
 
-    public LightItemData()
-    {
-        //actions = new Dictionary<string, Action>();
-        //actions.Add(nameof(this.Toggle), Toggle);
-    }
     public override string ToString()
     {
-        return base.ToString() + $" light is on : {isTurnedON}, method: {nameof(this.Toggle)}";
+        return base.ToString() + $" light is on : {isTurnedON}";
     }
 }
 
@@ -200,6 +172,8 @@ public class ItemsData
 
     public List<AudioItemData> audioItemsData;
 
+    public List<ActionData> actionData;
+
 
     public IEnumerable<ItemData> ConcatItemsData()
     {
@@ -218,6 +192,7 @@ public class ItemsData
         this.buttonItemsData = new List<ButtonItemData>();
         this.imageItemsData = new List<ImageItemData>();
         this.audioItemsData = new List<AudioItemData>();
+        this.actionData = new List<ActionData>();
     }
 
     public override string ToString()
@@ -235,13 +210,30 @@ public class ItemsData
 
 public class ActionData
 {
-    public string itemID;
+    public string fromItemID;
 
     public string toItemID;
 
-    public string methodname;
+    public string fromItemMethodName;
 
-    //[System.NonSerialized] public Dictionary<string, Action> actions;
-    [System.NonSerialized] public Action action;
+    public string toItemMethodName;
+
+    public bool isActionEnabled;
+
+    public ActionData(string fromItemID, string fromItemMethodName, 
+        string toItemID, string toItemMethodName, bool enabled)
+    {
+        this.fromItemID = fromItemID;
+        this.fromItemMethodName = fromItemMethodName;
+        this.toItemID = toItemID;
+        this.toItemMethodName = toItemMethodName;
+        this.isActionEnabled = enabled;
+    }
+
+
+    public override string ToString()
+    {
+        return $"{fromItemID},{toItemID}, {fromItemMethodName}, {toItemMethodName}";
+    }
 
 }
