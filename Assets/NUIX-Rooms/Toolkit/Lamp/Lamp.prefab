@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 3396446817957086566}
   - component: {fileID: 7566506157969289160}
   - component: {fileID: 2283956042548007194}
+  - component: {fileID: 6395125642077022681}
   m_Layer: 0
   m_Name: Lamp
   m_TagString: Untagged
@@ -150,7 +151,7 @@ MonoBehaviour:
   _transferOnSecondSelection: 1
   _addNewPointsToFront: 0
   _forwardElement: {fileID: 0}
-  _oneGrabTransformer: {fileID: 0}
+  _oneGrabTransformer: {fileID: 6395125642077022681}
   _twoGrabTransformer: {fileID: 0}
   _maxGrabPoints: -1
 --- !u!114 &2283956042548007194
@@ -187,6 +188,38 @@ MonoBehaviour:
   _whenCancel:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6395125642077022681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584796118025913745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9597e632dfbca247bcf65e49c67078e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _constraints:
+    ConstraintsAreRelative: 0
+    MinX:
+      Constrain: 0
+      Value: 0
+    MaxX:
+      Constrain: 0
+      Value: 0
+    MinY:
+      Constrain: 0
+      Value: 0
+    MaxY:
+      Constrain: 0
+      Value: 0
+    MinZ:
+      Constrain: 0
+      Value: 0
+    MaxZ:
+      Constrain: 0
+      Value: 0
 --- !u!1 &2607967003881930799
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,7 +556,7 @@ MonoBehaviour:
     arcOffset: 0
     arcLength: 360
   _relativeTo: {fileID: 3533197321820516728}
-  _gripPoint: {fileID: 3533197321449513059}
+  _referencePoint: {fileID: 3533197321449513059}
 --- !u!1 &3533197321820516735
 GameObject:
   m_ObjectHideFlags: 0

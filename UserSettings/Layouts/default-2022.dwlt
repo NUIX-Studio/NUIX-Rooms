@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1349
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Project
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 67
+  controlID: 18
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 802
     height: 1299
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 68
+  controlID: 19
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -317,22 +317,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Oculus/Interaction/Samples/Scenes/Examples
+    - Assets/NUIX-Rooms/Scripts/DeviceCreation/Actions
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Oculus/Interaction/Samples/Scenes/Examples
+  - Assets/NUIX-Rooms/Scripts/DeviceCreation/Actions
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Projects\NUIX\NUIX-Rooms
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 559}
-    m_SelectedIDs: 04910000
-    m_LastClickedID: 37124
-    m_ExpandedIDs: 00000000be900000c0900000c2900000c4900000c6900000c8900000ea900000ec90000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 111}
+    m_SelectedIDs: 10a70000
+    m_LastClickedID: 42768
+    m_ExpandedIDs: 00000000ca8e0000cc8e0000ce8e0000d08e0000d28e0000d48e0000008f0000028f0000f48f0000f88f000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -360,7 +360,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000be900000c0900000c2900000c4900000c6900000c8900000
+    m_ExpandedIDs: 00000000ca8e0000cc8e0000ce8e0000d08e0000d28e0000d48e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -488,23 +488,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 1e680000
-      m_LastClickedID: 26654
-      m_ExpandedIDs: 90c8fbffaac8fbff36cdfbffc886fcff6a92fcff8eb2ffff34b5ffff36b5ffff16b6ffff82c4ffff86c4ffff9ec4ffff82edffff80efffffe6effffff4f2fffffaf2ffff2cf7fffff8f9fffffcf9ffff00faffff1cfaffff2cfaffff98640000326500005c6500007e670000ac670000c4670000c86700001e680000b8680000ba680000c86800005c690000be6a0000e20a030096250300
+      m_SelectedIDs: 86260000
+      m_LastClickedID: 0
+      m_ExpandedIDs: a0edffff0cfbffff5a6500007c650000f2650000266600002c660000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: OculusInteractionSamplesRayCanvas
-        m_OriginalName: OculusInteractionSamplesRayCanvas
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 26654
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -772,9 +772,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.23399967, y: 0.872, z: 2.011}
+    m_Target: {x: 0.27370262, y: 0.27073455, z: -0.86646396}
     speed: 2
-    m_Value: {x: 0.23399964, y: 0.872, z: 2.011}
+    m_Value: {x: 0.27370262, y: 0.27073455, z: -0.86646396}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -820,13 +820,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.061848566, y: -0.03994671, z: -0.000121905745, w: -0.99764544}
+    m_Target: {x: -0.35630134, y: -0.6358346, z: 0.4042246, w: -0.5532885}
     speed: 2
-    m_Value: {x: -0.061826512, y: -0.041428275, z: -0.000029122339, w: -0.99722683}
+    m_Value: {x: -0.35555917, y: -0.6364214, z: 0.4046045, w: -0.55212384}
   m_Size:
-    m_Target: 1.4482069
+    m_Target: 0.51461047
     speed: 2
-    m_Value: 1.4482069
+    m_Value: 0.51461047
   m_Ortho:
     m_Target: 0
     speed: 2

@@ -6,6 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class ItemData
 {
+    public string id;
     public float position_x;
     public float position_y;
     public float position_z;
@@ -14,8 +15,12 @@ public class ItemData
     public float rotation_z;
     public float rotation_w;
     public ItemType itemType;
+
+    // TODO: change to list
+    public ActionData actionData;
+
+
     [System.NonSerialized] public GameObject gameObject;
-    [System.NonSerialized] public Dictionary<string, Action> actions;
 
     public ItemData(ItemType itemType = ItemType.DEFAULT, 
         float position_x = 0f, float position_y = 0f, float position_z = 0f, 
@@ -31,12 +36,8 @@ public class ItemData
         this.rotation_w = rotation_w;
         this.itemType = itemType;
         this.gameObject = gameObject;
-        this.actions = new Dictionary<string, Action>();
-    }
 
-    public ItemData()
-    {
-        this.actions = new Dictionary<string, Action>();
+        this.id = Guid.NewGuid().ToString();
     }
 
 
@@ -51,6 +52,16 @@ public class ItemData
             $"z = {string.Format("{0:0.00}", rotation_z)}, " +
             $"w = {string.Format("{0:0.00}", rotation_w)}";
     }
+
+
+    public void AddAction(Action actionMethod, string toItemID)
+    {
+        actionData.itemID = this.id;
+        actionData.toItemID = toItemID;
+        actionData.methodname = nameof(actionMethod);
+        actionData.action = actionMethod;
+    }
+
 }
 
 [System.Serializable]
@@ -80,7 +91,7 @@ public class TextPlateItemData : ItemData
     {
         this.text = text;
         this.isKeyboardOpen = isKeyboardOpen;
-        actions.Add(nameof(ToggleKeyboardVisibility), ToggleKeyboardVisibility);
+        //actions.Add(nameof(ToggleKeyboardVisibility), ToggleKeyboardVisibility);
     }
     public override string ToString()
     {
@@ -105,13 +116,13 @@ public class LightItemData : ItemData
     itemData.gameObject)
     {
         this.isTurnedON = isTurnedON;
-        actions.Add(nameof(this.Toggle), Toggle);
+        //actions.Add(nameof(this.Toggle), Toggle);
     }
 
     public LightItemData()
     {
-        actions = new Dictionary<string, Action>();
-        actions.Add(nameof(this.Toggle), Toggle);
+        //actions = new Dictionary<string, Action>();
+        //actions.Add(nameof(this.Toggle), Toggle);
     }
     public override string ToString()
     {
@@ -218,4 +229,19 @@ public class ItemsData
         }
         return res;
     }
+}
+
+
+
+public class ActionData
+{
+    public string itemID;
+
+    public string toItemID;
+
+    public string methodname;
+
+    //[System.NonSerialized] public Dictionary<string, Action> actions;
+    [System.NonSerialized] public Action action;
+
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using UnityEngine.UI;
 
 public class ItemsStorage : MonoBehaviour
 {
@@ -173,11 +174,14 @@ public class ItemsStorage : MonoBehaviour
                     break;
                 }
         }
+        /*
         GameObject actionsUI = GameObject.Find("ActionsUI");
         foreach (KeyValuePair<string, Action> entry in itemData.actions)
         {
-            actionsUI.GetComponent<ActionsController>().AddActionView(entry.Key);
+            GameObject actionView = actionsUI.GetComponent<ActionsController>().AddActionView(entry.Key);
+            actionView.GetComponentInChildren<Toggle>().onValueChanged.AddListener(entry.Value);
         }
+        */
         itemData.gameObject = instantiatedItem;
     }
     public void AddItemsToScene()
