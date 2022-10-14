@@ -21,17 +21,18 @@ public class ActionsUIController : MonoBehaviour
     }
 
 
-    public void TrackActionsAvailability(ActionData current_actionData, bool isOn)
+    public void TrackActionsAvailability(ActionData actionData, bool isOn)
     {
-        foreach(ActionData actionData in itemsStorage.itemsData.actionData)
+        actionData.isActionEnabled = isOn;
+        if (isOn)
         {
-            if (actionData.fromItemID == current_actionData.fromItemID &&
-                actionData.fromItemMethodName == current_actionData.fromItemMethodName &&
-                actionData.toItemID == current_actionData.toItemID &&
-                actionData.toItemMethodName == current_actionData.toItemMethodName)
-            {
-                actionData.isActionEnabled = isOn;
-            }
+              itemsStorage.GetItemDataByID(actionData.fromItemID).gameObject.GetComponent<ItemPresenter>().method =
+              itemsStorage.GetItemDataByID(actionData.toItemID).gameObject.GetComponent<ItemPresenter>().actions;
+            ItemPresenter itempresenterFrom = itemsStorage.GetItemDataByID(actionData.fromItemID).gameObject.GetComponent<ItemPresenter>();
+        }
+        else
+        {
+            itemsStorage.GetItemDataByID(actionData.fromItemID).gameObject.GetComponent<ItemPresenter>().method = null;
         }
     }
 
@@ -41,7 +42,7 @@ public class ActionsUIController : MonoBehaviour
         GameObject action = Instantiate(actionView, Vector3.zero, Quaternion.identity);
         action.name = actionData.ToString();
         action.transform.SetParent(actionsLabel.transform, false);
-        action.GetComponentInChildren<TMPro.TMP_Text>().text = action.name;
+        action.GetComponentInChildren<TMPro.TMP_Text>().text = "Sample text";
         action.GetComponentInChildren<Toggle>().isOn = actionData.isActionEnabled;
         action.GetComponentInChildren<Toggle>().onValueChanged.AddListener(
             delegate

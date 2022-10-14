@@ -1,12 +1,23 @@
-﻿public class ButtonItemPresenter : ItemPresenter
+﻿using UnityEngine;
+using UnityEngine.Events;
+
+public class ButtonItemPresenter : ItemPresenter
 {
-    public void Press()
-    {
-        actions.Invoke();
-    }
 
     public ButtonItemPresenter()
     {
-        actions.AddListener(Press);
+        actions.AddListener(LogButtonPress);
     }
+    public void Press()
+    {
+        method.Invoke();
+        LogButtonPress();
+    }
+
+    public void LogButtonPress()
+    {
+        Debug.Log("Button pressed");
+    }
+
+    
 }

@@ -13,6 +13,8 @@ public class ItemPresenter : MonoBehaviour
     public string itemID;
     public UnityEvent actions = new();
 
+    public UnityEvent method;
+
 
     // Start is called before the first frame update
     void Start()

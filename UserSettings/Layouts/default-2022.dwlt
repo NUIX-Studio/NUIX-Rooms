@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1349
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Hierarchy
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 18
+  controlID: 63
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 802
     height: 1299
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 19
+  controlID: 64
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -317,22 +317,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/NUIX-Rooms/Scripts/DeviceCreation/Actions
+    - Assets/NUIX-Rooms/Scripts/Items
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/NUIX-Rooms/Scripts/DeviceCreation/Actions
+  - Assets/NUIX-Rooms/Scripts/Items
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Projects\NUIX\NUIX-Rooms
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 111}
-    m_SelectedIDs: 10a70000
-    m_LastClickedID: 42768
-    m_ExpandedIDs: 00000000ca8e0000cc8e0000ce8e0000d08e0000d28e0000d48e0000008f0000028f0000f48f0000f88f000000ca9a3bffffff7f
+    m_SelectedIDs: c6330100
+    m_LastClickedID: 78790
+    m_ExpandedIDs: 00000000e6bd0000e8bd0000eabd0000ecbd0000eebd0000f0bd0000f2bd0000f4bd000024be000026be00002abe0000c633010000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -360,7 +360,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ca8e0000cc8e0000ce8e0000d08e0000d28e0000d48e0000
+    m_ExpandedIDs: 00000000e6bd0000e8bd0000eabd0000ecbd0000eebd0000f0bd0000f2bd0000f4bd0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -488,9 +488,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 86260000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: a0edffff0cfbffff5a6500007c650000f2650000266600002c660000
+      m_ExpandedIDs: e8e8ffff04ebffff6cebffff02eeffffa6eeffff88f1ffff60a700002ca8000032a8000058a80000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -772,9 +772,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.27370262, y: 0.27073455, z: -0.86646396}
+    m_Target: {x: 70.538506, y: 0.8140001, z: 0}
     speed: 2
-    m_Value: {x: 0.27370262, y: 0.27073455, z: -0.86646396}
+    m_Value: {x: 70.538506, y: 0.8140001, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -820,13 +820,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.35630134, y: -0.6358346, z: 0.4042246, w: -0.5532885}
+    m_Target: {x: -0.15428568, y: -0.019142117, z: -0.00030966083, w: -0.98822755}
     speed: 2
-    m_Value: {x: -0.35555917, y: -0.6364214, z: 0.4046045, w: -0.55212384}
+    m_Value: {x: -0.15422677, y: -0.019134806, z: -0.00030954255, w: -0.9878501}
   m_Size:
-    m_Target: 0.51461047
+    m_Target: 72.1308
     speed: 2
-    m_Value: 0.51461047
+    m_Value: 72.1308
   m_Ortho:
     m_Target: 0
     speed: 2

@@ -36,7 +36,7 @@ public class ItemData
         this.itemType = itemType;
         this.gameObject = gameObject;
 
-        this.itemID = Guid.NewGuid().ToString();
+        this.itemID = itemType.ToString();
     }
 
 
@@ -214,26 +214,20 @@ public class ActionData
 
     public string toItemID;
 
-    public string fromItemMethodName;
-
-    public string toItemMethodName;
-
     public bool isActionEnabled;
 
-    public ActionData(string fromItemID, string fromItemMethodName, 
-        string toItemID, string toItemMethodName, bool enabled)
+    public ActionData(string fromItemID,
+        string toItemID, bool enabled)
     {
         this.fromItemID = fromItemID;
-        this.fromItemMethodName = fromItemMethodName;
         this.toItemID = toItemID;
-        this.toItemMethodName = toItemMethodName;
         this.isActionEnabled = enabled;
     }
 
 
     public override string ToString()
     {
-        return $"{fromItemID},{toItemID}, {fromItemMethodName}, {toItemMethodName}";
+        return $"{fromItemID},{toItemID}";
     }
 
 }

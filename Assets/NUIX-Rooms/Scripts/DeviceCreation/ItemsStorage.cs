@@ -89,7 +89,18 @@ public class ItemsStorage : MonoBehaviour
                 instantiatedItem.transform.position.x, instantiatedItem.transform.position.y, instantiatedItem.transform.position.z,
                 instantiatedItem.transform.rotation.x, instantiatedItem.transform.rotation.y, instantiatedItem.transform.rotation.z, instantiatedItem.transform.rotation.w,
                 instantiatedItem);
-        switch(item.itemType)
+
+        instantiatedItem.GetComponent<ItemPresenter>().itemID = itemData.itemID;
+
+        foreach (ItemData itemDataTo in itemsData.ConcatItemsData())
+        {
+            ActionData actionData = new(itemData.itemID, itemDataTo.itemID, false);
+            actionsUIController.AddActionView(actionData);
+        }
+
+
+
+            switch (item.itemType)
         {
             case ItemType.TEXTPLATE:
                 {
@@ -126,18 +137,7 @@ public class ItemsStorage : MonoBehaviour
                     itemsData.itemsData.Add(itemData);
                     break;
                 }
-        }
-
-        // Now need to add actions for this item:
-        // Add actions for this item Actions controller methods
-        // Add actions for this item to other item Actions methods
-        // Add actions for otherm items actions to this item actions
-
-        ActionData actionData = new ActionData("id1", "method1", "id2", "method2", false);
-        actionsUIController.AddActionView(actionData);
-
-        Debug.Log("FEDYA ///////// " + instantiatedItem.GetComponent<ItemPresenter>().actions.ToString());
-        
+        }     
     }
 
 

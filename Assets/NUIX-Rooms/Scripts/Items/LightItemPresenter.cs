@@ -10,6 +10,8 @@ public class LightItemPresenter : ItemPresenter
     /// </summary>
     public void Toggle()
     {
+        ItemsStorage it = GameObject.Find("NUIXBus").GetComponent<ItemsStorage>();
+        Debug.Log("Light toggled");
         ((LightItemData) GameObject.Find("NUIXBus").GetComponent<ItemsStorage>().
             GetItemDataByID(itemID)).isTurnedON = 
             !((LightItemData) GameObject.Find("NUIXBus").GetComponent<ItemsStorage>().
