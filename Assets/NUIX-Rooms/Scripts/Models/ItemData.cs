@@ -16,9 +16,7 @@ public class ItemData
     public float rotation_w;
     public ItemType itemType;
 
-    // TODO: change to list
-
-
+    // TODO: remove gameobject dependency 
     [System.NonSerialized] public GameObject gameObject;
 
     public ItemData(ItemType itemType = ItemType.DEFAULT, 

@@ -237,6 +237,9 @@ MonoBehaviour:
   actions:
     m_PersistentCalls:
       m_Calls: []
+  method:
+    m_PersistentCalls:
+      m_Calls: []
   lightGameObject: {fileID: 4543485116435943686}
 --- !u!1 &2607967003881930799
 GameObject:
