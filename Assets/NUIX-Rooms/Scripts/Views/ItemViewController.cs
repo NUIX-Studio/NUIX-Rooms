@@ -6,7 +6,6 @@
 /// Responsible for updating the Item GameObject
 /// And tracking its changes
 /// </summary>
-[RequireComponent(typeof(ItemPresenter))]
 public class ItemViewController : MonoBehaviour
 {
     private ItemPresenter itemPresenter;
@@ -14,6 +13,9 @@ public class ItemViewController : MonoBehaviour
     private GameObject itemGameObject;
 
     public Vector3 SpawningAreaPosition;
+
+    public string itemID;
+
 
     void Start()
     {
@@ -31,14 +33,7 @@ public class ItemViewController : MonoBehaviour
 
     public Transform GetItemTransform()
     {
-        if (itemGameObject != null)
-        {
-            return itemGameObject.transform;
-        }
-        else
-        {
-            return null;
-        }
+        return gameObject.transform;
     }
 
     public void SetItemTransform(Transform itemTransform)
@@ -50,11 +45,4 @@ public class ItemViewController : MonoBehaviour
             itemGameObject.transform.localScale = itemTransform.localScale;
         }
     }
-
-    public GameObject CreateItemGameObject(ItemDescription item)
-    {
-        GameObject instantiatedItem = Instantiate(item.itemPrefab, SpawningAreaPosition, Quaternion.identity);
-
-    }
-
 }

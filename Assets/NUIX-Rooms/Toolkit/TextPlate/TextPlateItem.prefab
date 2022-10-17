@@ -12213,6 +12213,7 @@ GameObject:
   - component: {fileID: 5173079405099329114}
   - component: {fileID: 5173079405099329112}
   - component: {fileID: 5173079405099329115}
+  - component: {fileID: 3299104780328530410}
   m_Layer: 0
   m_Name: TextPlateItem
   m_TagString: Untagged
@@ -12285,6 +12286,20 @@ MonoBehaviour:
   _oneGrabTransformer: {fileID: 0}
   _twoGrabTransformer: {fileID: 0}
   _maxGrabPoints: -1
+--- !u!114 &3299104780328530410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5173079405099329116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795eb17623776044d9cf694ec0169e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawningAreaPosition: {x: 0, y: 1, z: 1}
+  itemID: 
 --- !u!1 &5173079405133850457
 GameObject:
   m_ObjectHideFlags: 0
@@ -12436,7 +12451,7 @@ MonoBehaviour:
     arcOffset: 0
     arcLength: 360
   _relativeTo: {fileID: 5173079406442844001}
-  _gripPoint: {fileID: 5173079405333048760}
+  _referencePoint: {fileID: 5173079405333048760}
 --- !u!1 &5173079405356635595
 GameObject:
   m_ObjectHideFlags: 0

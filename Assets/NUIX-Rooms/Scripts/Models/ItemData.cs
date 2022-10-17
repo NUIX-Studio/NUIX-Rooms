@@ -16,13 +16,10 @@ public class ItemData
     public float rotation_w;
     public ItemType itemType;
 
-    // TODO: remove gameobject dependency 
-    [System.NonSerialized] public GameObject gameObject;
 
     public ItemData(ItemType itemType = ItemType.DEFAULT, 
         float position_x = 0f, float position_y = 0f, float position_z = 0f, 
-        float rotation_x = 0f, float rotation_y = 0f, float rotation_z = 0f, float rotation_w = 0f,
-        GameObject gameObject = null)
+        float rotation_x = 0f, float rotation_y = 0f, float rotation_z = 0f, float rotation_w = 0f)
     {
         this.position_x = position_x;
         this.position_y = position_y;
@@ -32,7 +29,6 @@ public class ItemData
         this.rotation_z = rotation_z;
         this.rotation_w = rotation_w;
         this.itemType = itemType;
-        this.gameObject = gameObject;
 
         this.itemID = itemType.ToString();
     }
@@ -58,19 +54,9 @@ public class TextPlateItemData : ItemData
     public string text = "";
     public bool isKeyboardOpen = true;
 
-    public TextPlateItemData(ItemType itemType,
-    float position_x, float position_y, float position_z,
-    float rotation_x, float rotation_y, float rotation_z, float rotation_w,
-    GameObject gameObject, string text, bool isKeyboardOpen) : base (itemType, position_x, position_y, position_z,
-    rotation_x, rotation_y, rotation_z, rotation_w, gameObject)
-    {
-        this.text = text;
-        this.isKeyboardOpen = isKeyboardOpen;
-    }
     public TextPlateItemData(ItemData itemData, string text, bool isKeyboardOpen) 
         : base (itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
-    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w, 
-    itemData.gameObject)
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w)
     {
         this.text = text;
         this.isKeyboardOpen = isKeyboardOpen;
@@ -88,8 +74,7 @@ public class LightItemData : ItemData
 
     public LightItemData(ItemData itemData, bool isTurnedON)
         : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
-    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w,
-    itemData.gameObject)
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w)
     {
         this.isTurnedON = isTurnedON;
     }
@@ -109,8 +94,7 @@ public class ButtonItemData : ItemData
 
     public ButtonItemData(ItemData itemData, int type)
         : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
-    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w,
-    itemData.gameObject)
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w)
     {
         this.type = type;
     }
@@ -126,8 +110,7 @@ public class ImageItemData : ItemData
 
     public ImageItemData(ItemData itemData)
         : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
-    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w,
-    itemData.gameObject)
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w)
     {
         
     }
@@ -143,8 +126,7 @@ public class AudioItemData : ItemData
 
     public AudioItemData(ItemData itemData)
         : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
-    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w,
-    itemData.gameObject)
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w)
     {
         
     }

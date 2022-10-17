@@ -8,12 +8,7 @@ public class ItemService : MonoBehaviour
     private ItemsData itemsData;
 
 
-    public ItemDescription defaultItemDescription;
-    public ItemDescription textPlateItemDescription;
-    public ItemDescription lightItemDescription;
-    public ItemDescription buttonItemDescription;
-    public ItemDescription imageItemDescription;
-    public ItemDescription audioItemDescription;
+
 
 
     // Start is called before the first frame update
@@ -37,6 +32,11 @@ public class ItemService : MonoBehaviour
         return itemsData;
     }
 
+    public void SetItems(ItemsData itemsData)
+    {
+        this.itemsData = itemsData;
+    }
+
 
     public ItemData GetItemDataByID(string itemID)
     {
@@ -48,5 +48,47 @@ public class ItemService : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void AddItemData(ItemData itemData)
+    {
+        switch (itemData.itemType)
+        {
+            case ItemType.TEXTPLATE:
+                {
+                    TextPlateItemData textPlateItemData = new(itemData, "Sample text", true);
+                    itemsData.textPlateItemsData.Add(textPlateItemData);
+                    break;
+                }
+            case ItemType.LIGHT:
+                {
+                    LightItemData lightItemData = new(itemData, true);
+                    itemsData.lightItemsData.Add(lightItemData);
+                    break;
+                }
+            case ItemType.BUTTON:
+                {
+                    ButtonItemData buttonItemData = new(itemData, 0);
+                    itemsData.buttonItemsData.Add(buttonItemData);
+                    break;
+                }
+            case ItemType.IMAGE:
+                {
+                    ImageItemData imageItemData = new(itemData);
+                    itemsData.imageItemsData.Add(imageItemData);
+                    break;
+                }
+            case ItemType.AUDIO:
+                {
+                    AudioItemData audioItemData = new(itemData);
+                    itemsData.audioItemsData.Add(audioItemData);
+                    break;
+                }
+            default:
+                {
+                    itemsData.itemsData.Add(itemData);
+                    break;
+                }
+        }
     }
 }

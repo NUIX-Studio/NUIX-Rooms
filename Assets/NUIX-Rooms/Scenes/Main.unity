@@ -1494,7 +1494,7 @@ PrefabInstance:
     - target: {fileID: 1438875814, guid: 9f717ba020826834a98daf42c0d358da, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1775890981}
+      objectReference: {fileID: 1775890980}
     - target: {fileID: 1438875814, guid: 9f717ba020826834a98daf42c0d358da, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -3022,14 +3022,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8dc381359b3ce4fb5f9826617a1aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsStorage: {fileID: 1775890980}
-  actionView: {fileID: 8124370716436319301, guid: f8db0f1f6b3ae254da72b9768e8faeac, type: 3}
-  actionsLabel: {fileID: 1240063499}
---- !u!1 &1240063499 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 98124080046169392, guid: c075ee07c255e89449ee8cdbe8874619, type: 3}
-  m_PrefabInstance: {fileID: 1606860128}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1295958987 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7516989854395125638, guid: d2d6934a666a18d46b8b7a3864dc9f63, type: 3}
@@ -3058,7 +3050,7 @@ PrefabInstance:
     - target: {fileID: 1438875814, guid: 9f717ba020826834a98daf42c0d358da, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1775890981}
+      objectReference: {fileID: 1775890980}
     - target: {fileID: 1438875814, guid: 9f717ba020826834a98daf42c0d358da, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -3073,7 +3065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1438875814, guid: 9f717ba020826834a98daf42c0d358da, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: InstantiateData
+      value: LoadData
       objectReference: {fileID: 0}
     - target: {fileID: 1438875814, guid: 9f717ba020826834a98daf42c0d358da, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -4884,6 +4876,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1775890979}
+  - component: {fileID: 1775890982}
   - component: {fileID: 1775890981}
   - component: {fileID: 1775890980}
   m_Layer: 0
@@ -4917,24 +4910,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1775890977}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4872bde6478bfa64f8676d94fc3bbd77, type: 3}
+  m_Script: {fileID: 11500000, guid: 887c071373edcd547a645ff26dbb1931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsData:
-    itemsData: []
-    textPlateItemsData: []
-    lightItemsData: []
-    buttonItemsData: []
-    imageItemsData: []
-    audioItemsData: []
-  defaultItemDescription: {fileID: 1715913916}
-  textPlateItemDescription: {fileID: 272060347}
-  lightItemDescription: {fileID: 745268694}
-  buttonItemDescription: {fileID: 213388248}
-  imageItemDescription: {fileID: 1979652530}
-  audioItemDescription: {fileID: 1869479760}
-  SpawningAreaPosition: {x: 0, y: 1, z: 0}
-  actionsUIController: {fileID: 1138428577}
+  LogText: {fileID: 5927847527097373295}
+  itemService: {fileID: 1775890981}
+  itemPresenter: {fileID: 1775890982}
 --- !u!114 &1775890981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4944,10 +4925,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1775890977}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 887c071373edcd547a645ff26dbb1931, type: 3}
+  m_Script: {fileID: 11500000, guid: b03b5f07c92a84e44a387e91ab3e0fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LogText: {fileID: 5927847527097373295}
+--- !u!114 &1775890982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775890977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2683230d5808b9741af57def833cca6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultItemDescription: {fileID: 1715913916}
+  textPlateItemDescription: {fileID: 272060347}
+  lightItemDescription: {fileID: 745268694}
+  buttonItemDescription: {fileID: 213388248}
+  imageItemDescription: {fileID: 1979652530}
+  audioItemDescription: {fileID: 1869479760}
+  itemService: {fileID: 1775890981}
 --- !u!4 &1790096200 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3666093704642933930, guid: 9f717ba020826834a98daf42c0d358da, type: 3}
@@ -5564,7 +5563,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1775890980}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ItemsStorage, Assembly-CSharp
         m_MethodName: CreateItem
         m_Mode: 2
@@ -5669,7 +5668,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1775890980}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ItemsStorage, Assembly-CSharp
         m_MethodName: CreateItem
         m_Mode: 2
@@ -5742,7 +5741,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1775890980}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ItemsStorage, Assembly-CSharp
         m_MethodName: CreateItem
         m_Mode: 2
@@ -5925,8 +5924,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1775890980}
-        m_TargetAssemblyTypeName: ItemsStorage, Assembly-CSharp
+      - m_Target: {fileID: 1775890982}
+        m_TargetAssemblyTypeName: ItemPresenter, Assembly-CSharp
         m_MethodName: CreateItem
         m_Mode: 2
         m_Arguments:
@@ -14031,8 +14030,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1775890980}
-        m_TargetAssemblyTypeName: ItemsStorage, Assembly-CSharp
+      - m_Target: {fileID: 1775890982}
+        m_TargetAssemblyTypeName: ItemPresenter, Assembly-CSharp
         m_MethodName: CreateItem
         m_Mode: 2
         m_Arguments:

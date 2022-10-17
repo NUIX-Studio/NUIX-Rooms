@@ -7,7 +7,6 @@ using TMPro;
 /// <summary>
 /// Requires JSONSaving component, while JsonSaving requires this one. (TODO)
 /// </summary>
-[RequireComponent(typeof(ItemsStorage))]
 public class JSONSaving : MonoBehaviour
 {
 
@@ -15,6 +14,9 @@ public class JSONSaving : MonoBehaviour
     private string persistentPath;
 
     public TMPro.TMP_Text LogText;
+
+    public ItemService itemService;
+    public ItemPresenter itemPresenter;
 
     // Start is called before the first frame update
     void Start()
@@ -35,13 +37,13 @@ public class JSONSaving : MonoBehaviour
 
     public void SaveData()
     {
-        /// Wrap the code inside if this method is executed 
-        GetComponent<ItemsStorage>().RetrieveItemsParams();
+        /// Should call itemService instead
+        itemPresenter.RetrieveItemsParams();
         print("saving data");
         string savePath = path;
 
         Debug.Log("saving Data at " + savePath);
-        string json = JsonUtility.ToJson(GetComponent<ItemsStorage>().itemsData);
+        string json = JsonUtility.ToJson(itemService.GetItems());
         Debug.Log(json);
         LogText.text = json;
 
@@ -49,18 +51,18 @@ public class JSONSaving : MonoBehaviour
         writer.Write(json);
     }
 
-    public void LoadData()
+    private void LoadData()
     {
         using StreamReader reader = new(path);
         string json = reader.ReadToEnd();
-        GetComponent<ItemsStorage>().itemsData = JsonUtility.FromJson<ItemsData>(json);
-        Debug.Log(GetComponent<ItemsStorage>().itemsData.ToString());
-        LogText.text = GetComponent<ItemsStorage>().itemsData.ToString();
+        itemService.SetItems(JsonUtility.FromJson<ItemsData>(json));
+        Debug.Log(itemService.GetItems().ToString());
+        LogText.text = itemService.GetItems().ToString();
     }
 
     public void InstantiateData()
     {
         LoadData();
-        GetComponent<ItemsStorage>().AddItemsToScene();
+        itemPresenter.AddItemsToScene();
     }
 }

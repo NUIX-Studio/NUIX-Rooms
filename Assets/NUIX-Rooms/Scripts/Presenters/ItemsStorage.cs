@@ -4,7 +4,7 @@ using System;
 using UnityEngine.UI;
 
 public class ItemsStorage : MonoBehaviour
-{
+{/*
     public ItemsData itemsData;
 
 
@@ -200,6 +200,7 @@ public class ItemsStorage : MonoBehaviour
             actionView.GetComponentInChildren<Toggle>().onValueChanged.AddListener(entry.Value);
         }
         */
+    /*
         itemData.gameObject = instantiatedItem;
     }
     public void AddItemsToScene()
@@ -226,4 +227,5 @@ public class ItemsStorage : MonoBehaviour
         }
         return null;
     }
+*/
 }
