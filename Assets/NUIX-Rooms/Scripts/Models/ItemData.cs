@@ -191,24 +191,34 @@ public class ItemsData
 
 public class ActionData
 {
-    public string fromItemID;
+    public string actionID;
 
-    public string toItemID;
+    public string senderID;
+    public string senderMethod;
+    public List<String> senderArgs;
 
-    public bool isActionEnabled;
+    public string receiverID;
+    public string receiverMethod;
+    public List<String> receiverArgs;
 
-    public ActionData(string fromItemID,
-        string toItemID, bool enabled)
+    public ActionData(string actionID,
+        string senderID, string senderMethod, List<String> senderArgs,
+        string receiverID, string receiverMethod, List<String> receiverArgs)
     {
-        this.fromItemID = fromItemID;
-        this.toItemID = toItemID;
-        this.isActionEnabled = enabled;
+        this.senderID = senderID;
+        this.senderMethod = senderMethod;
+        this.senderArgs = senderArgs;
+
+        this.receiverID = receiverID;
+        this.receiverMethod = receiverMethod;
+        this.receiverArgs = receiverArgs;
+        this.actionID = actionID;
     }
 
 
     public override string ToString()
     {
-        return $"{fromItemID},{toItemID}";
+        return $"ActionData";
     }
 
 }

@@ -50,6 +50,18 @@ public class ItemService : MonoBehaviour
         return null;
     }
 
+    public ActionData GetActionDataByID(string actionID)
+    {
+        foreach (ActionData actionData in itemsData.actionData)
+        {
+            if (actionData.actionID == actionID)
+            {
+                return actionData;
+            }
+        }
+        return null;
+    }
+
     public void AddItemData(ItemData itemData)
     {
         switch (itemData.itemType)
@@ -90,5 +102,10 @@ public class ItemService : MonoBehaviour
                     break;
                 }
         }
+    }
+
+    public void AddActionData(ActionData actionData)
+    {
+        itemsData.actionData.Add(actionData);
     }
 }

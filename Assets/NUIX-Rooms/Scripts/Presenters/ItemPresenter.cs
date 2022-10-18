@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -39,11 +40,6 @@ public class ItemPresenter : MonoBehaviour
     void Update()
     {
         
-    }
-
-    private ItemData GetItemData(string itemID)
-    {
-        return itemService.GetItemDataByID(itemID);
     }
 
 
@@ -121,28 +117,24 @@ public class ItemPresenter : MonoBehaviour
     // TODO: consider put all the ItemDescriptions into one file
     public void CreateItem(ItemDescription item)
     {
-        ItemData itemData = CreateNewItemData(item);
-        Vector3 spawnPosition = new Vector3(0, 1, -1);
+        Quaternion i = Quaternion.identity;
+        string itemID = Guid.NewGuid().ToString();
+        itemService.AddItemData(new ItemData(item.itemType, 0, 0, 0,
+                i.x, i.y, i.z, i.w, itemID));
+        ItemData itemData = itemService.GetItemDataByID(itemID);
+
+        Vector3 spawnPosition = new(0, 0.5f, -1);
 
         Pose pose = new(spawnPosition, Quaternion.identity);
         GameObject instantiatedItem = CreateItemGameObject(pose, itemData);
-        itemService.AddItemData(itemData);
-    }
-
-    private ItemData CreateNewItemData(ItemDescription item)
-    {
-        Quaternion i = Quaternion.identity;
-        return new ItemData(item.itemType,
-                0, 0, 0,
-                i.x, i.y, i.z, i.w, Guid.NewGuid().ToString());
     }
 
     public void LoadItemToScene(ItemData itemData)
     {
-        Vector3 storedPosition = new Vector3(itemData.position_x, itemData.position_y, itemData.position_z);
-        Quaternion storedRotation = new Quaternion(itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w);
+        Vector3 storedPosition = new(itemData.position_x, itemData.position_y, itemData.position_z);
+        Quaternion storedRotation = new(itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w);
 
-        Pose pose = new Pose(storedPosition, storedRotation);
+        Pose pose = new(storedPosition, storedRotation);
         if (!itemViewControllers.ContainsKey(itemData.itemID))
         {
             GameObject instantiatedItem = CreateItemGameObject(pose, itemData);
@@ -166,14 +158,14 @@ public class ItemPresenter : MonoBehaviour
             case ItemType.TEXTPLATE:
                 {
                     instantiatedItem = Instantiate(textPlateItemDescription.itemPrefab, storedPosition, storedRotation);
-                    //instantiatedItem.GetComponent<TextPlateItem>().plateText.text = ((TextPlateItemData)itemData).text;
-                    //instantiatedItem.transform.Find("Visuals/Keyboard").gameObject.SetActive(((TextPlateItemData)itemData).isKeyboardOpen);
+                    instantiatedItem.GetComponent<TextPlateItem>().plateText.text = ((TextPlateItemData)itemData).text;
+                    instantiatedItem.transform.Find("Visuals/Keyboard").gameObject.SetActive(((TextPlateItemData)itemData).isKeyboardOpen);
                     break;
                 }
             case ItemType.LIGHT:
                 {
                     instantiatedItem = Instantiate(lightItemDescription.itemPrefab, storedPosition, storedRotation);
-                    //instantiatedItem.GetComponentInChildren<Light>().enabled = ((LightItemData)itemData).isTurnedON;
+                    instantiatedItem.GetComponentInChildren<Light>().enabled = ((LightItemData)itemData).isTurnedON;
                     break;
                 }
             case ItemType.BUTTON:
@@ -212,4 +204,15 @@ public class ItemPresenter : MonoBehaviour
             LoadItemToScene(itemData);
         }
     }
+
+    private void RunAction(ActionData actionData)
+    {
+        GetItemViewController(actionData.receiverID).CallMethod(actionData.receiverMethod, actionData.receiverArgs.Cast<object>().ToArray());
+    }
+
+    private void SetAction(ActionData actionData)
+    {
+        GetItemViewController(actionData.senderID).GetType().GetMethod(actionData.senderMethod)
+    }
+
 }
