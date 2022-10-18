@@ -134,7 +134,7 @@ public class ItemPresenter : MonoBehaviour
         Quaternion i = Quaternion.identity;
         return new ItemData(item.itemType,
                 0, 0, 0,
-                i.x, i.y, i.z, i.w);
+                i.x, i.y, i.z, i.w, Guid.NewGuid().ToString());
     }
 
     public void LoadItemToScene(ItemData itemData)
@@ -143,14 +143,20 @@ public class ItemPresenter : MonoBehaviour
         Quaternion storedRotation = new Quaternion(itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w);
 
         Pose pose = new Pose(storedPosition, storedRotation);
-        GameObject instantiatedItem = CreateItemGameObject(pose, itemData);
+        if (!itemViewControllers.ContainsKey(itemData.itemID))
+        {
+            GameObject instantiatedItem = CreateItemGameObject(pose, itemData);
+        }
+        else
+        {
+            Debug.Log("Item " + itemData.itemID + " of type " + itemData.itemType + " already exists in the scene");
+        }
     }
 
 
     public GameObject CreateItemGameObject(Pose pose, ItemData itemData)
     {
         GameObject instantiatedItem;
-
 
         Vector3 storedPosition = pose.position;
         Quaternion storedRotation = pose.rotation;

@@ -19,7 +19,8 @@ public class ItemData
 
     public ItemData(ItemType itemType = ItemType.DEFAULT, 
         float position_x = 0f, float position_y = 0f, float position_z = 0f, 
-        float rotation_x = 0f, float rotation_y = 0f, float rotation_z = 0f, float rotation_w = 0f)
+        float rotation_x = 0f, float rotation_y = 0f, float rotation_z = 0f, float rotation_w = 0f,
+        string itemID = "")
     {
         this.position_x = position_x;
         this.position_y = position_y;
@@ -30,7 +31,7 @@ public class ItemData
         this.rotation_w = rotation_w;
         this.itemType = itemType;
 
-        this.itemID = itemType.ToString();
+        this.itemID = itemID;   //Guid.NewGuid().ToString(); ;
     }
 
 
@@ -56,7 +57,7 @@ public class TextPlateItemData : ItemData
 
     public TextPlateItemData(ItemData itemData, string text, bool isKeyboardOpen) 
         : base (itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
-    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w)
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w, itemData.itemID)
     {
         this.text = text;
         this.isKeyboardOpen = isKeyboardOpen;
@@ -74,7 +75,7 @@ public class LightItemData : ItemData
 
     public LightItemData(ItemData itemData, bool isTurnedON)
         : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
-    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w)
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w, itemData.itemID)
     {
         this.isTurnedON = isTurnedON;
     }
@@ -94,7 +95,7 @@ public class ButtonItemData : ItemData
 
     public ButtonItemData(ItemData itemData, int type)
         : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
-    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w)
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w, itemData.itemID)
     {
         this.type = type;
     }
@@ -110,7 +111,7 @@ public class ImageItemData : ItemData
 
     public ImageItemData(ItemData itemData)
         : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
-    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w)
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w, itemData.itemID)
     {
         
     }
@@ -126,7 +127,7 @@ public class AudioItemData : ItemData
 
     public AudioItemData(ItemData itemData)
         : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
-    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w)
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w, itemData.itemID)
     {
         
     }
