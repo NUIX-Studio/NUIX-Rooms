@@ -210,9 +210,5 @@ public class ItemPresenter : MonoBehaviour
         GetItemViewController(actionData.receiverID).CallMethod(actionData.receiverMethod, actionData.receiverArgs.Cast<object>().ToArray());
     }
 
-    private void SetAction(ActionData actionData)
-    {
-        GetItemViewController(actionData.senderID).GetType().GetMethod(actionData.senderMethod)
-    }
 
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -11,7 +12,9 @@ using UnityEngine;
 /// </summary>
 public class ItemViewController : MonoBehaviour
 {
-    private ItemPresenter itemPresenter;
+
+    // IS IT EVEN ADDED? NEED TO CHECK
+    protected ItemPresenter itemPresenter;
 
     private GameObject itemGameObject;
 
@@ -19,7 +22,7 @@ public class ItemViewController : MonoBehaviour
 
     public string itemID;
 
-    public List<string> senderMethods;
+    public  Dictionary <string, ActionData> senderMethods;
     public List<string> receiverMethods;
 
 
@@ -37,7 +40,7 @@ public class ItemViewController : MonoBehaviour
 
     public ItemViewController()
     {
-        senderMethods = new List<string>();
+        senderMethods = new Dictionary<string, ActionData>();
         receiverMethods = new List<string>();
         receiverMethods.Add(nameof(SetPosition));
         receiverMethods.Add(nameof(SetRotation));
@@ -98,17 +101,23 @@ public class ItemViewController : MonoBehaviour
         }
     }
 
+    protected void CallReceiverMethod(string senderMethod)
+    {
+        ActionData actionData = senderMethods[senderMethod];
+        itemPresenter.GetItemViewController(actionData.receiverID).CallMethod(actionData.receiverMethod, actionData.receiverArgs.Cast<object>().ToArray());
+    }
+
 }
 
 public class ButtonItemViewController: ItemViewController
 { 
     ButtonItemViewController()
     {
-        senderMethods.Add(nameof(Press));
+        //senderMethods.Add(nameof(Press), null);
     }
 
     public void Press()
     {
-
+        CallReceiverMethod(nameof(Press));
     }
 }
