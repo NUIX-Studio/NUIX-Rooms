@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 6647858766378341443}
   - component: {fileID: 1901305688638144237}
   - component: {fileID: 7841145023441289279}
-  - component: {fileID: 4750467680300840117}
+  - component: {fileID: 9157900473100918829}
   m_Layer: 0
   m_Name: ButtonItem
   m_TagString: Untagged
@@ -530,7 +530,7 @@ MonoBehaviour:
   _whenCancel:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4750467680300840117
+--- !u!114 &9157900473100918829
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -539,13 +539,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7394129511907742900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da43e03d91c57d4db5469c6c391a6e0, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a7d5a9c5d19b9a46892d1efa2a8fad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawningAreaPosition: {x: 0, y: 0, z: 0}
   itemID: 
-  actions:
-    m_PersistentCalls:
-      m_Calls: []
+  receiverMethods:
+  - SetPosition
+  - SetRotation
+  - SetLocalScale
 --- !u!1 &7686372351734980275
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,8 +810,8 @@ MonoBehaviour:
   onRelease:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4750467680300840117}
-        m_TargetAssemblyTypeName: ButtonItemPresenter, Assembly-CSharp
+      - m_Target: {fileID: 9157900473100918829}
+        m_TargetAssemblyTypeName: ButtonItemViewController, Assembly-CSharp
         m_MethodName: Press
         m_Mode: 1
         m_Arguments:

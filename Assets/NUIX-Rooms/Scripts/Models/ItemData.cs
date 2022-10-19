@@ -201,6 +201,10 @@ public class ActionData
     public string receiverMethod;
     public List<String> receiverArgs;
 
+    public ActionData()
+    {
+    }
+
     public ActionData(string actionID,
         string senderID, string senderMethod, List<String> senderArgs,
         string receiverID, string receiverMethod, List<String> receiverArgs)

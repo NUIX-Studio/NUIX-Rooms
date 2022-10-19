@@ -13,16 +13,13 @@ using UnityEngine;
 public class ItemViewController : MonoBehaviour
 {
 
-    // IS IT EVEN ADDED? NEED TO CHECK
-    protected ItemPresenter itemPresenter;
-
-    private GameObject itemGameObject;
+    public ItemPresenter itemPresenter;
 
     public Vector3 SpawningAreaPosition;
 
     public string itemID;
 
-    public  Dictionary <string, ActionData> senderMethods;
+    public Dictionary <string, ActionData> senderMethods;
     public List<string> receiverMethods;
 
 
@@ -31,20 +28,17 @@ public class ItemViewController : MonoBehaviour
 
     void Start()
     {
-        if (GetComponent<ItemPresenter>() != null)
-        {
-            itemPresenter = GetComponent<ItemPresenter>();
-        }
+        receiverMethods.Add(nameof(SetPosition));
+        receiverMethods.Add(nameof(SetRotation));
+        receiverMethods.Add(nameof(SetLocalScale));
     }
 
 
     public ItemViewController()
     {
-        senderMethods = new Dictionary<string, ActionData>();
-        receiverMethods = new List<string>();
-        receiverMethods.Add(nameof(SetPosition));
-        receiverMethods.Add(nameof(SetRotation));
-        receiverMethods.Add(nameof(SetLocalScale));
+        if (senderMethods == null) senderMethods = new Dictionary<string, ActionData>();
+        if (receiverMethods == null) receiverMethods = new List<string>();
+
     }
 
 
@@ -55,36 +49,24 @@ public class ItemViewController : MonoBehaviour
 
     public void SetItemTransform(Transform itemTransform)
     {
-        if (itemGameObject != null)
-        {
-            SetPosition(itemTransform.position);
-            SetRotation(itemTransform.rotation);
-            SetLocalScale(itemTransform.localScale);
-        }
+        SetPosition(itemTransform.position);
+        SetRotation(itemTransform.rotation);
+        SetLocalScale(itemTransform.localScale);
     }
 
     public void SetPosition(Vector3 position)
     {
-        if (itemGameObject != null)
-        {
-            itemGameObject.transform.position = position;
-        }
+        this.transform.position = position;
     }
 
     public void SetRotation(Quaternion rotation)
     {
-        if (itemGameObject != null)
-        {
-            itemGameObject.transform.rotation = rotation;
-        }
+        this.transform.rotation = rotation;
     }
 
     public void SetLocalScale(Vector3 localScale)
     {
-        if (itemGameObject != null)
-        {
-            itemGameObject.transform.localScale = localScale;
-        }
+        this.transform.localScale = localScale;
     }
 
     public void CallMethod(string method, object[] parameters)
@@ -92,32 +74,28 @@ public class ItemViewController : MonoBehaviour
         try
         {
             MethodInfo methodInfo = this.GetType().GetMethod(method);
-            methodInfo.Invoke(method, parameters);
+            methodInfo.Invoke(this, parameters);
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Error: " + ex.Message);
-            Console.ReadKey();
+            Debug.Log("Error: " + ex.Message);
         }
     }
 
-    protected void CallReceiverMethod(string senderMethod)
+    public void CallReceiverMethod(string senderMethod)
     {
         ActionData actionData = senderMethods[senderMethod];
-        itemPresenter.GetItemViewController(actionData.receiverID).CallMethod(actionData.receiverMethod, actionData.receiverArgs.Cast<object>().ToArray());
+        itemPresenter.GetItemViewController(actionData.receiverID).
+            CallMethod(actionData.receiverMethod, actionData.receiverArgs.Cast<object>().ToArray());
     }
 
-}
-
-public class ButtonItemViewController: ItemViewController
-{ 
-    ButtonItemViewController()
+    public void AddSenderMethod(ActionData actionData)
     {
-        //senderMethods.Add(nameof(Press), null);
+        senderMethods.Add(actionData.senderMethod, actionData);
     }
 
-    public void Press()
+    public void UpdateSenderMethod(ActionData actionData)
     {
-        CallReceiverMethod(nameof(Press));
+        senderMethods[actionData.senderMethod] = actionData;
     }
 }

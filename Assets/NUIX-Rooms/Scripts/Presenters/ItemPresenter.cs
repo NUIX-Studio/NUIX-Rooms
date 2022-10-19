@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -33,7 +34,7 @@ public class ItemPresenter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        TestMethod();
     }
 
     // Update is called once per frame
@@ -115,7 +116,7 @@ public class ItemPresenter : MonoBehaviour
 
 
     // TODO: consider put all the ItemDescriptions into one file
-    public void CreateItem(ItemDescription item)
+    public GameObject CreateItem(ItemDescription item)
     {
         Quaternion i = Quaternion.identity;
         string itemID = Guid.NewGuid().ToString();
@@ -127,6 +128,7 @@ public class ItemPresenter : MonoBehaviour
 
         Pose pose = new(spawnPosition, Quaternion.identity);
         GameObject instantiatedItem = CreateItemGameObject(pose, itemData);
+        return instantiatedItem;
     }
 
     public void LoadItemToScene(ItemData itemData)
@@ -191,6 +193,7 @@ public class ItemPresenter : MonoBehaviour
                 }
         }
         instantiatedItem.GetComponent<ItemViewController>().itemID = itemData.itemID;
+        instantiatedItem.GetComponent<ItemViewController>().itemPresenter = this;
         itemViewControllers.Add(itemData.itemID, instantiatedItem.GetComponent<ItemViewController>());
         return instantiatedItem;
 
@@ -208,6 +211,25 @@ public class ItemPresenter : MonoBehaviour
     private void RunAction(ActionData actionData)
     {
         GetItemViewController(actionData.receiverID).CallMethod(actionData.receiverMethod, actionData.receiverArgs.Cast<object>().ToArray());
+    }
+
+    // TODO: Move to unitTests
+    private void TestMethod()
+    {
+        GameObject light = CreateItem(lightItemDescription);
+        light.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.2f, 0.8f, 0.2f));
+        GameObject button = CreateItem(buttonItemDescription);
+        button.GetComponent<ItemViewController>().SetPosition(new Vector3(0.2f, 0.8f, 0.2f));
+        string actionID = Guid.NewGuid().ToString();
+        ActionData actionData = new ActionData(actionID,
+            button.GetComponent<ItemViewController>().itemID,
+            "Press",
+            new List<string>(),
+            light.GetComponent<ItemViewController>().itemID,
+            "Toggle",
+            new List<string>()
+            );
+        button.GetComponent<ItemViewController>().UpdateSenderMethod(actionData);
     }
 
 

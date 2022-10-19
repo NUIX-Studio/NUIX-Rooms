@@ -96,8 +96,7 @@ GameObject:
   - component: {fileID: 7566506157969289160}
   - component: {fileID: 2283956042548007194}
   - component: {fileID: 6395125642077022681}
-  - component: {fileID: 2842125634925039417}
-  - component: {fileID: 5389501757310959470}
+  - component: {fileID: 7972510595266181798}
   m_Layer: 0
   m_Name: Lamp
   m_TagString: Untagged
@@ -222,7 +221,7 @@ MonoBehaviour:
     MaxZ:
       Constrain: 0
       Value: 0
---- !u!114 &2842125634925039417
+--- !u!114 &7972510595266181798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,31 +230,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1584796118025913745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d93cba9b270553d49a9e2a8069c27845, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultItemDescription: {fileID: 0}
-  textPlateItemDescription: {fileID: 0}
-  lightItemDescription: {fileID: 0}
-  buttonItemDescription: {fileID: 0}
-  imageItemDescription: {fileID: 0}
-  audioItemDescription: {fileID: 0}
-  itemService: {fileID: 0}
-  lightGameObject: {fileID: 4543485116435943686}
---- !u!114 &5389501757310959470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1584796118025913745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795eb17623776044d9cf694ec0169e2f, type: 3}
+  m_Script: {fileID: 11500000, guid: 52e22adf8edc62c4db8a681396e07c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SpawningAreaPosition: {x: 0, y: 0, z: 0}
   itemID: 
+  receiverMethods:
+  - SetPosition
+  - SetRotation
+  - SetLocalScale
+  itemLight: {fileID: 4543485116435943686}
 --- !u!1 &2607967003881930799
 GameObject:
   m_ObjectHideFlags: 0
