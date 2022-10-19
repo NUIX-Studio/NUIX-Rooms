@@ -34,7 +34,7 @@ public class ItemPresenter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TestMethod();
+        //TestMethod();
     }
 
     // Update is called once per frame
@@ -147,6 +147,11 @@ public class ItemPresenter : MonoBehaviour
         }
     }
 
+    public void LoadActionToScene(ActionData actionData)
+    {
+        GetItemViewController(actionData.senderID).UpdateSenderMethod(actionData);
+    }
+
 
     public GameObject CreateItemGameObject(Pose pose, ItemData itemData)
     {
@@ -206,6 +211,11 @@ public class ItemPresenter : MonoBehaviour
         {
             LoadItemToScene(itemData);
         }
+
+        foreach (ActionData actionData in itemService.GetItems().actionData)
+        {
+            LoadActionToScene(actionData);
+        }
     }
 
     private void RunAction(ActionData actionData)
@@ -230,6 +240,7 @@ public class ItemPresenter : MonoBehaviour
             new List<string>()
             );
         button.GetComponent<ItemViewController>().UpdateSenderMethod(actionData);
+        itemService.AddActionData(actionData);
     }
 
 

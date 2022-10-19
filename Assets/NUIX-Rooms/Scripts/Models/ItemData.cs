@@ -183,12 +183,16 @@ public class ItemsData
         {
             res += itemData.ToString() + Environment.NewLine;
         }
+        foreach (ActionData action in actionData)
+        {
+            res += action.ToString() + Environment.NewLine;
+        }
         return res;
     }
 }
 
 
-
+[System.Serializable]
 public class ActionData
 {
     public string actionID;
@@ -201,9 +205,6 @@ public class ActionData
     public string receiverMethod;
     public List<String> receiverArgs;
 
-    public ActionData()
-    {
-    }
 
     public ActionData(string actionID,
         string senderID, string senderMethod, List<String> senderArgs,
@@ -220,9 +221,17 @@ public class ActionData
     }
 
 
+
+
     public override string ToString()
     {
-        return $"ActionData";
+        return $" Action id {actionID}" +
+            $" sender {senderID} " +
+            $"method {senderMethod} " +
+            $"args {senderArgs} " +
+            $"receicer {receiverID} " +
+            $"method {receiverMethod} " +
+            $"args {receiverArgs}";
     }
 
 }
