@@ -10,8 +10,8 @@ public class ButtonItemViewController: ItemViewController
     public void Start()
     {
         // TODO move from start to constructor
-        //ActionData emptyAction = new ActionData();
-        //senderMethods.Add(nameof(Press), emptyAction);
+        ActionData emptyAction = new ActionData();
+        senderMethods.Add(nameof(Press), emptyAction);
     }
 
     public void Press()

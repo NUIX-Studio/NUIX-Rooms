@@ -231,21 +231,26 @@ public class ItemPresenter : MonoBehaviour
     private void TestMethod()
     {
         GameObject light = CreateItem(lightItemDescription);
-        light.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.2f, 0.8f, 0.2f));
+        light.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.3f, 0.8f, 0.2f));
         GameObject button = CreateItem(buttonItemDescription);
-        button.GetComponent<ItemViewController>().SetPosition(new Vector3(0.2f, 0.8f, 0.2f));
-        string actionID = Guid.NewGuid().ToString();
-        ActionData actionData = new ActionData(actionID,
-            button.GetComponent<ItemViewController>().itemID,
-            "Press",
-            new List<string>(),
-            light.GetComponent<ItemViewController>().itemID,
-            "Toggle",
-            new List<string>()
-            );
-        button.GetComponent<ItemViewController>().UpdateSenderMethod(actionData);
-        itemService.AddActionData(actionData);
+        button.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
+        //string actionID = Guid.NewGuid().ToString();
+        //ActionData actionData = new ActionData(actionID,
+        //    button.GetComponent<ItemViewController>().itemID,
+        //    "Press",
+        //    new List<string>(),
+        //    light.GetComponent<ItemViewController>().itemID,
+        //    "Toggle",
+        //    new List<string>()
+        //    );
+        //button.GetComponent<ItemViewController>().UpdateSenderMethod(actionData);
+        //itemService.AddActionData(actionData);
     }
 
+    public void AddActionData(ActionData actionData)
+    {
+        GetItemViewController(actionData.senderID).UpdateSenderMethod(actionData);
+        itemService.AddActionData(actionData);
+    }
 
 }

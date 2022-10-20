@@ -106,6 +106,10 @@ public class ItemService : MonoBehaviour
 
     public void AddActionData(ActionData actionData)
     {
-        itemsData.actionData.Add(actionData);
+        if (!itemsData.actionData.Contains(actionData))
+        {
+            itemsData.actionData.Add(actionData);
+            Debug.Log("ActionData already in the list!");
+        }
     }
 }

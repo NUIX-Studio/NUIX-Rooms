@@ -84,9 +84,16 @@ public class ItemViewController : MonoBehaviour
 
     public void CallReceiverMethod(string senderMethod)
     {
-        ActionData actionData = senderMethods[senderMethod];
-        itemPresenter.GetItemViewController(actionData.receiverID).
-            CallMethod(actionData.receiverMethod, actionData.receiverArgs.Cast<object>().ToArray());
+        try
+        {
+            ActionData actionData = senderMethods[senderMethod];
+            itemPresenter.GetItemViewController(actionData.receiverID).
+                CallMethod(actionData.receiverMethod, actionData.receiverArgs.Cast<object>().ToArray());
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("Error: " + ex.Message);
+        }
     }
 
     public void AddSenderMethod(ActionData actionData)

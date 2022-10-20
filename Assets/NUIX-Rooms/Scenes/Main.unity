@@ -607,7 +607,7 @@ GameObject:
   - component: {fileID: 104477037}
   - component: {fileID: 104477036}
   m_Layer: 0
-  m_Name: NextItem
+  m_Name: Next Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -910,10 +910,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Oculus.Interaction.HandGrab.Recorder.HandGrabPoseLiveRecorder,
-          Oculus.Interaction
-        m_MethodName: Redo
+      - m_Target: {fileID: 6413262174519616792}
+        m_TargetAssemblyTypeName: ActionsUIViewController, Assembly-CSharp
+        m_MethodName: NextReceiverViewController
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1136,7 +1135,7 @@ GameObject:
   - component: {fileID: 297591930}
   - component: {fileID: 297591929}
   m_Layer: 0
-  m_Name: Undo
+  m_Name: Previous Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1209,7 +1208,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6413262174519616792}
         m_TargetAssemblyTypeName: ActionsUIViewController, Assembly-CSharp
-        m_MethodName: NextSenderViewController
+        m_MethodName: PreviousSenderViewController
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1958,10 +1957,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Oculus.Interaction.HandGrab.Recorder.HandGrabPoseLiveRecorder,
-          Oculus.Interaction
-        m_MethodName: Undo
+      - m_Target: {fileID: 6413262174519616792}
+        m_TargetAssemblyTypeName: ActionsUIViewController, Assembly-CSharp
+        m_MethodName: PreviousSenderMethod
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2628,7 +2626,7 @@ GameObject:
   - component: {fileID: 668947890}
   - component: {fileID: 668947889}
   m_Layer: 0
-  m_Name: Receiver ID Label
+  m_Name: Receiver ID
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2851,10 +2849,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Oculus.Interaction.HandGrab.Recorder.HandGrabPoseLiveRecorder,
-          Oculus.Interaction
-        m_MethodName: Undo
+      - m_Target: {fileID: 6413262174519616792}
+        m_TargetAssemblyTypeName: ActionsUIViewController, Assembly-CSharp
+        m_MethodName: PreviousReceiverMethod
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3158,10 +3155,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Oculus.Interaction.HandGrab.Recorder.HandGrabPoseLiveRecorder,
-          Oculus.Interaction
-        m_MethodName: Redo
+      - m_Target: {fileID: 6413262174519616792}
+        m_TargetAssemblyTypeName: ActionsUIViewController, Assembly-CSharp
+        m_MethodName: NextSenderMethod
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4023,7 +4019,7 @@ GameObject:
   - component: {fileID: 885408202}
   - component: {fileID: 885408201}
   m_Layer: 0
-  m_Name: TimeLabel
+  m_Name: Receiver Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4278,7 +4274,7 @@ GameObject:
   - component: {fileID: 918930288}
   - component: {fileID: 918930287}
   m_Layer: 0
-  m_Name: Receiver Label
+  m_Name: Receiver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5472,7 +5468,7 @@ GameObject:
   - component: {fileID: 1221895674}
   - component: {fileID: 1221895673}
   m_Layer: 0
-  m_Name: TimeLabel
+  m_Name: Receiver Item Type Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7020,7 +7016,7 @@ GameObject:
   - component: {fileID: 1696514716}
   - component: {fileID: 1696514715}
   m_Layer: 0
-  m_Name: TimeLabel
+  m_Name: Receiver ID Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8030,7 +8026,7 @@ GameObject:
   - component: {fileID: 1749668673}
   - component: {fileID: 1749668672}
   m_Layer: 0
-  m_Name: Receiver Item Type Label
+  m_Name: Receiver Item Type
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8152,7 +8148,7 @@ GameObject:
   - component: {fileID: 1757337061}
   - component: {fileID: 1757337060}
   m_Layer: 0
-  m_Name: EnableGrabbing
+  m_Name: Add Action
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8227,11 +8223,10 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Oculus.Interaction.HandGrab.Recorder.HandGrabPoseLiveRecorder,
-          Oculus.Interaction
-        m_MethodName: EnableGrabbing
-        m_Mode: 0
+      - m_Target: {fileID: 6413262174519616792}
+        m_TargetAssemblyTypeName: ActionsUIViewController, Assembly-CSharp
+        m_MethodName: AddAction
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8431,6 +8426,10 @@ PrefabInstance:
     - target: {fileID: 8947771584843077245, guid: 98b997eeeb0457e44ba767e65ad1e0d3, type: 3}
       propertyPath: m_Name
       value: OVRCameraRig
+      objectReference: {fileID: 0}
+    - target: {fileID: 8947771584843077245, guid: 98b997eeeb0457e44ba767e65ad1e0d3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -8756,10 +8755,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Oculus.Interaction.HandGrab.Recorder.HandGrabPoseLiveRecorder,
-          Oculus.Interaction
-        m_MethodName: Redo
+      - m_Target: {fileID: 6413262174519616792}
+        m_TargetAssemblyTypeName: ActionsUIViewController, Assembly-CSharp
+        m_MethodName: NextReceiverMethod
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9002,10 +9000,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Oculus.Interaction.HandGrab.Recorder.HandGrabPoseLiveRecorder,
-          Oculus.Interaction
-        m_MethodName: Undo
+      - m_Target: {fileID: 6413262174519616792}
+        m_TargetAssemblyTypeName: ActionsUIViewController, Assembly-CSharp
+        m_MethodName: PreviousReceiverViewController
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9241,7 +9238,7 @@ GameObject:
   - component: {fileID: 1926098485}
   - component: {fileID: 1926098484}
   m_Layer: 0
-  m_Name: TimeLabel
+  m_Name: Receiver Method Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16560,8 +16557,8 @@ RectTransform:
   m_LocalScale: {x: 0.003, y: 0.003, z: 0.003}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1925525430}
   - {fileID: 1126105771}
+  - {fileID: 1925525430}
   - {fileID: 1133209325}
   m_Father: {fileID: 6413262174519616791}
   m_RootOrder: 0
@@ -16818,7 +16815,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1609369362675565956, guid: d3aecea57434e5843a357182c5a0e45c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1609369362675565957, guid: d3aecea57434e5843a357182c5a0e45c, type: 3}
       propertyPath: m_RootOrder

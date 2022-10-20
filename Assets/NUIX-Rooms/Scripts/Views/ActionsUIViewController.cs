@@ -13,6 +13,13 @@ public class ActionsUIViewController : MonoBehaviour
     private ItemViewController currentReceiverViewController;
     private int receiverViewControllerIndex = 0;
 
+    private string currentSenderMethod;
+    private int currentSenderMethodIndex = 0;
+    private string currentReceiverMethod;
+    private int currentReceiverMethodIndex = 0;
+
+
+
     public TMPro.TMP_Text senderIDLabel;
     public TMPro.TMP_Text senderItemTypeLabel;
     public TMPro.TMP_Text senderMethodNameLabel;
@@ -21,6 +28,86 @@ public class ActionsUIViewController : MonoBehaviour
     public TMPro.TMP_Text receiverItemTypeLabel;
     public TMPro.TMP_Text receiverMethodNameLabel;
 
+
+    public void NextSenderMethod()
+    {
+        try
+        {
+            int senderMethodsCount = currentSenderViewController.senderMethods.Count;
+            if (senderMethodsCount == 0) return;
+            currentSenderMethodIndex++;
+            if (currentSenderMethodIndex >= senderMethodsCount)
+            {
+                currentSenderMethodIndex = 0;
+            }
+            currentSenderMethod = currentSenderViewController.senderMethods.ElementAt(currentSenderMethodIndex).Key;
+            UpdateView();
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("Error: " + ex.Message);
+        }
+    }
+
+    public void PreviousSenderMethod()
+    {
+        try
+        {
+            int senderMethodsCount = currentSenderViewController.senderMethods.Count;
+            if (senderMethodsCount == 0) return;
+            currentSenderMethodIndex--;
+            if (currentSenderMethodIndex <= -1)
+            {
+                currentSenderMethodIndex = senderMethodsCount - 1;
+            }
+            currentSenderMethod = currentSenderViewController.senderMethods.ElementAt(currentSenderMethodIndex).Key;
+            UpdateView();
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("Error: " + ex.Message);
+        }
+    }
+
+    public void NextReceiverMethod()
+    {
+        try
+        {
+            int receiverMethodsCount = currentReceiverViewController.receiverMethods.Count;
+            if (receiverMethodsCount == 0) return;
+            currentReceiverMethodIndex++;
+            if (currentReceiverMethodIndex >= receiverMethodsCount)
+            {
+                currentReceiverMethodIndex = 0;
+            }
+            currentReceiverMethod = currentReceiverViewController.receiverMethods.ElementAt(currentReceiverMethodIndex);
+            UpdateView();
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("Error: " + ex.Message);
+        }
+    }
+    public void PreviousReceiverMethod()
+    {
+        try
+        {
+            int receiverMethodsCount = currentReceiverViewController.receiverMethods.Count;
+            if (receiverMethodsCount == 0) return;
+            currentReceiverMethodIndex--;
+            if (currentReceiverMethodIndex <= -1)
+            {
+                currentReceiverMethodIndex = receiverMethodsCount -1;
+            }
+            currentReceiverMethod = currentReceiverViewController.receiverMethods.ElementAt(currentReceiverMethodIndex);
+            UpdateView();
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("Error: " + ex.Message);
+        }
+    }
+
     public void NextSenderViewController()
     {
         try
@@ -28,9 +115,29 @@ public class ActionsUIViewController : MonoBehaviour
             int viewControllersCount = itemPresenter.itemViewControllers.Count;
             if (viewControllersCount == 0) return;
             senderViewControllerIndex++;
-            if (senderViewControllerIndex == viewControllersCount)
+            if (senderViewControllerIndex >= viewControllersCount)
             {
                 senderViewControllerIndex = 0;
+            }
+            currentSenderViewController = itemPresenter.itemViewControllers.ElementAt(senderViewControllerIndex).Value;
+            UpdateView();
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("Error: " + ex.Message);
+        }
+    }
+
+    public void PreviousSenderViewController()
+    {
+        try
+        {
+            int viewControllersCount = itemPresenter.itemViewControllers.Count;
+            if (viewControllersCount == 0) return;
+            senderViewControllerIndex--;
+            if (senderViewControllerIndex <= -1)
+            {
+                senderViewControllerIndex = viewControllersCount - 1;
             }
             currentSenderViewController = itemPresenter.itemViewControllers.ElementAt(senderViewControllerIndex).Value;
             UpdateView();
@@ -48,9 +155,28 @@ public class ActionsUIViewController : MonoBehaviour
             int viewControllersCount = itemPresenter.itemViewControllers.Count;
             if (viewControllersCount == 0) return;
             receiverViewControllerIndex++;
-            if (receiverViewControllerIndex == viewControllersCount)
+            if (receiverViewControllerIndex >= viewControllersCount)
             {
                 receiverViewControllerIndex = 0;
+            }
+            currentReceiverViewController = itemPresenter.itemViewControllers.ElementAt(receiverViewControllerIndex).Value;
+            UpdateView();
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("Error: " + ex.Message);
+        }
+    }
+    public void PreviousReceiverViewController()
+    {
+        try
+        {
+            int viewControllersCount = itemPresenter.itemViewControllers.Count;
+            if (viewControllersCount == 0) return;
+            receiverViewControllerIndex--;
+            if (receiverViewControllerIndex <= -1)
+            {
+                receiverViewControllerIndex = viewControllersCount;
             }
             currentReceiverViewController = itemPresenter.itemViewControllers.ElementAt(receiverViewControllerIndex).Value;
             UpdateView();
@@ -63,13 +189,42 @@ public class ActionsUIViewController : MonoBehaviour
 
     private void UpdateView()
     {
-        senderIDLabel.text = currentSenderViewController.itemID;
-        senderItemTypeLabel.text = itemPresenter.GetItemDatabyID(currentSenderViewController.itemID).itemType.ToString();
-        
-        receiverIDLabel.text = currentReceiverViewController.itemID;
-        receiverItemTypeLabel.text = itemPresenter.GetItemDatabyID(currentReceiverViewController.itemID).itemType.ToString();
+        if (currentSenderViewController != null)
+        {
+            senderIDLabel.text = currentSenderViewController.itemID;
+            senderItemTypeLabel.text = itemPresenter.GetItemDatabyID(currentSenderViewController.itemID).itemType.ToString();
+        }
+        if (currentReceiverViewController != null)
+        {
+            receiverIDLabel.text = currentReceiverViewController.itemID;
+            receiverItemTypeLabel.text = itemPresenter.GetItemDatabyID(currentReceiverViewController.itemID).itemType.ToString();
+        }
 
         // Update methods based on viewcontrollers
+        if (currentSenderMethod != "")
+        {
+            senderMethodNameLabel.text = currentSenderMethod;
+        }
+        if (currentReceiverMethod != "")
+        {
+            receiverMethodNameLabel.text = currentReceiverMethod;
+        }
+    }
+
+    public void AddAction()
+    {
+        try
+        {
+            ActionData actionData = new ActionData(Guid.NewGuid().ToString(),
+                currentSenderViewController.itemID, currentSenderMethod, new List<string>(),
+                currentReceiverViewController.itemID, currentReceiverMethod, new List<string>());
+            itemPresenter.AddActionData(actionData);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("Error: " + ex.Message);
+        }
+
     }
 
     // Start is called before the first frame update
