@@ -34,7 +34,7 @@ public class ItemPresenter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //TestMethod();
+        TestMethod();
     }
 
     // Update is called once per frame
@@ -54,6 +54,10 @@ public class ItemPresenter : MonoBehaviour
         return null;
     }
 
+    public ItemData GetItemDatabyID(string itemID)
+    {
+        return itemService.GetItemDataByID(itemID);
+    }
 
     private void SetItemTransform(string itemID, Transform transform)
     {
