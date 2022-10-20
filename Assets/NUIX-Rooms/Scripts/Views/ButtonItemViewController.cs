@@ -11,7 +11,9 @@ public class ButtonItemViewController: ItemViewController
     {
         // TODO move from start to constructor
         ActionData emptyAction = new ActionData();
-        senderMethods.Add(nameof(Press), emptyAction);
+        emptyAction.senderMethod = nameof(Press);
+        emptyAction.senderID = itemID;
+        CreateNewOrUpdateExistingSenderMethod(emptyAction);
     }
 
     public void Press()

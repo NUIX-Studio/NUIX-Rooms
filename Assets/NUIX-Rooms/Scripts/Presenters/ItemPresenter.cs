@@ -34,7 +34,7 @@ public class ItemPresenter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TestMethod();
+        //TestMethod();
     }
 
     // Update is called once per frame
@@ -153,7 +153,7 @@ public class ItemPresenter : MonoBehaviour
 
     public void LoadActionToScene(ActionData actionData)
     {
-        GetItemViewController(actionData.senderID).UpdateSenderMethod(actionData);
+        GetItemViewController(actionData.senderID).CreateNewOrUpdateExistingSenderMethod(actionData);
     }
 
 
@@ -249,7 +249,7 @@ public class ItemPresenter : MonoBehaviour
 
     public void AddActionData(ActionData actionData)
     {
-        GetItemViewController(actionData.senderID).UpdateSenderMethod(actionData);
+        GetItemViewController(actionData.senderID).CreateNewOrUpdateExistingSenderMethod(actionData);
         itemService.AddActionData(actionData);
     }
 

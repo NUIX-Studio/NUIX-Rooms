@@ -96,13 +96,8 @@ public class ItemViewController : MonoBehaviour
         }
     }
 
-    public void AddSenderMethod(ActionData actionData)
+    public void CreateNewOrUpdateExistingSenderMethod(ActionData actionData)
     {
-        senderMethods.Add(actionData.senderMethod, actionData);
-    }
-
-    public void UpdateSenderMethod(ActionData actionData)
-    {
-        senderMethods[actionData.senderMethod] = actionData;
+        if (actionData.actionID != null) senderMethods[actionData.senderMethod] = actionData;
     }
 }
