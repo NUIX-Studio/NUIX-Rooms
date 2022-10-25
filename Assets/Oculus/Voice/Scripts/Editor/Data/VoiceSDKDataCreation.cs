@@ -31,7 +31,6 @@ namespace Oculus.Voice.Data
     [Serializable]
     public class VoiceSDKDataCreation
     {
-        [MenuItem("GameObject/Voice SDK/App Voice Experience")]
         [MenuItem("Assets/Create/Voice SDK/Add App Voice Experience to Scene", false, 100)]
         public static void AddVoiceCommandServiceToScene()
         {

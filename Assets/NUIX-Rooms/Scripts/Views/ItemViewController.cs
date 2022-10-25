@@ -98,6 +98,18 @@ public class ItemViewController : MonoBehaviour
 
     public void CreateNewOrUpdateExistingSenderMethod(ActionData actionData)
     {
-        if (actionData.actionID != null) senderMethods[actionData.senderMethod] = actionData;
+        // IMPORTANT: Explain why this check is needed/not needed
+        if (actionData.actionID != null) 
+            senderMethods[actionData.senderMethod] = actionData;
+        else
+        {
+            if (!CheckIfSenderMethodExists(actionData))
+                senderMethods[actionData.senderMethod] = actionData;
+        }
+    }
+
+    public bool CheckIfSenderMethodExists(ActionData actionData)
+    {
+        return senderMethods.ContainsKey(actionData.senderMethod);
     }
 }

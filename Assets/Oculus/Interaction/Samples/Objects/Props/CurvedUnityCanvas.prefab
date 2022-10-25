@@ -186,7 +186,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cylinder: {fileID: 470775373127492019}
   _facing: 1
-  _surfaceOrientation: 1
   _height: 0
 --- !u!114 &8486259948616120778
 MonoBehaviour:
@@ -2511,9 +2510,37 @@ MonoBehaviour:
   _maxDistance: 0.01
   _enterHoverDistance: 0
   _releaseDistance: 0.1
-  _horizontalDragThreshold: 0.01
-  _verticalDragThreshold: 0.01
   _volumeMask: {fileID: 0}
+  _dragThresholding:
+    Enabled: 1
+    SurfaceThreshold: 0.01
+    ZThreshold: 0.01
+    DragEaseCurve:
+      _animationCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _animationLength: 0.05
   _positionPinning:
     Enabled: 0
     MaxPinDistance: 0

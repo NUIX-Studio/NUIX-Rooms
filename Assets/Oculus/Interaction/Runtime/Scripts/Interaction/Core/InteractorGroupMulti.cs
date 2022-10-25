@@ -33,7 +33,7 @@ namespace Oculus.Interaction
     /// By default, Interactors are prioritized in list order (first = highest priority).
     /// Interactors can otherwise be prioritized with an optional ICandidateComparer
     /// </summary>
-    public class InteractorGroupMulti : MonoBehaviour, IInteractor, IUpdateDriver
+    public class InteractorGroupMulti : MonoBehaviour, IInteractor
     {
         [SerializeField, Interface(typeof(IInteractor))]
         private List<MonoBehaviour> _interactors;
@@ -48,6 +48,10 @@ namespace Oculus.Interaction
 
         [SerializeField, Interface(typeof(ICandidateComparer)), Optional]
         private MonoBehaviour _interactorComparer;
+
+        [SerializeField, Optional]
+        private UnityEngine.Object _data = null;
+        public object Data { get; protected set; } = null;
 
         public int MaxIterationsPerFrame = 3;
         protected ICandidateComparer CandidateComparer = null;
@@ -78,6 +82,12 @@ namespace Oculus.Interaction
             if (_interactorComparer != null)
             {
                 Assert.IsNotNull(CandidateComparer);
+            }
+
+            if (Data == null)
+            {
+                _data = this;
+                Data = _data;
             }
         }
 
@@ -128,6 +138,12 @@ namespace Oculus.Interaction
                 interactor.Postprocess();
             }
 
+            if (State == InteractorState.Select &&
+                (_selectInteractor != null && _selectInteractor.State != InteractorState.Select))
+            {
+                _selectInteractor = null;
+            }
+
             WhenPostprocessed();
         }
 
@@ -155,7 +171,7 @@ namespace Oculus.Interaction
             }
         }
 
-        public void Enable()
+        private void EnableInteractors()
         {
             foreach (IInteractor interactor in Interactors)
             {
@@ -163,21 +179,32 @@ namespace Oculus.Interaction
             }
         }
 
-        public void Disable()
+        public void Enable()
         {
-            for (int i = 0; i < Interactors.Count; i++)
+            if (State != InteractorState.Disabled)
             {
-                Interactors[i].Disable();
+                return;
             }
 
+            State = InteractorState.Normal;
+            EnableInteractors();
+        }
+
+        public void Disable()
+        {
             if (State == InteractorState.Select)
             {
-                State = InteractorState.Hover;
+                Unselect();
             }
 
             if (State == InteractorState.Hover)
             {
-                State = InteractorState.Normal;
+                Unhover();
+            }
+
+            for (int i = 0; i < Interactors.Count; i++)
+            {
+                Interactors[i].Disable();
             }
 
             State = InteractorState.Disabled;
@@ -242,7 +269,7 @@ namespace Oculus.Interaction
             }
 
             State = InteractorState.Hover;
-            Enable();
+            EnableInteractors();
         }
 
         public bool ShouldHover
@@ -289,7 +316,8 @@ namespace Oculus.Interaction
 
         public bool ShouldSelect => _selectCandidateInteractor != null;
 
-        public bool ShouldUnselect => _selectInteractor == null || _selectInteractor.ShouldUnselect;
+        public bool ShouldUnselect => _selectInteractor == null ||
+                                      _selectInteractor.ShouldUnselect;
 
         private void DisableAllInteractorsExcept(IInteractor enabledInteractor)
         {
@@ -369,11 +397,10 @@ namespace Oculus.Interaction
                 InteractorState previousState = _state;
                 _state = value;
 
-                WhenStateChanged(new InteractorStateChangeArgs
-                {
-                    PreviousState = previousState,
-                    NewState = _state
-                });
+                WhenStateChanged(new InteractorStateChangeArgs(
+                    previousState,
+                    _state
+                ));
             }
         }
 
@@ -458,7 +485,7 @@ namespace Oculus.Interaction
 
                 if (State == InteractorState.Normal || State == InteractorState.Hover)
                 {
-                    Enable();
+                    EnableInteractors();
                 }
 
                 if(State == InteractorState.Normal)
@@ -517,6 +544,12 @@ namespace Oculus.Interaction
         {
             CandidateComparer = comparer;
             _interactorComparer = comparer as MonoBehaviour;
+        }
+
+        public void InjectOptionalData(object data)
+        {
+            _data = data as UnityEngine.Object;
+            Data = data;
         }
 
         #endregion

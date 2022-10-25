@@ -191,7 +191,7 @@ MonoBehaviour:
     arcOffset: 0
     arcLength: 360
   _relativeTo: {fileID: 6488342423924470675}
-  _gripPoint: {fileID: 4423143256515289685}
+  _referencePoint: {fileID: 4423143256515289685}
 --- !u!1 &5555420633605813700
 GameObject:
   m_ObjectHideFlags: 0

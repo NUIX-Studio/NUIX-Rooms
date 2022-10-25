@@ -24,8 +24,16 @@ namespace Oculus.Interaction
 {
     public struct InteractorStateChangeArgs
     {
-        public InteractorState PreviousState;
-        public InteractorState NewState;
+        public InteractorState PreviousState { get; }
+        public InteractorState NewState { get; }
+
+        public InteractorStateChangeArgs(
+            InteractorState previousState,
+            InteractorState newState)
+        {
+            PreviousState = previousState;
+            NewState = newState;
+        }
     }
 
     /// <summary>
@@ -34,6 +42,7 @@ namespace Oculus.Interaction
     public interface IInteractorView
     {
         int Identifier { get; }
+        public object Data { get; }
 
         bool HasCandidate { get; }
         object CandidateProperties { get; }

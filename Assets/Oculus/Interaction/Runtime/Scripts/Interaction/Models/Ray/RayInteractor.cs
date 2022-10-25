@@ -36,6 +36,11 @@ namespace Oculus.Interaction
         [SerializeField]
         private float _maxRayLength = 5f;
 
+        [SerializeField]
+        [Tooltip("(Meters, World) The threshold below which distances to a surface " +
+                 "are treated as equal for the purposes of ranking.")]
+        private float _equalDistanceThreshold = 0.001f;
+
         private RayCandidateProperties _rayCandidateProperties = null;
 
         private IMovement _movement;
@@ -109,7 +114,9 @@ namespace Oculus.Interaction
             {
                 if (interactable.Raycast(Ray, out SurfaceHit hit, MaxRayLength, false))
                 {
-                    if (hit.Distance < closestDist)
+                    bool equal = Mathf.Abs(hit.Distance - closestDist) < _equalDistanceThreshold;
+                    if ((!equal && hit.Distance < closestDist) ||
+                        (equal && interactable.TiebreakerScore > closestInteractable.TiebreakerScore))
                     {
                         closestDist = hit.Distance;
                         closestInteractable = interactable;
@@ -215,6 +222,12 @@ namespace Oculus.Interaction
         {
             _rayOrigin = rayOrigin;
         }
+
+        public void InjectOptionalEqualDistanceThreshold(float equalDistanceThreshold)
+        {
+            _equalDistanceThreshold = equalDistanceThreshold;
+        }
+
         #endregion
     }
 }

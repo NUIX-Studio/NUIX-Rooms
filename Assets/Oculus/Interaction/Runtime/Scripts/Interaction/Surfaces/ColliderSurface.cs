@@ -37,6 +37,8 @@ namespace Oculus.Interaction.Surfaces
 
         public Transform Transform => transform;
 
+        public Bounds Bounds => _collider.bounds;
+
         public bool Raycast(in Ray ray, out SurfaceHit hit, float maxDistance)
         {
             hit = new SurfaceHit();

@@ -471,7 +471,7 @@ namespace Facebook.WitAi
             }
 
             // Return full string
-            return $"voice-sdk-44.0.0.172.455,wit-unity-{WIT_SDK_VERSION},{_operatingSystem},{_deviceModel},{configId},{_appIdentifier},{userEditor},{_unityVersion}{customUserAgents}";
+            return $"voice-sdk-46.0.0.244.0,wit-unity-{WIT_SDK_VERSION},{_operatingSystem},{_deviceModel},{configId},{_appIdentifier},{userEditor},{_unityVersion}{customUserAgents}";
         }
 
         private bool RequestRequiresBody(string command)

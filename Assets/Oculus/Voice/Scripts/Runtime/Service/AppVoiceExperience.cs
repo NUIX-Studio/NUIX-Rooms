@@ -52,7 +52,7 @@ namespace Oculus.Voice
         private IVoiceService voiceServiceImpl;
         private IVoiceSDKLogger voiceSDKLoggerImpl;
 #if UNITY_ANDROID && !UNITY_EDITOR
-        private readonly string PACKAGE_VERSION = "44.0.1";
+        private readonly string PACKAGE_VERSION = "46.0.1";
 #endif
 
         private bool Initialized => null != voiceServiceImpl;
@@ -101,20 +101,16 @@ namespace Oculus.Voice
 
         #region Voice Service Methods
 
-        public override void Activate()
+        public override void Activate(string text, WitRequestOptions options)
         {
-            Activate(new WitRequestOptions());
+            voiceSDKLoggerImpl.LogInteractionStart(options.requestID, "message");
+            voiceServiceImpl.Activate(text, options);
         }
 
         public override void Activate(WitRequestOptions options)
         {
             voiceSDKLoggerImpl.LogInteractionStart(options.requestID, "speech");
             voiceServiceImpl.Activate(options);
-        }
-
-        public override void ActivateImmediately()
-        {
-            ActivateImmediately(new WitRequestOptions());
         }
 
         public override void ActivateImmediately(WitRequestOptions options)
@@ -131,17 +127,6 @@ namespace Oculus.Voice
         public override void DeactivateAndAbortRequest()
         {
             voiceServiceImpl.DeactivateAndAbortRequest();
-        }
-
-        public override void Activate(string text)
-        {
-            Activate(text, new WitRequestOptions());
-        }
-
-        public override void Activate(string text, WitRequestOptions requestOptions)
-        {
-            voiceSDKLoggerImpl.LogInteractionStart(requestOptions.requestID, "message");
-            voiceServiceImpl.Activate(text, requestOptions);
         }
 
         #endregion
@@ -191,7 +176,8 @@ namespace Oculus.Voice
             voiceSDKLoggerImpl = new VoiceSDKConsoleLoggerImpl();
             RevertToWitUnity();
 #endif
-            voiceSDKLoggerImpl.WitApplication = RuntimeConfiguration?.witConfiguration?.application?.id;
+            voiceSDKLoggerImpl.WitApplication =
+                RuntimeConfiguration.witConfiguration.WitApplicationId;
             voiceSDKLoggerImpl.ShouldLogToConsole = EnableConsoleLogging;
 
             OnInitialized?.Invoke();

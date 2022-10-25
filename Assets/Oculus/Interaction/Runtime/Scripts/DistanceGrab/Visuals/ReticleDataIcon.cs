@@ -59,8 +59,6 @@ namespace Oculus.Interaction.DistanceReticles
             }
         }
 
-        public Transform Target => this.transform;
-
         public Vector3 GetTargetSize()
         {
             if (_renderer != null)
@@ -70,26 +68,9 @@ namespace Oculus.Interaction.DistanceReticles
             return this.transform.localScale;
         }
 
-        public Vector3 BestHitPoint(Ray ray)
+        public Vector3 ProcessHitPoint(Vector3 hitPoint)
         {
-            float bestScore = float.PositiveInfinity;
-            Vector3 bestPoint = Target.position;
-
-            if (_colliders == null)
-            {
-                return bestPoint;
-            }
-
-            foreach (Collider collider in _colliders)
-            {
-                Vector3 point = NearestColliderHit(ray, collider, out float score);
-                if (score < bestScore)
-                {
-                    bestScore = score;
-                    bestPoint = point;
-                }
-            }
-            return Vector3.Lerp(bestPoint, Target.position, _snappiness);
+            return Vector3.Lerp(hitPoint, this.transform.position, _snappiness);
         }
 
         private Vector3 NearestColliderHit(Ray ray, Collider collider, out float score)

@@ -60,7 +60,11 @@ public class OVRGradleGeneration
 	public OVRADBTool adbTool;
 	public Process adbProcess;
 
+#if PRIORITIZE_OCULUS_XR_SETTINGS
 	private int _callbackOrder = 3;
+#else
+	private int _callbackOrder = 99999; // be executed after OculusManifest in Oculus XR Plugin, which has callbackOrder 10000
+#endif
 
 	public int callbackOrder { get { return _callbackOrder; } }
 	static private System.DateTime buildStartTime;

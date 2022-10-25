@@ -76,7 +76,7 @@ namespace Oculus.Voice.Demo
 
             // Determine current intent
             WitIntentData intent = sessionData.response.GetFirstIntentData();
-            if (intent.confidence < MIN_CONFIDENCE)
+            if (intent == null || intent.confidence < MIN_CONFIDENCE)
             {
                 return;
             }

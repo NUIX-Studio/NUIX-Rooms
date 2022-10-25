@@ -88,11 +88,6 @@ namespace Oculus.Interaction
         #endregion
 
         #region Unity Lifecycle
-        protected override void Awake()
-        {
-            base.Awake();
-            _pointableElement = _pointableElement as PointableElement;
-        }
 
         protected override void Start()
         {
@@ -254,7 +249,9 @@ namespace Oculus.Interaction
         private void GeneratePointerEvent(PointerEventType pointerEventType)
         {
             Pose pose = ComputePointerPose();
-            _pointableElement.ProcessPointerEvent(new PointerEvent(Identifier, pointerEventType, pose));
+            _pointableElement.ProcessPointerEvent(
+                new PointerEvent(
+                    Identifier, pointerEventType, pose, Data));
         }
 
         protected override void DoPreprocess()

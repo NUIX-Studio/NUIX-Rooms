@@ -326,7 +326,7 @@ namespace Oculus.Interaction.HandGrab
                 Pose fromPose = _currentTarget.WorldGrabPose;
                 _movement = SelectedInteractable.GenerateMovement(fromPose, grabPose);
                 SelectedInteractable.PointableElement.ProcessPointerEvent(
-                    new PointerEvent(Identifier, PointerEventType.Move, fromPose));
+                    new PointerEvent(Identifier, PointerEventType.Move, fromPose, Data));
             }
         }
 

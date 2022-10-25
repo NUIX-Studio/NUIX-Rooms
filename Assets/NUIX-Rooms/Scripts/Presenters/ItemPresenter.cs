@@ -18,6 +18,7 @@ public class ItemPresenter : MonoBehaviour
     public ItemDescription buttonItemDescription;
     public ItemDescription imageItemDescription;
     public ItemDescription audioItemDescription;
+    public ItemDescription poseItemDescription;
 
     public ItemService itemService;
 
@@ -34,7 +35,7 @@ public class ItemPresenter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //TestMethod();
+        TestMethod();
     }
 
     // Update is called once per frame
@@ -195,6 +196,11 @@ public class ItemPresenter : MonoBehaviour
                     instantiatedItem = Instantiate(audioItemDescription.itemPrefab, storedPosition, storedRotation);
                     break;
                 }
+            case ItemType.POSE:
+                {
+                    instantiatedItem = Instantiate(poseItemDescription.itemPrefab, storedPosition, storedRotation);
+                    break;
+                }
             default:
                 {
                     instantiatedItem = Instantiate(defaultItemDescription.itemPrefab, storedPosition, storedRotation);
@@ -234,6 +240,8 @@ public class ItemPresenter : MonoBehaviour
         light.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.3f, 0.8f, 0.2f));
         GameObject button = CreateItem(buttonItemDescription);
         button.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
+        GameObject pose = CreateItem(poseItemDescription);
+        pose.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
         //string actionID = Guid.NewGuid().ToString();
         //ActionData actionData = new ActionData(actionID,
         //    button.GetComponent<ItemViewController>().itemID,

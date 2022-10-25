@@ -83,22 +83,10 @@ namespace Oculus.Voice.Bindings.Android
             _isActive = false;
         }
 
-        public void Activate(string text)
-        {
-            service.Activate(text);
-        }
-
         public void Activate(string text, WitRequestOptions requestOptions)
         {
+            eventBinding.VoiceEvents.OnRequestOptionSetup?.Invoke(requestOptions);
             service.Activate(text, requestOptions);
-        }
-
-        public void Activate()
-        {
-            if (_isActive) return;
-
-            _isActive = true;
-            service.Activate();
         }
 
         public void Activate(WitRequestOptions requestOptions)
@@ -106,15 +94,8 @@ namespace Oculus.Voice.Bindings.Android
             if (_isActive) return;
 
             _isActive = true;
+            eventBinding.VoiceEvents.OnRequestOptionSetup?.Invoke(requestOptions);
             service.Activate(requestOptions);
-        }
-
-        public void ActivateImmediately()
-        {
-            if (_isActive) return;
-
-            _isActive = true;
-            service.ActivateImmediately();
         }
 
         public void ActivateImmediately(WitRequestOptions requestOptions)
@@ -122,6 +103,7 @@ namespace Oculus.Voice.Bindings.Android
             if (_isActive) return;
 
             _isActive = true;
+            eventBinding.VoiceEvents.OnRequestOptionSetup?.Invoke(requestOptions);
             service.ActivateImmediately(requestOptions);
         }
 

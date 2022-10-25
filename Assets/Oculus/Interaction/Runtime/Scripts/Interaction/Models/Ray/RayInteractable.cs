@@ -38,6 +38,23 @@ namespace Oculus.Interaction
         private MonoBehaviour _movementProvider;
         private IMovementProvider MovementProvider { get; set; }
 
+        [SerializeField, Optional]
+        private int _tiebreakerScore = 0;
+
+        #region Properties
+        public int TiebreakerScore
+        {
+            get
+            {
+                return _tiebreakerScore;
+            }
+            set
+            {
+                _tiebreakerScore = value;
+            }
+        }
+        #endregion
+
         protected override void Awake()
         {
             base.Awake();

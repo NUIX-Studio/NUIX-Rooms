@@ -287,7 +287,7 @@ MonoBehaviour:
   _physicsGrabbable: {fileID: 0}
   _supportedGrabTypes: 1
   _pinchGrabRules:
-    _thumbRequirement: 2
+    _thumbRequirement: 0
     _indexRequirement: 2
     _middleRequirement: 0
     _ringRequirement: 0
@@ -330,7 +330,7 @@ MonoBehaviour:
     _positionRotationWeight: 0.8
   _supportedGrabTypes: 1
   _pinchGrabRules:
-    _thumbRequirement: 2
+    _thumbRequirement: 0
     _indexRequirement: 2
     _middleRequirement: 0
     _ringRequirement: 0
@@ -1317,7 +1317,7 @@ MonoBehaviour:
     _positionRotationWeight: 1
   _supportedGrabTypes: 1
   _pinchGrabRules:
-    _thumbRequirement: 2
+    _thumbRequirement: 0
     _indexRequirement: 2
     _middleRequirement: 0
     _ringRequirement: 0
@@ -1385,7 +1385,7 @@ MonoBehaviour:
   _physicsGrabbable: {fileID: 0}
   _supportedGrabTypes: 1
   _pinchGrabRules:
-    _thumbRequirement: 2
+    _thumbRequirement: 0
     _indexRequirement: 2
     _middleRequirement: 0
     _ringRequirement: 0
@@ -2674,7 +2674,7 @@ MonoBehaviour:
   _physicsGrabbable: {fileID: 0}
   _supportedGrabTypes: 1
   _pinchGrabRules:
-    _thumbRequirement: 2
+    _thumbRequirement: 0
     _indexRequirement: 1
     _middleRequirement: 1
     _ringRequirement: 0
@@ -4590,7 +4590,7 @@ MonoBehaviour:
   _physicsGrabbable: {fileID: 0}
   _supportedGrabTypes: 1
   _pinchGrabRules:
-    _thumbRequirement: 2
+    _thumbRequirement: 0
     _indexRequirement: 2
     _middleRequirement: 0
     _ringRequirement: 0
@@ -4633,7 +4633,7 @@ MonoBehaviour:
     _positionRotationWeight: 1
   _supportedGrabTypes: 1
   _pinchGrabRules:
-    _thumbRequirement: 2
+    _thumbRequirement: 0
     _indexRequirement: 2
     _middleRequirement: 0
     _ringRequirement: 0
@@ -4912,7 +4912,7 @@ MonoBehaviour:
   _physicsGrabbable: {fileID: 0}
   _supportedGrabTypes: 1
   _pinchGrabRules:
-    _thumbRequirement: 2
+    _thumbRequirement: 0
     _indexRequirement: 2
     _middleRequirement: 0
     _ringRequirement: 0
@@ -4955,7 +4955,7 @@ MonoBehaviour:
     _positionRotationWeight: 0.8
   _supportedGrabTypes: 1
   _pinchGrabRules:
-    _thumbRequirement: 2
+    _thumbRequirement: 0
     _indexRequirement: 2
     _middleRequirement: 0
     _ringRequirement: 0
@@ -6013,7 +6013,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 1212767123521056345}
-  _customIcon: {fileID: 2800000, guid: 83037a5bfaf2e5e419f50d09bd18425e, type: 3}
+  _customIcon: {fileID: 2800000, guid: aa3a2b3718100f84fb5d8ff9adb8ccb7, type: 3}
   _colliders:
   - {fileID: 960625345224561644}
   _snappiness: 0.8
@@ -6097,67 +6097,6 @@ Transform:
   m_Father: {fileID: 356937184374082485}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1078857642925386486
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 7079690334011128078}
-    m_Modifications:
-    - target: {fileID: 112276, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_Name
-      value: OVRControllerPrefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11479374, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_controller
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
 --- !u!114 &1096353437662342727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7694,67 +7633,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1001 &5216562344776525957
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 7079690334011128076}
-    m_Modifications:
-    - target: {fileID: 112276, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_Name
-      value: OVRControllerPrefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11479374, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
-      propertyPath: m_controller
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
 --- !u!1001 &5862178853148416086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9242,21 +9120,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7079690334011128073}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &7079690334011128076 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4484591312116288, guid: 126d619cf4daa52469682f85c1378b4a,
-    type: 3}
-  m_PrefabInstance: {fileID: 7079690334011128073}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7079690334011128077 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 482130, guid: 126d619cf4daa52469682f85c1378b4a,
-    type: 3}
-  m_PrefabInstance: {fileID: 7079690334011128073}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7079690334011128078 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4593680705043960, guid: 126d619cf4daa52469682f85c1378b4a,
     type: 3}
   m_PrefabInstance: {fileID: 7079690334011128073}
   m_PrefabAsset: {fileID: 0}
@@ -9503,7 +9369,7 @@ MonoBehaviour:
     _positionRotationWeight: 0
   _supportedGrabTypes: 3
   _pinchGrabRules:
-    _thumbRequirement: 2
+    _thumbRequirement: 0
     _indexRequirement: 1
     _middleRequirement: 1
     _ringRequirement: 0

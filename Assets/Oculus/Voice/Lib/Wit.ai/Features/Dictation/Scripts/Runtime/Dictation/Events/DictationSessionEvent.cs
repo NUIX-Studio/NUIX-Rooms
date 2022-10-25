@@ -6,11 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+using System;
 using Facebook.WitAi.Dictation.Data;
 using UnityEngine.Events;
 
 namespace Facebook.WitAi.Dictation.Events
 {
+    [Serializable]
     public class DictationSessionEvent : UnityEvent<DictationSession>
     {
         

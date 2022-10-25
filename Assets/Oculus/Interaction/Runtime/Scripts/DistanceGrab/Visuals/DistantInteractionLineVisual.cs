@@ -159,10 +159,11 @@ namespace Oculus.Interaction.DistanceReticles
 
         private void UpdateLine()
         {
-            Ray ray = DistanceInteractor.Pointer;
-            Vector3 start = ray.origin + ray.direction * VisualOffset;
-            Vector3 end = TargetHit(ray);
-            Vector3 middle = start + ray.direction * Vector3.Distance(start, end) * 0.5f;
+            Vector3 direction = DistanceInteractor.Origin.forward;
+            Vector3 origin = DistanceInteractor.Origin.position;
+            Vector3 start = origin + direction * VisualOffset;
+            Vector3 end = TargetHit(DistanceInteractor.HitPoint);
+            Vector3 middle = start + direction * Vector3.Distance(start, end) * 0.5f;
 
             for (int i = 0; i < NumLinePoints; i++)
             {
@@ -176,14 +177,15 @@ namespace Oculus.Interaction.DistanceReticles
 
         protected abstract void RenderLine(List<Vector3> linePoints);
 
-        protected Vector3 TargetHit(Ray ray)
+        protected Vector3 TargetHit(Vector3 hitPoint)
         {
             if (_target != null)
             {
-                return _target.BestHitPoint(ray);
+                return _target.ProcessHitPoint(hitPoint);
             }
 
-            return ray.origin + ray.direction * _targetlessLength;
+            return DistanceInteractor.Origin.position
+                + DistanceInteractor.Origin.forward * _targetlessLength;
         }
 
         protected static Vector3 EvaluateBezier(Vector3 start, Vector3 middle, Vector3 end, float t)
@@ -199,7 +201,7 @@ namespace Oculus.Interaction.DistanceReticles
         {
             public Transform Target { get; set; }
 
-            public Vector3 BestHitPoint(Ray ray)
+            public Vector3 ProcessHitPoint(Vector3 hitPoint)
             {
                 return Target.position;
             }

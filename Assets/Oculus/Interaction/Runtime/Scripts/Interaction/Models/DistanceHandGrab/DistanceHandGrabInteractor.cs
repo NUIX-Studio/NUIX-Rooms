@@ -113,14 +113,24 @@ namespace Oculus.Interaction.HandGrab
 
         #endregion
 
-        public Ray Pointer
+        public Pose Origin
         {
             get
             {
-                return new Ray(_detectionFrustums.SelectionFrustum.StartPoint,
-                    _detectionFrustums.SelectionFrustum.Direction);
+                return new Pose(_detectionFrustums.SelectionFrustum.StartPoint,
+                    Quaternion.LookRotation(_detectionFrustums.SelectionFrustum.Direction));
             }
         }
+
+        public Vector3 HitPoint
+        {
+            get
+            {
+                return _originalHitPoint;
+            }
+
+        }
+
         public IDistanceInteractable DistanceInteractable => this.Interactable;
 
         #region IHandGrabSource
@@ -331,7 +341,7 @@ namespace Oculus.Interaction.HandGrab
                 Pose fromPose = _currentTarget.WorldGrabPose;
                 _movement = SelectedInteractable.GenerateMovement(fromPose, grabPose);
                 SelectedInteractable.PointableElement.ProcessPointerEvent(
-                    new PointerEvent(Identifier, PointerEventType.Move, fromPose));
+                    new PointerEvent(Identifier, PointerEventType.Move, fromPose, Data));
             }
         }
 

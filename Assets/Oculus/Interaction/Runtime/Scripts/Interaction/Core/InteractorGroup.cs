@@ -32,7 +32,7 @@ namespace Oculus.Interaction
     /// By default, Interactors are prioritized in list order (first = highest priority).
     /// Interactors can also be prioritized with an optional ICandidateComparer
     /// </summary>
-    public class InteractorGroup : MonoBehaviour, IInteractor, IUpdateDriver
+    public class InteractorGroup : MonoBehaviour, IInteractor
     {
         [SerializeField, Interface(typeof(IInteractor))]
         private List<MonoBehaviour> _interactors;
@@ -46,6 +46,10 @@ namespace Oculus.Interaction
 
         [SerializeField, Interface(typeof(ICandidateComparer)), Optional]
         private MonoBehaviour _interactorComparer;
+
+        [SerializeField, Optional]
+        private UnityEngine.Object _data = null;
+        public object Data { get; protected set; } = null;
 
         public int MaxIterationsPerFrame = 3;
         protected ICandidateComparer CandidateComparer = null;
@@ -76,6 +80,12 @@ namespace Oculus.Interaction
             if (_interactorComparer != null)
             {
                 Assert.IsNotNull(CandidateComparer);
+            }
+
+            if (Data == null)
+            {
+                _data = this;
+                Data = _data;
             }
         }
 
@@ -211,7 +221,8 @@ namespace Oculus.Interaction
         }
 
         public bool ShouldHover => _activeInteractor != null && _activeInteractor.ShouldHover;
-        public bool ShouldUnhover => _activeInteractor == null || _activeInteractor.ShouldUnhover ||
+        public bool ShouldUnhover => _activeInteractor == null ||
+                                     _activeInteractor.ShouldUnhover ||
                                      _activeInteractor != _candidateInteractor;
         public bool ShouldSelect => _activeInteractor != null && _activeInteractor.ShouldSelect;
         public bool ShouldUnselect => _activeInteractor == null || _activeInteractor.ShouldUnselect;
@@ -256,11 +267,9 @@ namespace Oculus.Interaction
                 InteractorState previousState = _state;
                 _state = value;
 
-                WhenStateChanged(new InteractorStateChangeArgs
-                {
-                    PreviousState = previousState,
-                    NewState = _state
-                });
+                WhenStateChanged(new InteractorStateChangeArgs(
+                    previousState, _state
+                ));
             }
         }
 
@@ -406,6 +415,12 @@ namespace Oculus.Interaction
         {
             CandidateComparer = comparer;
             _interactorComparer = comparer as MonoBehaviour;
+        }
+
+        public void InjectOptionalData(object data)
+        {
+            _data = data as UnityEngine.Object;
+            Data = data;
         }
 
         #endregion

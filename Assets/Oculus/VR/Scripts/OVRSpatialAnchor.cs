@@ -81,6 +81,17 @@ public class OVRSpatialAnchor : MonoBehaviour
     public bool PendingCreation => _requestId != 0;
 
     /// <summary>
+    /// Whether the spatial anchor has been localized.
+    /// </summary>
+    /// <remarks>
+    /// When you create a new spatial anchor, it may take a few frames before it is localized. Once localized,
+    /// its transform will update automatically.
+    /// </remarks>
+    public bool Localized => Space.Valid &&
+                             OVRPlugin.GetSpaceComponentStatus(Space, OVRPlugin.SpaceComponentType.Locatable,
+                                 out var isEnabled, out _) && isEnabled;
+
+    /// <summary>
     /// Initializes this component from an existing space handle and uuid, e.g., the result of a call to
     /// <see cref="OVRPlugin.QuerySpaces"/>.
     /// </summary>

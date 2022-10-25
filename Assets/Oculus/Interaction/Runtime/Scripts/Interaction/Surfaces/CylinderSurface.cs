@@ -62,6 +62,19 @@ namespace Oculus.Interaction.Surfaces
 
         public Transform Transform => _cylinder.transform;
 
+
+        public Bounds Bounds
+        {
+            get
+            {
+                float maxScale = Mathf.Max(Transform.lossyScale.x, 
+                    Mathf.Max(Transform.lossyScale.y, Transform.lossyScale.z));
+                float maxSize = maxScale * (Height + Radius);
+                return new Bounds(Transform.position, 
+                    new Vector3(maxSize, maxSize, maxSize));
+            }
+        }
+
         public NormalFacing Facing
         {
             get => _facing;

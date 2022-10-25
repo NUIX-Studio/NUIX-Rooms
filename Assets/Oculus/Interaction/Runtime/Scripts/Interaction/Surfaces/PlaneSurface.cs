@@ -92,6 +92,18 @@ namespace Oculus.Interaction.Surfaces
 
         public Transform Transform => transform;
 
+        public Bounds Bounds
+        {
+            get
+            {
+                Vector3 size = new Vector3(
+                    Mathf.Abs(Normal.x) == 1f ? float.Epsilon : float.PositiveInfinity,
+                    Mathf.Abs(Normal.y) == 1f ? float.Epsilon : float.PositiveInfinity,
+                    Mathf.Abs(Normal.z) == 1f ? float.Epsilon : float.PositiveInfinity);
+                return new Bounds(transform.position, size);
+            }
+        }
+
         public bool Raycast(in Ray ray, out SurfaceHit hit, float maxDistance)
         {
             hit = new SurfaceHit();

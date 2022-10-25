@@ -106,19 +106,18 @@ namespace Oculus.Voice.Utility
 
         #region TTS
 
-        [MenuItem("GameObject/Voice SDK/TTS/Default TTS Setup", false, 0)]
         [MenuItem("Assets/Create/Voice SDK/TTS/Add Default TTS Setup", false, 0)]
         public static void CreateDefaultTTSSetup()
         {
             TTSEditorUtilities.CreateDefaultSetup();
         }
-        [MenuItem("GameObject/Voice SDK/TTS/TTS Service", false, 100)]
+
         [MenuItem("Assets/Create/Voice SDK/TTS/Add TTS Service to Scene", false, 100)]
         public static void CreateTTSService()
         {
             TTSEditorUtilities.CreateService();
         }
-        [MenuItem("GameObject/Voice SDK/TTS/TTS Speaker", false, 100)]
+
         [MenuItem("Assets/Create/Voice SDK/TTS/Add TTS Speaker to Scene", false, 100)]
         public static void CreateTTSSpeaker()
         {

@@ -251,6 +251,9 @@ namespace Oculus.Platform
     [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
     public static extern ulong ovr_PlatformInitializeWithAccessToken(UInt64 appId, string accessToken);
 
+    [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+    public static extern ulong ovr_PlatformInitializeWithAccessTokenAndOptions(UInt64 appId, string accessToken, ovrKeyValuePair[] configOptions, UIntPtr numOptions);
+
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern bool ovr_UnityInitWrapperWindows(string appId, IntPtr loggingCB);
 
@@ -530,6 +533,9 @@ namespace Oculus.Platform
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern ulong ovr_AbuseReport_LaunchAdvancedReportFlow(UInt64 content_id, IntPtr abuse_report_options);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern ulong ovr_AbuseReport_ReportRequestHandled(ReportRequestResponse response);
 
     public static ulong ovr_Achievements_AddCount(string name, ulong count) {
       IntPtr name_native = StringToNative(name);
@@ -1046,7 +1052,7 @@ namespace Oculus.Platform
     public static extern ulong ovr_IAP_GetProductsBySKU(string[] skus, int count);
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
-    public static extern ulong ovr_IAP_GetViewerPurchases();
+    public static extern ulong ovr_IAP_GetViewerPurchases(bool fetchDeveloperPayload);
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern ulong ovr_IAP_GetViewerPurchasesDurableCache();
@@ -1576,6 +1582,9 @@ namespace Oculus.Platform
     public static extern ulong ovr_User_LaunchFriendRequestFlow(UInt64 userID);
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern ulong ovr_User_LaunchProfile(UInt64 userID);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern ulong ovr_User_LaunchReportFlow(UInt64 userID);
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
@@ -1698,6 +1707,9 @@ namespace Oculus.Platform
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern ulong ovr_Voip_GetMicrophoneAvailability();
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern ulong ovr_Voip_ReportAppVoipSessions(UInt64[] sessionIDs);
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern ulong ovr_Voip_SetSystemVoipSuppressed(bool suppressed);
@@ -3501,6 +3513,14 @@ namespace Oculus.Platform
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern bool ovr_ProductArray_HasNextPage(IntPtr obj);
 
+    public static string ovr_Purchase_GetDeveloperPayload(IntPtr obj) {
+      var result = StringFromNative(ovr_Purchase_GetDeveloperPayload_Native(obj));
+      return result;
+    }
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_Purchase_GetDeveloperPayload")]
+    private static extern IntPtr ovr_Purchase_GetDeveloperPayload_Native(IntPtr obj);
+
     public static DateTime ovr_Purchase_GetExpirationTime(IntPtr obj) {
       var result = DateTimeFromNative(ovr_Purchase_GetExpirationTime_Native(obj));
       return result;
@@ -3527,6 +3547,14 @@ namespace Oculus.Platform
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_Purchase_GetPurchaseStrID")]
     private static extern IntPtr ovr_Purchase_GetPurchaseStrID_Native(IntPtr obj);
+
+    public static string ovr_Purchase_GetReportingId(IntPtr obj) {
+      var result = StringFromNative(ovr_Purchase_GetReportingId_Native(obj));
+      return result;
+    }
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_Purchase_GetReportingId")]
+    private static extern IntPtr ovr_Purchase_GetReportingId_Native(IntPtr obj);
 
     public static string ovr_Purchase_GetSKU(IntPtr obj) {
       var result = StringFromNative(ovr_Purchase_GetSKU_Native(obj));

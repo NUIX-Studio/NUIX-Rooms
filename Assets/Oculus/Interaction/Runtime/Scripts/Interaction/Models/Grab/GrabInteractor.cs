@@ -213,14 +213,14 @@ namespace Oculus.Interaction
                     Pose source = _interactable.GetGrabSourceForTarget(target);
                     _tween.StopAndSetPose(source);
                     SelectedInteractable.PointableElement.ProcessPointerEvent(
-                        new PointerEvent(Identifier, PointerEventType.Move, _tween.Pose));
+                        new PointerEvent(Identifier, PointerEventType.Move, _tween.Pose, Data));
                     _tween.MoveTo(target);
                 }
                 else
                 {
                     _tween.StopAndSetPose(target);
                     SelectedInteractable.PointableElement.ProcessPointerEvent(
-                        new PointerEvent(Identifier, PointerEventType.Move, target));
+                        new PointerEvent(Identifier, PointerEventType.Move, target, Data));
                     _tween.MoveTo(target);
                 }
             }
