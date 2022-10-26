@@ -38,10 +38,11 @@ public class SpeechRecognition : MonoBehaviour
     [Tooltip("Unity UI Text component used to post recognition results on screen.")]
     public TMP_Text ErrorText;
 
+    // TODO FIX IT BASED ON NUIX-STUDIO PREVIOS RELEASE
     // Dropdown lists used to select translation languages, if enabled
     public Toggle TranslationEnabled;
     [Tooltip("Target language #1 for translation (if enabled).")]
-    public Dropdown Languages1;
+    public TMP_Dropdown Languages1;
 
     // Used to show live messages on screen, must be locked to avoid threading deadlocks since
     // the recognition events are raised in a separate thread
