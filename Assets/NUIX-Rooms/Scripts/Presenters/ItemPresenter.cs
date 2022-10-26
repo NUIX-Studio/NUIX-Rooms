@@ -35,7 +35,7 @@ public class ItemPresenter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TestMethod();
+        //TestMethod();
     }
 
     // Update is called once per frame
