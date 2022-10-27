@@ -248,8 +248,8 @@ public class ItemPresenter : MonoBehaviour
         light.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.3f, 0.8f, 0.2f));
         GameObject button = CreateItem(buttonItemDescription);
         button.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
-        //GameObject pose = CreateItem(poseItemDescription);
-        //pose.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
+        GameObject pose = CreateItem(poseItemDescription);
+        pose.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
         GameObject stt = CreateItem(sttItemDescription);
         stt.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 1.08f, 0.32f));
         
