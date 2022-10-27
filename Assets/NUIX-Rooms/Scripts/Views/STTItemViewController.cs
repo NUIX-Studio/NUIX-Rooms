@@ -32,11 +32,11 @@ public class STTItemViewController : ItemViewController
         //char[] separators = new char[] { ' ', '.' };
 
         //foreach (var word in result.Split(separators, StringSplitOptions.RemoveEmptyEntries))
-        foreach (KeyValuePair<string, Action> phrase in phrases)
+        foreach (KeyValuePair<string, ActionData> action in senderMethods)
         {
-            if (result == phrase.Key)
+            if (result == action.Key)
             {
-                phrase.Value?.Invoke();
+                CallReceiverMethod(result);
             }
         }
     }
@@ -52,8 +52,6 @@ public class STTItemViewController : ItemViewController
         emptyAction.senderMethod = phrase;
         emptyAction.senderID = itemID;
         CreateNewOrUpdateExistingSenderMethod(emptyAction);
-        phrases.Add(phrase, delegate { });
-        phrases[phrase] += () => CallReceiverMethod(phrase);
     }
 
     /*
