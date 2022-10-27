@@ -7,5 +7,6 @@ public enum ItemType
     BUTTON,
     IMAGE,
     AUDIO,
-    POSE
+    POSE,
+    STT
 }

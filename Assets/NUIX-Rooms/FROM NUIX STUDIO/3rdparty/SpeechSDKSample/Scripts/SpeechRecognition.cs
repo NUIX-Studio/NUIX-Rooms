@@ -30,7 +30,7 @@ public class SpeechRecognition : MonoBehaviour
     // NUIX:
     // Additional gameobject to handle speech recognition results
 
-    public NUIXSpeechRecognition nuixSpeechRecognition;
+    public STTItemViewController sttcontroller;
 
     // Public fields in the Unity inspector
     [Tooltip("Unity UI Text component used to report potential errors on screen.")]
@@ -47,6 +47,8 @@ public class SpeechRecognition : MonoBehaviour
     // Used to show live messages on screen, must be locked to avoid threading deadlocks since
     // the recognition events are raised in a separate thread
     private string recognizedString = "";
+
+    private string recognitionResultStringNUIX = "";
     private string errorString = "";
     private System.Object threadLocker = new System.Object();
 
@@ -225,9 +227,10 @@ public class SpeechRecognition : MonoBehaviour
             lock (threadLocker)
             {
                 recognizedString = $"RESULT: {Environment.NewLine}{e.Result.Text}";
+                recognitionResultStringNUIX = e.Result.Text;
                 ExecuteOnMainThread.RunOnMainThread.Enqueue(() =>
                 {
-                    nuixSpeechRecognition.AnalyzeSpeechRecognized(e.Result.Text);
+                    sttcontroller.AnalyzeSpeechRecognized(e.Result.Text);
                 });
             }
         }
@@ -438,5 +441,10 @@ public class SpeechRecognition : MonoBehaviour
             recognizedString = "Speech Translator is now stopped.";
             UnityEngine.Debug.LogFormat("Speech Translator is now stopped.");
         }
+    }
+
+    public string RecognizedString()
+    {
+        return recognitionResultStringNUIX;
     }
 }
