@@ -5,11 +5,19 @@ using Oculus.Interaction;
 using Oculus.Interaction.Input;
 using UnityEngine.Assertions;
 
+/// <summary>
+/// Attached to a PoseItemDescription, adding extra actions
+/// </summary>
 public class PoseItemViewController : ItemViewController
 {
-
+    /// <summary>
+    /// Set poses from Oculus Integration package to be recognized
+    /// </summary>
     [SerializeField] private ActiveStateSelector[] _poses;
-    // Start is called before the first frame update
+
+    /// <summary>
+    /// Let each of the recognized poses to call a connected sender method
+    /// </summary>
     void Start()
     {
         transform.Find("HandRefLeft").gameObject.GetComponent<HandRef>().InjectHand(GameObject.Find("NUIXHandRefLeft").GetComponent<HandRef>().Hand);

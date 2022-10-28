@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Serializes and deserializes the cached itemdata and actiondata
+/// </summary>
 public class ItemService : MonoBehaviour
 {
-
     private ItemsData itemsData;
-
-
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +37,11 @@ public class ItemService : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Search the cached itemData and return it, if found
+    /// </summary>
+    /// <param name="itemID">ID of the item</param>
+    /// <returns></returns>
     public ItemData GetItemDataByID(string itemID)
     {
         foreach (ItemData itemData in itemsData.ConcatItemsData())
@@ -50,6 +54,11 @@ public class ItemService : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Search the cached actionData and return it, if found
+    /// </summary>
+    /// <param name="actionID">ID of an action</param>
+    /// <returns></returns>
     public ActionData GetActionDataByID(string actionID)
     {
         foreach (ActionData actionData in itemsData.actionData)
@@ -62,6 +71,11 @@ public class ItemService : MonoBehaviour
         return null;
     }
 
+
+    /// <summary>
+    /// Recognizes the type of itemData and caches it
+    /// </summary>
+    /// <param name="itemData">The data to cache</param>
     public void AddItemData(ItemData itemData)
     {
         switch (itemData.itemType)
@@ -98,17 +112,25 @@ public class ItemService : MonoBehaviour
                 }
             default:
                 {
+                    // Pose, STT go here, because they don't have any specific fields to serialize
                     itemsData.itemsData.Add(itemData);
                     break;
                 }
         }
     }
 
+    /// <summary>
+    /// Caches the given actionData
+    /// </summary>
+    /// <param name="actionData">A unique uncached actionData</param>
     public void AddActionData(ActionData actionData)
     {
         if (!itemsData.actionData.Contains(actionData))
         {
             itemsData.actionData.Add(actionData);
+        }
+        else
+        {
             Debug.Log("ActionData already in the list!");
         }
     }

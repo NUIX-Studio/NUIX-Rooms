@@ -7,25 +7,57 @@ using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// Responsible for sending the actions to connected GameObjects
-/// Also implements the actions themselves
+/// Sends actions between ItemViewControllers.
+/// Packs ItemViewControllers parameters into Data objects
 /// </summary>
 public class ItemPresenter : MonoBehaviour
 {
+    /// <summary>
+    /// ItemDescription with a prefab for default item attached
+    /// </summary>
     public ItemDescription defaultItemDescription;
     public ItemDescription textPlateItemDescription;
     public ItemDescription lightItemDescription;
+
+    /// <summary>
+    /// ItemDescription with a prefab for button item attached
+    /// </summary>
     public ItemDescription buttonItemDescription;
+
+    /// <summary>
+    /// ItemDescription with a prefab for Image Slideshow Item attached
+    /// </summary>
     public ItemDescription imageItemDescription;
+
+    /// <summary>
+    /// ItemDescription with a prefab for Audio Player Item attached
+    /// </summary>
     public ItemDescription audioItemDescription;
+
+    /// <summary>
+    /// ItemDescription with a prefab for Pose Recognition item attached
+    /// </summary>
     public ItemDescription poseItemDescription;
+
+    /// <summary>
+    /// ItemDescription with a prefab for Speech to Text item attached
+    /// </summary>
     public ItemDescription sttItemDescription;
 
+
+    /// <summary>
+    /// Required for serializing the item parameters
+    /// </summary>
     public ItemService itemService;
 
-
+    /// <summary>
+    /// A list of itemViewControllers of items in the scene
+    /// </summary>
     public Dictionary<string, ItemViewController> itemViewControllers;
 
+    /// <summary>
+    /// Will be removed when release
+    /// </summary>
     public bool test = false;
 
 
@@ -48,7 +80,11 @@ public class ItemPresenter : MonoBehaviour
     }
 
 
-    // TODO: implement
+    /// <summary>
+    /// Get an ItemViewController for the item in the scene
+    /// </summary>
+    /// <param name="itemID">the ID of an item to get the view controller</param>
+    /// <returns></returns>
     public ItemViewController GetItemViewController(string itemID)
     {
         if (itemViewControllers.TryGetValue(itemID, out ItemViewController itemViewController))
@@ -58,6 +94,11 @@ public class ItemPresenter : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Get the cached item data
+    /// </summary>
+    /// <param name="itemID">ID of the item</param>
+    /// <returns></returns>
     public ItemData GetItemDatabyID(string itemID)
     {
         return itemService.GetItemDataByID(itemID);
@@ -68,13 +109,22 @@ public class ItemPresenter : MonoBehaviour
         ItemViewController itemViewController = GetItemViewController(itemID);
         itemViewController.SetItemTransform(transform);
     }
-    
+
+    /// <summary>
+    /// Get location, rotation and local scale
+    /// </summary>
+    /// <param name="itemID">ID of the item</param>
+    /// <returns></returns>
     private Transform GetItemTransform(string itemID)
     {
         ItemViewController itemViewController = GetItemViewController(itemID);
         return itemViewController.GetItemTransform();
     }
 
+    /// <summary>
+    /// Cache the transform
+    /// </summary>
+    /// <param name="itemID">ID of the item</param>
     private void SaveItemTransform(string itemID)
     {
         ItemData itemData = itemService.GetItemDataByID(itemID);
@@ -90,7 +140,10 @@ public class ItemPresenter : MonoBehaviour
     }
 
 
-    // TODO: Move to ItemService
+    // TODO: Move partly into ItemViewController (ex. gettext, getstate etc)
+    /// <summary>
+    /// Get the parameters of Items from ItemViewControllers and cache them
+    /// </summary>
     public void RetrieveItemsParams()
     {
         // Consider replace the iteration through lists to enumerable.concat
@@ -119,11 +172,12 @@ public class ItemPresenter : MonoBehaviour
     }
 
 
-    // Next several functions I would rather out into a separate Script
-    // Because ItemPresenter should be attached to only one item
-
-
     // TODO: consider put all the ItemDescriptions into one file
+    /// <summary>
+    /// Create item based on itemDescription. Cache it using itemService
+    /// </summary>
+    /// <param name="item">What kind of item to create</param>
+    /// <returns></returns>
     public GameObject CreateItem(ItemDescription item)
     {
         Quaternion i = Quaternion.identity;
@@ -139,6 +193,10 @@ public class ItemPresenter : MonoBehaviour
         return instantiatedItem;
     }
 
+    /// <summary>
+    /// Load the cached item
+    /// </summary>
+    /// <param name="itemData"></param>
     public void LoadItemToScene(ItemData itemData)
     {
         Vector3 storedPosition = new(itemData.position_x, itemData.position_y, itemData.position_z);
@@ -155,12 +213,22 @@ public class ItemPresenter : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Load the cached actionData
+    /// </summary>
+    /// <param name="actionData"></param>
     public void LoadActionToScene(ActionData actionData)
     {
         GetItemViewController(actionData.senderID).CreateNewOrUpdateExistingSenderMethod(actionData);
     }
 
 
+    /// <summary>
+    /// Instantiate an item at selected pose and using the cached itemdata
+    /// </summary>
+    /// <param name="pose">The pose to instantiate item at</param>
+    /// <param name="itemData">itemdata to be used. The position from itemdata won't be used</param>
+    /// <returns></returns>
     public GameObject CreateItemGameObject(Pose pose, ItemData itemData)
     {
         GameObject instantiatedItem;
@@ -222,7 +290,9 @@ public class ItemPresenter : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// Load all the cached items and actions into the scene
+    /// </summary>
     public void AddItemsToScene()
     {
         foreach (ItemData itemData in itemService.GetItems().ConcatItemsData())
@@ -236,10 +306,10 @@ public class ItemPresenter : MonoBehaviour
         }
     }
 
-    private void RunAction(ActionData actionData)
-    {
-        GetItemViewController(actionData.receiverID).CallMethod(actionData.receiverMethod, actionData.receiverArgs.Cast<object>().ToArray());
-    }
+    //private void RunAction(ActionData actionData)
+    //{
+    //    GetItemViewController(actionData.receiverID).CallMethod(actionData.receiverMethod, actionData.receiverArgs.Cast<object>().ToArray());
+    //}
 
     // TODO: Move to unitTests
     private void TestMethod()
@@ -267,6 +337,10 @@ public class ItemPresenter : MonoBehaviour
         //itemService.AddActionData(actionData);
     }
 
+    /// <summary>
+    /// Load an ActionData into the scene and cache it
+    /// </summary>
+    /// <param name="actionData"></param>
     public void AddActionData(ActionData actionData)
     {
         GetItemViewController(actionData.senderID).CreateNewOrUpdateExistingSenderMethod(actionData);

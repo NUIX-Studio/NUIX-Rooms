@@ -4,33 +4,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Attached to a STTItemDescription, adding extra actions
+/// </summary>
 public class STTItemViewController : ItemViewController
 {
-
-    private Dictionary<string, Action> phrases;
-
-    public event Action WhenSelected = delegate { };
+    //private Dictionary<string, Action> phrases;
+    //public event Action WhenSelected = delegate { };
 
     public SpeechRecognition speechRecognition;
 
-
-    [SerializeField] private ActiveStateSelector[] _phrases;    // Start is called before the first frame update
-    void Start()
-    {
-        if (phrases == null) phrases = new Dictionary<string, Action>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
+    /// <summary>
+    /// Compares the string to the list of sender method names (i.e. specified actions)
+    /// </summary>
+    /// <param name="result">Any string</param>
     public void AnalyzeSpeechRecognized(string result)
     {
         //char[] separators = new char[] { ' ', '.' };
-
         //foreach (var word in result.Split(separators, StringSplitOptions.RemoveEmptyEntries))
         foreach (KeyValuePair<string, ActionData> action in senderMethods)
         {
@@ -41,6 +31,10 @@ public class STTItemViewController : ItemViewController
         }
     }
 
+    /// <summary>
+    /// Get the last recognized string from the connected SpeechRecognition class 
+    /// and add it to the list of sender methods
+    /// </summary>
     public void AddPhraseFromRecognized()
     {
         AddPhrase(speechRecognition.RecognizedString());
@@ -53,34 +47,4 @@ public class STTItemViewController : ItemViewController
         emptyAction.senderID = itemID;
         CreateNewOrUpdateExistingSenderMethod(emptyAction);
     }
-
-    /*
-    void AddTextToSTTAction(string text)
-    {
-        ActionData emptyAction = new ActionData();
-        emptyAction.senderMethod = _poses[poseNumber].gameObject.name;
-        emptyAction.senderID = itemID;
-        CreateNewOrUpdateExistingSenderMethod(emptyAction);
-    }
-
-    [SerializeField] private ActiveStateSelector[] _poses;
-    // Start is called before the first frame update
-    void Start()
-    {
-        transform.Find("HandRefLeft").gameObject.GetComponent<HandRef>().InjectHand(GameObject.Find("NUIXHandRefLeft").GetComponent<HandRef>().Hand);
-        transform.Find("HandRefRight").gameObject.GetComponent<HandRef>().InjectHand(GameObject.Find("NUIXHandRefRight").GetComponent<HandRef>().Hand);
-        for (int i = 0; i < _poses.Length; i++)
-        {
-            int poseNumber = i;
-            //_poses[i].WhenSelected += () => ShowVisuals(poseNumber);
-            //_poses[i].WhenUnselected += () => HideVisuals(poseNumber);
-
-            _poses[i].WhenSelected += () => CallReceiverMethod(_poses[poseNumber].gameObject.name);
-            ActionData emptyAction = new ActionData();
-            emptyAction.senderMethod = _poses[poseNumber].gameObject.name;
-            emptyAction.senderID = itemID;
-            CreateNewOrUpdateExistingSenderMethod(emptyAction);
-        }
-    }
-    */
 }

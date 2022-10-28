@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Classes to cache the parameters of items and actions and to be serialized from/deserialized into
+/// </summary>
 [System.Serializable]
 public class ItemData
 {
