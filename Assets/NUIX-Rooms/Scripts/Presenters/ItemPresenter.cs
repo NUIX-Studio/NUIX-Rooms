@@ -42,7 +42,17 @@ public class ItemPresenter : MonoBehaviour
     /// <summary>
     /// ItemDescription with a prefab for Speech to Text item attached
     /// </summary>
+    /// 
     public ItemDescription sttItemDescription;
+    /// <summary>
+    /// ItemDescription with a prefab for Camera item attached
+    /// </summary>
+    public ItemDescription cameraItemDescription;
+
+    /// <summary>
+    /// ItemDescription with a prefab for WeightScaler item attached
+    /// </summary>
+    public ItemDescription weightScalerItemDescription;
 
 
     /// <summary>
@@ -162,7 +172,8 @@ public class ItemPresenter : MonoBehaviour
 
         foreach (LightItemData itemData in itemService.GetItems().lightItemsData)
         {
-            itemData.isTurnedON = GetItemViewController(itemData.itemID).gameObject.GetComponentInChildren<Light>().enabled;
+            itemData.isTurnedON = ((LightItemViewController)GetItemViewController(itemData.itemID)).itemLight.enabled;
+            itemData.colorIndex = ((LightItemViewController)GetItemViewController(itemData.itemID)).colorIndex;
         }
 
         foreach (ButtonItemData itemData in itemService.GetItems().buttonItemsData)
@@ -249,6 +260,7 @@ public class ItemPresenter : MonoBehaviour
                 {
                     instantiatedItem = Instantiate(lightItemDescription.itemPrefab, storedPosition, storedRotation);
                     instantiatedItem.GetComponentInChildren<Light>().enabled = ((LightItemData)itemData).isTurnedON;
+                    instantiatedItem.GetComponent<LightItemViewController>().SetColor(((LightItemData)itemData).colorIndex);
                     break;
                 }
             case ItemType.BUTTON:
@@ -275,6 +287,16 @@ public class ItemPresenter : MonoBehaviour
             case ItemType.STT:
                 {
                     instantiatedItem = Instantiate(sttItemDescription.itemPrefab, storedPosition, storedRotation);
+                    break;
+                }
+            case ItemType.CAMERA:
+                {
+                    instantiatedItem = Instantiate(cameraItemDescription.itemPrefab, storedPosition, storedRotation);
+                    break;
+                }
+            case ItemType.WEIGHTSCALER:
+                {
+                    instantiatedItem = Instantiate(weightScalerItemDescription.itemPrefab, storedPosition, storedRotation);
                     break;
                 }
             default:
@@ -318,12 +340,16 @@ public class ItemPresenter : MonoBehaviour
         light.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.3f, 0.8f, 0.2f));
         GameObject button = CreateItem(buttonItemDescription);
         button.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
-        GameObject pose = CreateItem(poseItemDescription);
-        pose.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
-        GameObject stt = CreateItem(sttItemDescription);
-        stt.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 1.08f, 0.32f));
-        
-        
+        //GameObject pose = CreateItem(poseItemDescription);
+        //pose.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
+        //GameObject stt = CreateItem(sttItemDescription);
+        //stt.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 1.08f, 0.32f));
+        GameObject camera = CreateItem(cameraItemDescription);
+        camera.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
+        GameObject weightScaler = CreateItem(weightScalerItemDescription);
+        weightScaler.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.0f, 0.2f));
+
+
         //string actionID = Guid.NewGuid().ToString();
         //ActionData actionData = new ActionData(actionID,
         //    button.GetComponent<ItemViewController>().itemID,

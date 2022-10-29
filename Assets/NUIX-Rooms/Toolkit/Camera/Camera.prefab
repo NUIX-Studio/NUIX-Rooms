@@ -48,6 +48,7 @@ MonoBehaviour:
   _interactorFilters: []
   _maxInteractors: -1
   _maxSelectingInteractors: -1
+  _data: {fileID: 0}
   _pointableElement: {fileID: 1686355356034468991}
   _rigidbody: {fileID: 1686355356034468990}
   _resetGrabOnGrabsUpdated: 1
@@ -218,7 +219,7 @@ Camera:
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
-  m_FOVAxisMode: 0
+  m_FOVAxisMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
   m_FocalLength: 50
@@ -230,7 +231,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 100
-  field of view: 4.8
+  field of view: 99.6
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -306,6 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactables:
   - {fileID: 1686355354134504866}
+  _data: {fileID: 0}
 --- !u!114 &1686355355013754662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,7 +509,7 @@ MonoBehaviour:
     arcOffset: 0
     arcLength: 360
   _relativeTo: {fileID: 1686355354134504865}
-  _gripPoint: {fileID: 1686355356026614978}
+  _referencePoint: {fileID: 1686355356026614978}
 --- !u!1 &1686355356034468977
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,6 +519,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1686355356034468989}
+  - component: {fileID: 2107421297041933525}
   - component: {fileID: 1686355356034468990}
   - component: {fileID: 1686355356034468991}
   - component: {fileID: 1686355356034468976}
@@ -543,8 +546,25 @@ Transform:
   - {fileID: 1686355355013754680}
   - {fileID: 1686355354914616721}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2107421297041933525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686355356034468977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cbb010082ab25e4d9abc99789b499db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPresenter: {fileID: 0}
+  itemID: 
+  receiverMethods: []
+  _target: {fileID: 0}
+  _camera: {fileID: 1686355354914616735}
 --- !u!54 &1686355356034468990
 Rigidbody:
   m_ObjectHideFlags: 0

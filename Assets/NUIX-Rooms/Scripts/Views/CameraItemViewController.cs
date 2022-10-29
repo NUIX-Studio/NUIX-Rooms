@@ -1,0 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraItemViewController : ItemViewController
+{
+    [SerializeField]
+    [Tooltip("The tracked object, main camera by default")] Transform _target;
+
+    [SerializeField]
+    [Tooltip("Should be either Character camera or any other camera in the scene.")]
+    Camera _camera;
+
+    public void Start()
+    {
+        if (_target == null) _target = Camera.main.transform;
+        ActionData emptyAction = new ActionData();
+        emptyAction.senderMethod = nameof(SightSensed);
+        emptyAction.senderID = itemID;
+        CreateNewOrUpdateExistingSenderMethod(emptyAction);
+    }
+
+    public void Update()
+    {
+        CheckForTargetInCameraView();
+    }
+
+
+    public void SightSensed()
+    {
+        Debug.Log($"The target {_target.name} is inside the {_camera.name} view");
+    }
+
+    public void CheckForTargetInCameraView()
+    {
+        Vector3 viewPos = _camera.WorldToViewportPoint(_target.position);
+        // Checking if the target object is inside the defined camera view
+        if ((viewPos.z > 0.0F) && (viewPos.x < 1.0F) && (viewPos.x > 0.0F))
+        {
+            SightSensed();
+        }
+    }
+
+}

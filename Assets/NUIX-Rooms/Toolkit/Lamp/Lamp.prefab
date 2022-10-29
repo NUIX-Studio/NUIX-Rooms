@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52e22adf8edc62c4db8a681396e07c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawningAreaPosition: {x: 0, y: 0, z: 0}
+  itemPresenter: {fileID: 0}
   itemID: 
   receiverMethods:
   - SetPosition
@@ -625,6 +625,7 @@ MonoBehaviour:
   _interactorFilters: []
   _maxInteractors: -1
   _maxSelectingInteractors: -1
+  _data: {fileID: 0}
   _pointableElement: {fileID: 7566506157969289160}
   _rigidbody: {fileID: 3396446817957086566}
   _resetGrabOnGrabsUpdated: 1
@@ -1266,6 +1267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactables:
   - {fileID: 3533197321820516729}
+  _data: {fileID: 0}
 --- !u!114 &2826457500956411458
 MonoBehaviour:
   m_ObjectHideFlags: 0

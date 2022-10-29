@@ -88,7 +88,7 @@ public class ItemService : MonoBehaviour
                 }
             case ItemType.LIGHT:
                 {
-                    LightItemData lightItemData = new(itemData, true);
+                    LightItemData lightItemData = new(itemData, true, 0);
                     itemsData.lightItemsData.Add(lightItemData);
                     break;
                 }
@@ -112,7 +112,7 @@ public class ItemService : MonoBehaviour
                 }
             default:
                 {
-                    // Pose, STT go here, because they don't have any specific fields to serialize
+                    // Pose, STT, Camera, WeightScaler go here, because they don't have any specific fields to serialize atm
                     itemsData.itemsData.Add(itemData);
                     break;
                 }

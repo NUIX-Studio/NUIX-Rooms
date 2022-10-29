@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactables:
   - {fileID: 302147178047682708}
+  _data: {fileID: 0}
 --- !u!114 &7100511634559473076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +309,7 @@ MonoBehaviour:
   _interactorFilters: []
   _maxInteractors: -1
   _maxSelectingInteractors: -1
+  _data: {fileID: 0}
   _pointableElement: {fileID: 3220686075259026494}
   _rigidbody: {fileID: 7678945003822536336}
   _resetGrabOnGrabsUpdated: 1

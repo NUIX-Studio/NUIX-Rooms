@@ -75,17 +75,19 @@ public class TextPlateItemData : ItemData
 public class LightItemData : ItemData
 {
     public bool isTurnedON;
+    public int colorIndex;
 
-    public LightItemData(ItemData itemData, bool isTurnedON)
+    public LightItemData(ItemData itemData, bool isTurnedON, int colorIndex)
         : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
     itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w, itemData.itemID)
     {
         this.isTurnedON = isTurnedON;
+        this.colorIndex = colorIndex;
     }
 
     public override string ToString()
     {
-        return base.ToString() + $" light is on : {isTurnedON}";
+        return base.ToString() + $" light is on : {isTurnedON}, color number : {colorIndex}";
     }
 }
 

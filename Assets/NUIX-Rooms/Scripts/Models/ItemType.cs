@@ -8,5 +8,7 @@ public enum ItemType
     IMAGE,
     AUDIO,
     POSE,
-    STT
+    STT,
+    CAMERA,
+    WEIGHTSCALER
 }
