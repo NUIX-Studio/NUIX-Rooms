@@ -8,16 +8,13 @@ public class WeightScalerItemViewController : ItemViewController
     public TMPro.TMP_Text currentWeightLabel;
     public TMPro.TMP_Text requiredWeightLabel;
 
-    float requiredWeight = 1.0f;
+    public float requiredWeight = 1.0f;
     public WeightScalerPlaneCollisionController weightScalerPlaneCollisionController;
 
     // Start is called before the first frame update
     void Start()
     {
-        ActionData emptyAction = new ActionData();
-        emptyAction.senderMethod = nameof(WeightTrigger);
-        emptyAction.senderID = itemID;
-        CreateNewOrUpdateExistingSenderMethod(emptyAction);
+        CreateNewOrUpdateExistingSenderMethod(new ActionData(itemID, nameof(WeightTrigger)));
     }
     
     /// <summary>
@@ -54,5 +51,13 @@ public class WeightScalerItemViewController : ItemViewController
             WeightTrigger();
         }
         UpdateTextLabels();
+    }
+    public void SetRequiredWeight(float requiredWeight)
+    {
+        this.requiredWeight = requiredWeight;
+    }
+    public float GetRequredWeight()
+    {
+        return requiredWeight;
     }
 }

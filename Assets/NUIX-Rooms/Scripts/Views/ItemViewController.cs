@@ -33,10 +33,7 @@ public class ItemViewController : MonoBehaviour
     /// Can be called by Sender Methods of this or other GameObjects
     /// </summary>
     public List<string> receiverMethods;
-
-
-    
-
+   
     /// <summary>
     /// Each Item GameObject in the Scene has a transform component,
     /// which we can modify by calling these receiver methods
@@ -55,7 +52,6 @@ public class ItemViewController : MonoBehaviour
         if (receiverMethods == null) receiverMethods = new List<string>();
 
     }
-
 
     public Transform GetItemTransform()
     {

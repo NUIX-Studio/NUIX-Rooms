@@ -592,14 +592,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484158346925631000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.449, y: 0.0683, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6271255747371477923}
   - {fileID: 2285898088707316881}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5493069527784322097
 MonoBehaviour:
@@ -618,6 +618,7 @@ MonoBehaviour:
   receiverMethods: []
   currentWeightLabel: {fileID: 3232775213988696426}
   requiredWeightLabel: {fileID: 7234714758677954842}
+  requiredWeight: 1
   weightScalerPlaneCollisionController: {fileID: 2134987744995826965}
 --- !u!54 &3333793926785148655
 Rigidbody:

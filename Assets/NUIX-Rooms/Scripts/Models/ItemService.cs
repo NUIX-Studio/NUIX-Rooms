@@ -110,6 +110,12 @@ public class ItemService : MonoBehaviour
                     itemsData.audioItemsData.Add(audioItemData);
                     break;
                 }
+            case ItemType.WEIGHTSCALER:
+                {
+                    WeightScalerItemData weightScalerItemData = new(itemData, 1);
+                    itemsData.weightScalerItemsData.Add(weightScalerItemData);
+                    break;
+                }
             default:
                 {
                     // Pose, STT, Camera, WeightScaler go here, because they don't have any specific fields to serialize atm

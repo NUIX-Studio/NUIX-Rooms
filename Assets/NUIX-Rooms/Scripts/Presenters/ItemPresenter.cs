@@ -180,6 +180,11 @@ public class ItemPresenter : MonoBehaviour
         {
             itemData.type = 0;
         }
+
+        foreach (WeightScalerItemData itemData in itemService.GetItems().weightScalerItemsData)
+        {
+            itemData.requiredWeight = ((WeightScalerItemViewController)GetItemViewController(itemData.itemID)).GetRequredWeight();
+        }
     }
 
 
@@ -297,6 +302,7 @@ public class ItemPresenter : MonoBehaviour
             case ItemType.WEIGHTSCALER:
                 {
                     instantiatedItem = Instantiate(weightScalerItemDescription.itemPrefab, storedPosition, storedRotation);
+                    instantiatedItem.GetComponent<WeightScalerItemViewController>().SetRequiredWeight(((WeightScalerItemData)itemData).requiredWeight);
                     break;
                 }
             default:
@@ -347,7 +353,7 @@ public class ItemPresenter : MonoBehaviour
         GameObject camera = CreateItem(cameraItemDescription);
         camera.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
         GameObject weightScaler = CreateItem(weightScalerItemDescription);
-        weightScaler.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.0f, 0.2f));
+        weightScaler.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 1.0f, 0.2f));
 
 
         //string actionID = Guid.NewGuid().ToString();

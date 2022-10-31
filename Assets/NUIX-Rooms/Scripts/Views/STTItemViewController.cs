@@ -42,9 +42,6 @@ public class STTItemViewController : ItemViewController
 
     private void AddPhrase(string phrase)
     {
-        ActionData emptyAction = new ActionData();
-        emptyAction.senderMethod = phrase;
-        emptyAction.senderID = itemID;
-        CreateNewOrUpdateExistingSenderMethod(emptyAction);
+        CreateNewOrUpdateExistingSenderMethod(new ActionData(itemID, phrase));
     }
 }

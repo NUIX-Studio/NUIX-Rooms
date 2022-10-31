@@ -13,7 +13,7 @@ public class PoseItemViewController : ItemViewController
     /// <summary>
     /// Set poses from Oculus Integration package to be recognized
     /// </summary>
-    [SerializeField] private ActiveStateSelector[] _poses;
+    [SerializeField] private ActiveStateSelector[] poses;
 
     /// <summary>
     /// Let each of the recognized poses to call a connected sender method
@@ -22,17 +22,14 @@ public class PoseItemViewController : ItemViewController
     {
         transform.Find("HandRefLeft").gameObject.GetComponent<HandRef>().InjectHand(GameObject.Find("NUIXHandRefLeft").GetComponent<HandRef>().Hand);
         transform.Find("HandRefRight").gameObject.GetComponent<HandRef>().InjectHand(GameObject.Find("NUIXHandRefRight").GetComponent<HandRef>().Hand);
-        for (int i = 0; i < _poses.Length; i++)
+        for (int i = 0; i < poses.Length; i++)
         {
             int poseNumber = i;
             //_poses[i].WhenSelected += () => ShowVisuals(poseNumber);
             //_poses[i].WhenUnselected += () => HideVisuals(poseNumber);
 
-            _poses[i].WhenSelected += () => CallReceiverMethod(_poses[poseNumber].gameObject.name);
-            ActionData emptyAction = new ActionData();
-            emptyAction.senderMethod = _poses[poseNumber].gameObject.name;
-            emptyAction.senderID = itemID;
-            CreateNewOrUpdateExistingSenderMethod(emptyAction);
+            poses[i].WhenSelected += () => CallReceiverMethod(poses[poseNumber].gameObject.name);
+            CreateNewOrUpdateExistingSenderMethod(new ActionData(itemID, poses[poseNumber].gameObject.name));
         }
     }
 

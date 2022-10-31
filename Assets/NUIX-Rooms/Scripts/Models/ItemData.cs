@@ -142,6 +142,38 @@ public class AudioItemData : ItemData
     }
 }
 
+[System.Serializable]
+public class CameraItemData : ItemData
+{
+    public CameraItemData(ItemData itemData)
+        : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w, itemData.itemID)
+    {
+        
+    }
+    public override string ToString()
+    {
+        return base.ToString();
+    }
+}
+
+[System.Serializable]
+public class WeightScalerItemData : ItemData
+{
+    public float requiredWeight;
+
+    public WeightScalerItemData(ItemData itemData, float requiredWeight)
+        : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w, itemData.itemID)
+    {
+        this.requiredWeight = requiredWeight;
+    }
+    public override string ToString()
+    {
+        return base.ToString() + $" required weight : {requiredWeight}";
+    }
+}
+
 
 [System.Serializable]
 public class ItemsData
@@ -158,6 +190,10 @@ public class ItemsData
 
     public List<AudioItemData> audioItemsData;
 
+    public List<CameraItemData> cameraItemsData;
+
+    public List<WeightScalerItemData> weightScalerItemsData;
+
     public List<ActionData> actionData;
 
 
@@ -167,7 +203,9 @@ public class ItemsData
             Concat(lightItemsData).
             Concat(buttonItemsData).
             Concat(imageItemsData).
-            Concat(audioItemsData);
+            Concat(audioItemsData).
+            Concat(cameraItemsData).
+            Concat(weightScalerItemsData);
     }
 
     public ItemsData()
@@ -178,6 +216,9 @@ public class ItemsData
         this.buttonItemsData = new List<ButtonItemData>();
         this.imageItemsData = new List<ImageItemData>();
         this.audioItemsData = new List<AudioItemData>();
+        this.cameraItemsData = new List<CameraItemData>();
+        this.weightScalerItemsData = new List<WeightScalerItemData>();
+
         this.actionData = new List<ActionData>();
     }
 
@@ -229,7 +270,11 @@ public class ActionData
         this.actionID = actionID;
     }
 
-
+    public ActionData(string senderID, string senderMethod)
+    {
+        this.senderID = senderID;
+        this.senderMethod = senderMethod;
+    }
 
 
     public override string ToString()
@@ -242,5 +287,4 @@ public class ActionData
             $"method {receiverMethod} " +
             $"args {receiverArgs}";
     }
-
 }

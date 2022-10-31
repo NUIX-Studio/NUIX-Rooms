@@ -14,10 +14,7 @@ public class CameraItemViewController : ItemViewController
     public void Start()
     {
         if (_target == null) _target = Camera.main.transform;
-        ActionData emptyAction = new ActionData();
-        emptyAction.senderMethod = nameof(SightSensed);
-        emptyAction.senderID = itemID;
-        CreateNewOrUpdateExistingSenderMethod(emptyAction);
+        CreateNewOrUpdateExistingSenderMethod(new ActionData(itemID, nameof(SightSensed)));
     }
 
     public void Update()
