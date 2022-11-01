@@ -145,12 +145,12 @@ public class VideoItemData : ItemData
 [System.Serializable]
 public class AudioItemData : ItemData
 {
-
-    public AudioItemData(ItemData itemData)
+    public int audioClipIndex;
+    public AudioItemData(ItemData itemData, int audioClipIndex)
         : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
     itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w, itemData.itemID)
     {
-        
+        this.audioClipIndex = audioClipIndex;
     }
     public override string ToString()
     {

@@ -196,6 +196,11 @@ public class ItemPresenter : MonoBehaviour
             itemData.videoClipIndex = ((VideoItemViewController)GetItemViewController(itemData.itemID)).videoClipIndex;
         }
 
+        foreach (AudioItemData itemData in itemService.GetItems().audioItemsData)
+        {
+            itemData.audioClipIndex = ((AudioItemViewController)GetItemViewController(itemData.itemID)).audioClipIndex;
+        }
+
         foreach (WeightScalerItemData itemData in itemService.GetItems().weightScalerItemsData)
         {
             itemData.requiredWeight = ((WeightScalerItemViewController)GetItemViewController(itemData.itemID)).GetRequredWeight();
@@ -304,6 +309,7 @@ public class ItemPresenter : MonoBehaviour
             case ItemType.AUDIO:
                 {
                     instantiatedItem = Instantiate(audioItemDescription.itemPrefab, storedPosition, storedRotation);
+                    instantiatedItem.GetComponent<AudioItemViewController>().SetAudioClip(((AudioItemData)itemData).audioClipIndex);
                     break;
                 }
             case ItemType.POSE:

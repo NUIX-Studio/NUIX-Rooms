@@ -112,7 +112,7 @@ public class ItemService : MonoBehaviour
                 }
             case ItemType.AUDIO:
                 {
-                    AudioItemData audioItemData = new(itemData);
+                    AudioItemData audioItemData = new(itemData, 0);
                     itemsData.audioItemsData.Add(audioItemData);
                     break;
                 }

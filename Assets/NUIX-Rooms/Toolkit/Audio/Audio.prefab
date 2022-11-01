@@ -288,7 +288,7 @@ MonoBehaviour:
     arcOffset: 0
     arcLength: 360
   _relativeTo: {fileID: 6488342423924470675}
-  _gripPoint: {fileID: 4423143256515289685}
+  _referencePoint: {fileID: 4423143256515289685}
 --- !u!1 &5555420633605813700
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,6 +534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactables:
   - {fileID: 5613918960681095387}
+  _data: {fileID: 0}
 --- !u!114 &3122051700138130939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,6 +697,7 @@ MonoBehaviour:
   _interactorFilters: []
   _maxInteractors: -1
   _maxSelectingInteractors: -1
+  _data: {fileID: 0}
   _pointableElement: {fileID: 7308207667003872369}
   _rigidbody: {fileID: 2542496425200811743}
   _resetGrabOnGrabsUpdated: 1
