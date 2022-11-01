@@ -181,6 +181,11 @@ public class ItemPresenter : MonoBehaviour
             itemData.type = 0;
         }
 
+        foreach (ImageItemData itemData in itemService.GetItems().imageItemsData)
+        {
+            itemData.imageIndex = ((ImageItemViewController)GetItemViewController(itemData.itemID)).imageIndex;
+        }
+
         foreach (WeightScalerItemData itemData in itemService.GetItems().weightScalerItemsData)
         {
             itemData.requiredWeight = ((WeightScalerItemViewController)GetItemViewController(itemData.itemID)).GetRequredWeight();
@@ -277,6 +282,7 @@ public class ItemPresenter : MonoBehaviour
             case ItemType.IMAGE:
                 {
                     instantiatedItem = Instantiate(imageItemDescription.itemPrefab, storedPosition, storedRotation);
+                    instantiatedItem.GetComponent<ImageItemViewController>().SetImage(((ImageItemData)itemData).imageIndex);
                     break;
                 }
             case ItemType.AUDIO:
@@ -346,14 +352,16 @@ public class ItemPresenter : MonoBehaviour
         light.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.6f, 0.77f, 0.7f));
         GameObject button = CreateItem(buttonItemDescription);
         button.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.6f, 0.785f, 0.2f));
+        GameObject image = CreateItem(imageItemDescription);
+        image.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.785f, 0.2f));
         //GameObject pose = CreateItem(poseItemDescription);
         //pose.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
         //GameObject stt = CreateItem(sttItemDescription);
         //stt.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 1.08f, 0.32f));
         //GameObject camera = CreateItem(cameraItemDescription);
         //camera.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
-        GameObject weightScaler = CreateItem(weightScalerItemDescription);
-        weightScaler.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 1.0f, 0.2f));
+        //GameObject weightScaler = CreateItem(weightScalerItemDescription);
+        //weightScaler.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 1.0f, 0.2f));
 
 
         //string actionID = Guid.NewGuid().ToString();

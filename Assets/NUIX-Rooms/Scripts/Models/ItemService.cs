@@ -100,7 +100,7 @@ public class ItemService : MonoBehaviour
                 }
             case ItemType.IMAGE:
                 {
-                    ImageItemData imageItemData = new(itemData);
+                    ImageItemData imageItemData = new(itemData, 0);
                     itemsData.imageItemsData.Add(imageItemData);
                     break;
                 }

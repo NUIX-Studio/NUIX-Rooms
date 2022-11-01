@@ -113,12 +113,12 @@ public class ButtonItemData : ItemData
 [System.Serializable]
 public class ImageItemData : ItemData
 {
-
-    public ImageItemData(ItemData itemData)
+    public int imageIndex;
+    public ImageItemData(ItemData itemData, int imageIndex)
         : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
     itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w, itemData.itemID)
     {
-        
+        this.imageIndex = imageIndex;
     }
     public override string ToString()
     {
