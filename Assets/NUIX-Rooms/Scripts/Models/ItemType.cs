@@ -6,6 +6,7 @@ public enum ItemType
     LIGHT,
     BUTTON,
     IMAGE,
+    VIDEO,
     AUDIO,
     POSE,
     STT,

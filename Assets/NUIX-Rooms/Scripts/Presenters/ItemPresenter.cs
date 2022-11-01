@@ -30,6 +30,11 @@ public class ItemPresenter : MonoBehaviour
     public ItemDescription imageItemDescription;
 
     /// <summary>
+    /// ItemDescription with a prefab for VideoPlayer Item attached
+    /// </summary>
+    public ItemDescription videoItemDescription;
+
+    /// <summary>
     /// ItemDescription with a prefab for Audio Player Item attached
     /// </summary>
     public ItemDescription audioItemDescription;
@@ -186,6 +191,11 @@ public class ItemPresenter : MonoBehaviour
             itemData.imageIndex = ((ImageItemViewController)GetItemViewController(itemData.itemID)).imageIndex;
         }
 
+        foreach (VideoItemData itemData in itemService.GetItems().videoItemsData)
+        {
+            itemData.videoClipIndex = ((VideoItemViewController)GetItemViewController(itemData.itemID)).videoClipIndex;
+        }
+
         foreach (WeightScalerItemData itemData in itemService.GetItems().weightScalerItemsData)
         {
             itemData.requiredWeight = ((WeightScalerItemViewController)GetItemViewController(itemData.itemID)).GetRequredWeight();
@@ -285,6 +295,12 @@ public class ItemPresenter : MonoBehaviour
                     instantiatedItem.GetComponent<ImageItemViewController>().SetImage(((ImageItemData)itemData).imageIndex);
                     break;
                 }
+            case ItemType.VIDEO:
+                {
+                    instantiatedItem = Instantiate(videoItemDescription.itemPrefab, storedPosition, storedRotation);
+                    instantiatedItem.GetComponent<VideoItemViewController>().SetVideoClip(((VideoItemData)itemData).videoClipIndex);
+                    break;
+                }
             case ItemType.AUDIO:
                 {
                     instantiatedItem = Instantiate(audioItemDescription.itemPrefab, storedPosition, storedRotation);
@@ -352,8 +368,10 @@ public class ItemPresenter : MonoBehaviour
         light.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.6f, 0.77f, 0.7f));
         GameObject button = CreateItem(buttonItemDescription);
         button.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.6f, 0.785f, 0.2f));
-        GameObject image = CreateItem(imageItemDescription);
-        image.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.785f, 0.2f));
+        //GameObject image = CreateItem(imageItemDescription);
+        //image.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.785f, 0.2f));
+        GameObject video = CreateItem(videoItemDescription);
+        video.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.785f, 0.2f));
         //GameObject pose = CreateItem(poseItemDescription);
         //pose.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
         //GameObject stt = CreateItem(sttItemDescription);

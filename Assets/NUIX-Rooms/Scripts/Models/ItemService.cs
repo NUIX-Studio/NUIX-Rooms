@@ -104,6 +104,12 @@ public class ItemService : MonoBehaviour
                     itemsData.imageItemsData.Add(imageItemData);
                     break;
                 }
+            case ItemType.VIDEO:
+                {
+                    VideoItemData videoItemData = new(itemData, 0);
+                    itemsData.videoItemsData.Add(videoItemData);
+                    break;
+                }
             case ItemType.AUDIO:
                 {
                     AudioItemData audioItemData = new(itemData);

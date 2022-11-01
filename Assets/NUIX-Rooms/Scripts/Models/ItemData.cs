@@ -127,6 +127,22 @@ public class ImageItemData : ItemData
 }
 
 [System.Serializable]
+public class VideoItemData : ItemData
+{
+    public int videoClipIndex;
+    public VideoItemData(ItemData itemData, int videoClipIndex)
+        : base(itemData.itemType, itemData.position_x, itemData.position_y, itemData.position_z,
+    itemData.rotation_x, itemData.rotation_y, itemData.rotation_z, itemData.rotation_w, itemData.itemID)
+    {
+        this.videoClipIndex = videoClipIndex;
+    }
+    public override string ToString()
+    {
+        return base.ToString();
+    }
+}
+
+[System.Serializable]
 public class AudioItemData : ItemData
 {
 
@@ -188,6 +204,8 @@ public class ItemsData
 
     public List<ImageItemData> imageItemsData;
 
+    public List<VideoItemData> videoItemsData;
+
     public List<AudioItemData> audioItemsData;
 
     public List<CameraItemData> cameraItemsData;
@@ -203,6 +221,7 @@ public class ItemsData
             Concat(lightItemsData).
             Concat(buttonItemsData).
             Concat(imageItemsData).
+            Concat(videoItemsData).
             Concat(audioItemsData).
             Concat(cameraItemsData).
             Concat(weightScalerItemsData);
@@ -215,6 +234,7 @@ public class ItemsData
         this.lightItemsData = new List<LightItemData>();
         this.buttonItemsData = new List<ButtonItemData>();
         this.imageItemsData = new List<ImageItemData>();
+        this.videoItemsData = new List<VideoItemData>();
         this.audioItemsData = new List<AudioItemData>();
         this.cameraItemsData = new List<CameraItemData>();
         this.weightScalerItemsData = new List<WeightScalerItemData>();
