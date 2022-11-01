@@ -11,10 +11,12 @@ public class CameraItemViewController : ItemViewController
     [Tooltip("Should be either Character camera or any other camera in the scene.")]
     Camera _camera;
 
+    private bool isTriggered = false;
+
     public void Start()
     {
         if (_target == null) _target = Camera.main.transform;
-        CreateNewOrUpdateExistingSenderMethod(new ActionData(itemID, nameof(SightSensed)));
+        CreateNewOrUpdateExistingSenderMethod(new ActionData(itemID, nameof(TrackedObjectInsideCameraView)));
     }
 
     public void Update()
@@ -23,9 +25,15 @@ public class CameraItemViewController : ItemViewController
     }
 
 
-    public void SightSensed()
+    public void TrackedObjectInsideCameraView()
     {
         Debug.Log($"The target {_target.name} is inside the {_camera.name} view");
+        CallReceiverMethod(nameof(TrackedObjectInsideCameraView));
+    }
+    public void TrackedObjectOutsideCameraView()
+    {
+        Debug.Log($"The target {_target.name} is outside the {_camera.name} view");
+        CallReceiverMethod(nameof(TrackedObjectOutsideCameraView));
     }
 
     public void CheckForTargetInCameraView()
@@ -34,7 +42,13 @@ public class CameraItemViewController : ItemViewController
         // Checking if the target object is inside the defined camera view
         if ((viewPos.z > 0.0F) && (viewPos.x < 1.0F) && (viewPos.x > 0.0F))
         {
-            SightSensed();
+            if (!isTriggered) TrackedObjectInsideCameraView();
+            isTriggered = true;
+        }
+        else
+        {
+            if (isTriggered) TrackedObjectOutsideCameraView();
+            isTriggered = false;
         }
     }
 
