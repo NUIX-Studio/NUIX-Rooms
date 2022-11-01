@@ -343,15 +343,15 @@ public class ItemPresenter : MonoBehaviour
     private void TestMethod()
     {
         GameObject light = CreateItem(lightItemDescription);
-        light.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.3f, 0.8f, 0.2f));
+        light.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.6f, 0.77f, 0.7f));
         GameObject button = CreateItem(buttonItemDescription);
-        button.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
+        button.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.6f, 0.785f, 0.2f));
         //GameObject pose = CreateItem(poseItemDescription);
         //pose.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
         //GameObject stt = CreateItem(sttItemDescription);
         //stt.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 1.08f, 0.32f));
-        GameObject camera = CreateItem(cameraItemDescription);
-        camera.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
+        //GameObject camera = CreateItem(cameraItemDescription);
+        //camera.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
         GameObject weightScaler = CreateItem(weightScalerItemDescription);
         weightScaler.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 1.0f, 0.2f));
 

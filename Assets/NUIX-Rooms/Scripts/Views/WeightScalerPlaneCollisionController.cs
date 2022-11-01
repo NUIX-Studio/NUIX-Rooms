@@ -10,6 +10,7 @@ public class WeightScalerPlaneCollisionController : MonoBehaviour
 
     private void Update()
     {
+        totalWeight = 0f;
         for (int i = 0; i < _colliders.Count; i++)
         {
             Rigidbody rigidbody = (_colliders[i] as GameObject).GetComponent<Rigidbody>();

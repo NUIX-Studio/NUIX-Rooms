@@ -11,10 +11,12 @@ public class WeightScalerItemViewController : ItemViewController
     public float requiredWeight = 1.0f;
     public WeightScalerPlaneCollisionController weightScalerPlaneCollisionController;
 
+    private bool isTriggered = false;
     // Start is called before the first frame update
     void Start()
     {
         CreateNewOrUpdateExistingSenderMethod(new ActionData(itemID, nameof(WeightTrigger)));
+        CreateNewOrUpdateExistingSenderMethod(new ActionData(itemID, nameof(WeightUnTrigger)));
     }
     
     /// <summary>
@@ -23,6 +25,13 @@ public class WeightScalerItemViewController : ItemViewController
     public void WeightTrigger()
     {
         Debug.Log($"Total weight {weightScalerPlaneCollisionController.totalWeight} exceeded the weight set {requiredWeight}");
+        CallReceiverMethod(nameof(WeightTrigger));
+    }
+
+    public void WeightUnTrigger()
+    {
+        Debug.Log($"Total weight {weightScalerPlaneCollisionController.totalWeight} is now less than the weight set {requiredWeight}");
+        CallReceiverMethod(nameof(WeightUnTrigger));
     }
 
     public void IncreaseRequiredWeight()
@@ -48,7 +57,13 @@ public class WeightScalerItemViewController : ItemViewController
 
         if (currentWeight > requiredWeight)
         {
-            WeightTrigger();
+            if (!isTriggered) WeightTrigger();
+            isTriggered = true;
+        }
+        else
+        {
+            if (isTriggered) WeightUnTrigger();
+            isTriggered = false;
         }
         UpdateTextLabels();
     }
