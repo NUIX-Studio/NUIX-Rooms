@@ -5225,10 +5225,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPresenter: {fileID: 0}
-  SpawningAreaPosition: {x: 0, y: 0, z: 0}
   itemID: 
   receiverMethods: []
-  _poses:
+  poses:
   - {fileID: 8257979473494797439}
   - {fileID: 7493400188458582937}
   - {fileID: 8257979473780861060}
@@ -5239,8 +5238,6 @@ MonoBehaviour:
   - {fileID: 7901099971872406013}
   - {fileID: 8257979473429992823}
   - {fileID: 8737852861262147410}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!54 &3273789942672053989
 Rigidbody:
   m_ObjectHideFlags: 0
