@@ -16,6 +16,7 @@ public class RoomLoader : MonoBehaviour
     void Start()
     {
         if (itemsToCreate1) CreateItems1();    
+        if (itemsToCreate2) CreateItems2();    
     }
 
     public void CreateItems1()
@@ -26,12 +27,14 @@ public class RoomLoader : MonoBehaviour
         button.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.782f, 0.369f));
         GameObject textplate = itemPresenter.CreateItem(itemPresenter.textPlateItemDescription);
         textplate.GetComponent<ItemViewController>().SetPosition(new Vector3(0.1f, 0.782f, 0.269f));
-
     }
 
     private void CreateItems2()
     {
-        
+        GameObject pose = itemPresenter.CreateItem(itemPresenter.poseItemDescription);
+        pose.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
+        GameObject image = itemPresenter.CreateItem(itemPresenter.imageItemDescription);
+        image.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.785f, 0.2f));
     }
 
 

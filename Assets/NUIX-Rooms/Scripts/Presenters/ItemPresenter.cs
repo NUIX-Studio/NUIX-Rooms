@@ -76,6 +76,13 @@ public class ItemPresenter : MonoBehaviour
     public bool test = false;
 
 
+    [SerializeField] public bool itemsToCreate1;
+    [SerializeField] public bool itemsToCreate2;
+    [SerializeField] public bool itemsToCreate3;
+    [SerializeField] public bool itemsToCreate4;
+    [SerializeField] public bool itemsToCreate5;
+
+
     public ItemPresenter()
     {
         itemViewControllers = new Dictionary<string, ItemViewController>();
@@ -86,6 +93,8 @@ public class ItemPresenter : MonoBehaviour
     void Start()
     {
         if (test) TestMethod();
+        if (itemsToCreate1) CreateItems1();
+        if (itemsToCreate2) CreateItems2();
     }
 
     // Update is called once per frame
@@ -417,4 +426,22 @@ public class ItemPresenter : MonoBehaviour
         return null;
     }
 
+
+    public void CreateItems1()
+    {
+        GameObject light = CreateItem(lightItemDescription);
+        light.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.77f, 0.55f));
+        GameObject button = CreateItem(buttonItemDescription);
+        button.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.782f, 0.369f));
+        GameObject textplate = CreateItem(textPlateItemDescription);
+        textplate.GetComponent<ItemViewController>().SetPosition(new Vector3(0.1f, 0.782f, 0.269f));
+    }
+
+    public void CreateItems2()
+    {
+        GameObject pose = CreateItem(poseItemDescription);
+        pose.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
+        GameObject image = CreateItem(imageItemDescription);
+        image.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.785f, 0.2f));
+    }
 }
