@@ -27,8 +27,8 @@ public class JSONSaving : MonoBehaviour
 
     private void SetPaths()
     {
-        path = Application.dataPath + Path.AltDirectorySeparatorChar + SceneManager.GetActiveScene().name + "-Data.json";
-        persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveData.json";
+        path = Path.Combine(Application.dataPath, SceneManager.GetActiveScene().name + "-Data.json");
+        persistentPath = Path.Combine(Application.persistentDataPath, SceneManager.GetActiveScene().name + "-Data.json");
     }
 
     // Update is called once per frame
@@ -47,12 +47,14 @@ public class JSONSaving : MonoBehaviour
         string savePath = path;
 
         Debug.Log("saving Data at " + savePath);
+        if (LogText) LogText.text = "saving Data at " + savePath;
         string json = JsonUtility.ToJson(itemService.GetItems());
         Debug.Log(json);
-        if (LogText) LogText.text = json;
+        if (LogText) LogText.text += json;
 
-        using StreamWriter writer = new(savePath);
-        writer.Write(json);
+        File.WriteAllText(savePath, json);
+        //using StreamWriter writer = new(savePath);
+        //writer.Write(json);
     }
 
     /// <summary>
@@ -60,11 +62,14 @@ public class JSONSaving : MonoBehaviour
     /// </summary>
     private void LoadData()
     {
-        using StreamReader reader = new(path);
-        string json = reader.ReadToEnd();
+        //using StreamReader reader = new(path);
+        //string json = reader.ReadToEnd();
+        if (LogText) LogText.text = "Loading data from " + path;
+        string json = File.ReadAllText(path);
+        
         itemService.SetItems(JsonUtility.FromJson<ItemsData>(json));
         Debug.Log(itemService.GetItems().ToString());
-        if (LogText) LogText.text = itemService.GetItems().ToString();
+        if (LogText) LogText.text += itemService.GetItems().ToString();
     }
 
     /// <summary>

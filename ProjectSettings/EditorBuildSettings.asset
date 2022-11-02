@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/NUIX-Rooms/Scenes/Samples/Room1-BtnCtrl.unity
+    guid: aeb2e1a5779d6e64e85ec0f03228aef8
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 3b027f368de927143891b4e8b4af0b5d, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: dad2b7533d522ee43bf0f692064b7aa8, type: 2}
