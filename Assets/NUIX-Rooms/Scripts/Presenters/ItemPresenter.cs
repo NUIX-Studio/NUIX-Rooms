@@ -95,6 +95,7 @@ public class ItemPresenter : MonoBehaviour
         if (test) TestMethod();
         if (itemsToCreate1) CreateItems1();
         if (itemsToCreate2) CreateItems2();
+        if (itemsToCreate3) CreateItems3();
     }
 
     // Update is called once per frame
@@ -443,5 +444,21 @@ public class ItemPresenter : MonoBehaviour
         pose.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
         GameObject image = CreateItem(imageItemDescription);
         image.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.785f, 0.2f));
+    }
+
+    public void CreateItems3()
+    {
+        GameObject stt = CreateItem(sttItemDescription);
+        stt.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 1.08f, 0.32f));
+        GameObject light = CreateItem(lightItemDescription);
+        light.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.6f, 0.77f, 0.7f));
+    }
+
+    public void CreateItems4()
+    {
+        GameObject video = CreateItem(videoItemDescription);
+        video.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.785f, 0.2f));
+        GameObject weightScaler = CreateItem(weightScalerItemDescription);
+        weightScaler.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 1.0f, 0.2f));
     }
 }
