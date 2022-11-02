@@ -411,4 +411,10 @@ public class ItemPresenter : MonoBehaviour
         itemService.AddActionData(actionData);
     }
 
+
+    public ItemData RetrieveItemDataFromGameObject(GameObject item)
+    {
+        return null;
+    }
+
 }

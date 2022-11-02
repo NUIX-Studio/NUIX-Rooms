@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Used to Serialize/deserialize item data and action data
@@ -26,7 +27,7 @@ public class JSONSaving : MonoBehaviour
 
     private void SetPaths()
     {
-        path = Application.dataPath + Path.AltDirectorySeparatorChar + "SaveData.json";
+        path = Application.dataPath + Path.AltDirectorySeparatorChar + SceneManager.GetActiveScene().name + "-Data.json";
         persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveData.json";
     }
 
@@ -48,7 +49,7 @@ public class JSONSaving : MonoBehaviour
         Debug.Log("saving Data at " + savePath);
         string json = JsonUtility.ToJson(itemService.GetItems());
         Debug.Log(json);
-        LogText.text = json;
+        if (LogText) LogText.text = json;
 
         using StreamWriter writer = new(savePath);
         writer.Write(json);
@@ -63,7 +64,7 @@ public class JSONSaving : MonoBehaviour
         string json = reader.ReadToEnd();
         itemService.SetItems(JsonUtility.FromJson<ItemsData>(json));
         Debug.Log(itemService.GetItems().ToString());
-        LogText.text = itemService.GetItems().ToString();
+        if (LogText) LogText.text = itemService.GetItems().ToString();
     }
 
     /// <summary>

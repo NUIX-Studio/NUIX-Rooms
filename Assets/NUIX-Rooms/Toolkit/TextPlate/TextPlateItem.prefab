@@ -12298,8 +12298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795eb17623776044d9cf694ec0169e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawningAreaPosition: {x: 0, y: 1, z: 1}
+  itemPresenter: {fileID: 0}
   itemID: 
+  receiverMethods: []
 --- !u!1 &5173079405133850457
 GameObject:
   m_ObjectHideFlags: 0
@@ -12728,6 +12729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactables:
   - {fileID: 5173079406442844000}
+  _data: {fileID: 0}
 --- !u!114 &5173079405420882264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13650,7 +13652,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -14991,6 +14993,7 @@ MonoBehaviour:
   _interactorFilters: []
   _maxInteractors: -1
   _maxSelectingInteractors: -1
+  _data: {fileID: 0}
   _pointableElement: {fileID: 5173079405099329115}
   _rigidbody: {fileID: 5173079405099329112}
   _resetGrabOnGrabsUpdated: 1

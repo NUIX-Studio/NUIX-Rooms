@@ -48,6 +48,7 @@ MonoBehaviour:
   _interactorFilters: []
   _maxInteractors: -1
   _maxSelectingInteractors: -1
+  _data: {fileID: 0}
   _pointableElement: {fileID: 1901305688638144237}
   _rigidbody: {fileID: 6647858766378341443}
   _resetGrabOnGrabsUpdated: 1
@@ -126,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactables:
   - {fileID: 3666377431968905799}
+  _data: {fileID: 0}
 --- !u!114 &6078436928772560743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,7 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7d5a9c5d19b9a46892d1efa2a8fad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawningAreaPosition: {x: 0, y: 0, z: 0}
+  itemPresenter: {fileID: 0}
   itemID: 
   receiverMethods:
   - SetPosition
@@ -813,18 +815,6 @@ MonoBehaviour:
       - m_Target: {fileID: 9157900473100918829}
         m_TargetAssemblyTypeName: ButtonItemViewController, Assembly-CSharp
         m_MethodName: Press
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7686372351971085611}
-        m_TargetAssemblyTypeName: ButtonVR, Assembly-CSharp
-        m_MethodName: SpawnSphere
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
