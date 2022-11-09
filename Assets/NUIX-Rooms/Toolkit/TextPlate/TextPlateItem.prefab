@@ -12210,10 +12210,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5173079405099329117}
-  - component: {fileID: 5173079405099329114}
   - component: {fileID: 5173079405099329112}
   - component: {fileID: 5173079405099329115}
-  - component: {fileID: 3299104780328530410}
+  - component: {fileID: 7589542907193473819}
   m_Layer: 0
   m_Name: TextPlateItem
   m_TagString: Untagged
@@ -12238,20 +12237,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5173079405099329114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5173079405099329116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93309aa045ecaf949b80b4007afeed3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyboard: {fileID: 5173079404872383816}
-  plateText: {fileID: 5173079405768798180}
 --- !u!54 &5173079405099329112
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12286,7 +12271,7 @@ MonoBehaviour:
   _oneGrabTransformer: {fileID: 0}
   _twoGrabTransformer: {fileID: 0}
   _maxGrabPoints: -1
---- !u!114 &3299104780328530410
+--- !u!114 &7589542907193473819
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12295,12 +12280,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5173079405099329116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795eb17623776044d9cf694ec0169e2f, type: 3}
+  m_Script: {fileID: 11500000, guid: 658b4be0f58f4dd4e827c8bf9b7a238e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemPresenter: {fileID: 0}
   itemID: 
   receiverMethods: []
+  keyboard: {fileID: 5173079404872383816}
+  plateText: {fileID: 5173079405768798180}
 --- !u!1 &5173079405133850457
 GameObject:
   m_ObjectHideFlags: 0
@@ -13949,8 +13936,8 @@ MonoBehaviour:
   onRelease:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5173079405099329114}
-        m_TargetAssemblyTypeName: TextPlateItem, Assembly-CSharp
+      - m_Target: {fileID: 7589542907193473819}
+        m_TargetAssemblyTypeName: TextPlateItemViewController, Assembly-CSharp
         m_MethodName: ToggleEnableKeyboard
         m_Mode: 1
         m_Arguments:

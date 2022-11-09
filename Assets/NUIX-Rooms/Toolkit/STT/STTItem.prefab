@@ -709,11 +709,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPresenter: {fileID: 0}
-  SpawningAreaPosition: {x: 0, y: 0, z: 0}
   itemID: 
   receiverMethods: []
   speechRecognition: {fileID: 3727448469015173877}
-  _phrases: []
 --- !u!54 &309066967848150695
 Rigidbody:
   m_ObjectHideFlags: 0

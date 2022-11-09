@@ -181,8 +181,8 @@ public class ItemPresenter : MonoBehaviour
 
         foreach (TextPlateItemData itemData in itemService.GetItems().textPlateItemsData)
         {
-            itemData.text = GetItemViewController(itemData.itemID).gameObject.GetComponent<TextPlateItem>().plateText.text;
-            itemData.isKeyboardOpen = GetItemViewController(itemData.itemID).gameObject.transform.Find("Visuals/Keyboard").gameObject.activeInHierarchy;
+            itemData.text = ((TextPlateItemViewController)GetItemViewController(itemData.itemID)).PlateText;
+            itemData.isKeyboardOpen = ((TextPlateItemViewController)GetItemViewController(itemData.itemID)).IsKeyBoardActive;
         }
 
         foreach (LightItemData itemData in itemService.GetItems().lightItemsData)
@@ -287,8 +287,8 @@ public class ItemPresenter : MonoBehaviour
             case ItemType.TEXTPLATE:
                 {
                     instantiatedItem = Instantiate(textPlateItemDescription.itemPrefab, storedPosition, storedRotation);
-                    instantiatedItem.GetComponent<TextPlateItem>().plateText.text = ((TextPlateItemData)itemData).text;
-                    instantiatedItem.transform.Find("Visuals/Keyboard").gameObject.SetActive(((TextPlateItemData)itemData).isKeyboardOpen);
+                    instantiatedItem.GetComponent<TextPlateItemViewController>().PlateText = ((TextPlateItemData)itemData).text;
+                    instantiatedItem.GetComponent<TextPlateItemViewController>().IsKeyBoardActive = ((TextPlateItemData)itemData).isKeyboardOpen;
                     break;
                 }
             case ItemType.LIGHT:
@@ -457,7 +457,9 @@ public class ItemPresenter : MonoBehaviour
     public void CreateItems4()
     {
         GameObject video = CreateItem(videoItemDescription);
-        video.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.785f, 0.2f));
+        video.GetComponent<ItemViewController>().SetPosition(new Vector3(-1.7052151f, 0.486999989f, 1.46103621f));
+        video.GetComponent<ItemViewController>().SetRotation(new Quaternion(0, -0.386683226f, 0, 0.92221266f));
+        video.GetComponent<ItemViewController>().SetLocalScale(new Vector3(7.06168079f, 4.00269985f, 1));
         GameObject weightScaler = CreateItem(weightScalerItemDescription);
         weightScaler.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 1.0f, 0.2f));
     }
