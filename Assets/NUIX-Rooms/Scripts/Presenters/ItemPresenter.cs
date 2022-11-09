@@ -96,6 +96,7 @@ public class ItemPresenter : MonoBehaviour
         if (itemsToCreate1) CreateItems1();
         if (itemsToCreate2) CreateItems2();
         if (itemsToCreate3) CreateItems3();
+        if (itemsToCreate4) CreateItems4();
     }
 
     // Update is called once per frame
@@ -224,7 +225,7 @@ public class ItemPresenter : MonoBehaviour
     /// </summary>
     /// <param name="item">What kind of item to create</param>
     /// <returns></returns>
-    public GameObject CreateItem(ItemDescription item)
+    public GameObject CreateItem(ItemDescription item, Pose pose)
     {
         Quaternion i = Quaternion.identity;
         string itemID = Guid.NewGuid().ToString();
@@ -232,11 +233,13 @@ public class ItemPresenter : MonoBehaviour
                 i.x, i.y, i.z, i.w, itemID));
         ItemData itemData = itemService.GetItemDataByID(itemID);
 
-        Vector3 spawnPosition = new(0, 0.5f, -1);
-
-        Pose pose = new(spawnPosition, Quaternion.identity);
         GameObject instantiatedItem = CreateItemGameObject(pose, itemData);
         return instantiatedItem;
+    }
+
+    public void CreateItem(ItemDescription item)
+    {
+        CreateItem(item, new Pose(new Vector3(0f, 0.7f, 0f), Quaternion.identity));
     }
 
     /// <summary>
@@ -380,23 +383,10 @@ public class ItemPresenter : MonoBehaviour
     // TODO: Move to unitTests
     private void TestMethod()
     {
-        GameObject light = CreateItem(lightItemDescription);
-        light.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.6f, 0.77f, 0.7f));
-        GameObject button = CreateItem(buttonItemDescription);
-        button.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.6f, 0.785f, 0.2f));
-        //GameObject image = CreateItem(imageItemDescription);
-        //image.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.785f, 0.2f));
-        GameObject video = CreateItem(videoItemDescription);
-        video.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.785f, 0.2f));
-        //GameObject pose = CreateItem(poseItemDescription);
-        //pose.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
-        //GameObject stt = CreateItem(sttItemDescription);
-        //stt.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 1.08f, 0.32f));
-        //GameObject camera = CreateItem(cameraItemDescription);
-        //camera.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
-        //GameObject weightScaler = CreateItem(weightScalerItemDescription);
-        //weightScaler.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 1.0f, 0.2f));
-
+        CreateItem(lightItemDescription, new Pose(new Vector3(-0.6f, 0.77f, 0.7f), Quaternion.identity));
+        CreateItem(buttonItemDescription, new Pose(new Vector3(-0.6f, 0.785f, 0.2f), Quaternion.identity));
+        CreateItem(videoItemDescription, new Pose(new Vector3(0f, 0.785f, 0.2f), Quaternion.identity));
+        
 
         //string actionID = Guid.NewGuid().ToString();
         //ActionData actionData = new ActionData(actionID,
@@ -430,37 +420,28 @@ public class ItemPresenter : MonoBehaviour
 
     public void CreateItems1()
     {
-        GameObject light = CreateItem(lightItemDescription);
-        light.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.77f, 0.55f));
-        GameObject button = CreateItem(buttonItemDescription);
-        button.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.782f, 0.369f));
-        GameObject textplate = CreateItem(textPlateItemDescription);
-        textplate.GetComponent<ItemViewController>().SetPosition(new Vector3(0.1f, 0.782f, 0.269f));
+        GameObject light = CreateItem(lightItemDescription, new Pose(new Vector3(-0.6f, 0.77f, 0.7f), Quaternion.identity));
+        GameObject button = CreateItem(buttonItemDescription, new Pose(new Vector3(0f, 0.782f, 0.369f), Quaternion.identity));
+        GameObject textplate = CreateItem(textPlateItemDescription, new Pose(new Vector3(0.1f, 0.782f, 0.269f), Quaternion.identity));
     }
 
     public void CreateItems2()
     {
-        GameObject pose = CreateItem(poseItemDescription);
-        pose.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 0.8f, 0.2f));
-        GameObject image = CreateItem(imageItemDescription);
-        image.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 0.785f, 0.2f));
+        GameObject pose = CreateItem(poseItemDescription, new Pose(new Vector3(-0.1f, 0.8f, 0.2f), Quaternion.identity));
+        GameObject image = CreateItem(imageItemDescription, new Pose(new Vector3(0f, 0.785f, 0.2f), Quaternion.identity));
     }
 
     public void CreateItems3()
     {
-        GameObject stt = CreateItem(sttItemDescription);
-        stt.GetComponent<ItemViewController>().SetPosition(new Vector3(0f, 1.08f, 0.32f));
-        GameObject light = CreateItem(lightItemDescription);
-        light.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.6f, 0.77f, 0.7f));
+        GameObject stt = CreateItem(sttItemDescription, new Pose(new Vector3(0f, 1.08f, 0.32f), Quaternion.identity));
+        GameObject light = CreateItem(lightItemDescription, new Pose(new Vector3(-0.6f, 0.77f, 0.7f), Quaternion.identity));
     }
 
     public void CreateItems4()
     {
-        GameObject video = CreateItem(videoItemDescription);
-        video.GetComponent<ItemViewController>().SetPosition(new Vector3(-1.7052151f, 0.486999989f, 1.46103621f));
-        video.GetComponent<ItemViewController>().SetRotation(new Quaternion(0, -0.386683226f, 0, 0.92221266f));
+        GameObject video = CreateItem(videoItemDescription, new Pose(new Vector3(-1.7052151f, 0.486999989f, 1.46103621f), new Quaternion(0, -0.386683226f, 0, 0.92221266f)));
         video.GetComponent<ItemViewController>().SetLocalScale(new Vector3(7.06168079f, 4.00269985f, 1));
-        GameObject weightScaler = CreateItem(weightScalerItemDescription);
+        GameObject weightScaler = CreateItem(weightScalerItemDescription, new Pose(new Vector3(-0.1f, 0.8f, 0.2f), Quaternion.identity));
         weightScaler.GetComponent<ItemViewController>().SetPosition(new Vector3(-0.1f, 1.0f, 0.2f));
     }
 }
