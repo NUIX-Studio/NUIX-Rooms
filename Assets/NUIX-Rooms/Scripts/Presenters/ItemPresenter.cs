@@ -1,3 +1,4 @@
+using Oculus.Interaction.Samples;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -59,6 +60,11 @@ public class ItemPresenter : MonoBehaviour
     /// </summary>
     public ItemDescription weightScalerItemDescription;
 
+    /// <summary>
+    /// ItemDescription with a prefab for SceneLoader item attached
+    /// </summary>
+    public ItemDescription sceneLoaderItemDescription;
+
 
     /// <summary>
     /// Required for serializing the item parameters
@@ -76,6 +82,7 @@ public class ItemPresenter : MonoBehaviour
     public bool test = false;
 
 
+    [SerializeField] public bool itemsToCreate0;
     [SerializeField] public bool itemsToCreate1;
     [SerializeField] public bool itemsToCreate2;
     [SerializeField] public bool itemsToCreate3;
@@ -93,6 +100,7 @@ public class ItemPresenter : MonoBehaviour
     void Start()
     {
         if (test) TestMethod();
+        if (itemsToCreate0) CreateItems0();
         if (itemsToCreate1) CreateItems1();
         if (itemsToCreate2) CreateItems2();
         if (itemsToCreate3) CreateItems3();
@@ -346,6 +354,11 @@ public class ItemPresenter : MonoBehaviour
                     instantiatedItem.GetComponent<WeightScalerItemViewController>().SetRequiredWeight(((WeightScalerItemData)itemData).requiredWeight);
                     break;
                 }
+            case ItemType.SCENELOADER:
+                {
+                    instantiatedItem = Instantiate(sceneLoaderItemDescription.itemPrefab, storedPosition, storedRotation);
+                    break;
+                }
             default:
                 {
                     instantiatedItem = Instantiate(defaultItemDescription.itemPrefab, storedPosition, storedRotation);
@@ -417,6 +430,24 @@ public class ItemPresenter : MonoBehaviour
         return null;
     }
 
+    public void CreateItems0()
+    {
+        GameObject pose = CreateItem(poseItemDescription, new Pose(new Vector3(-0.1f, 0.8f, 0.2f), Quaternion.identity));
+        GameObject sceneLoader = CreateItem(sceneLoaderItemDescription, 
+            new Pose(new Vector3(-0.532000005f, 0.787999988f, -0.130999997f), 
+            new Quaternion(0.153045908f, -0.690345585f, 0.153045908f, 0.690345585f)));
+        string actionID = Guid.NewGuid().ToString();
+        ActionData actionData = new ActionData(actionID,
+            pose.GetComponent<ItemViewController>().itemID,
+            "ThumbsUpRight",
+            new List<string>(),
+            sceneLoader.GetComponent<ItemViewController>().itemID,
+            "Load",
+            new List<string> { "Room1-BtnCtrl" }
+            );
+        pose.GetComponent<ItemViewController>().CreateNewOrUpdateExistingSenderMethod(actionData);
+        itemService.AddActionData(actionData);
+    }
 
     public void CreateItems1()
     {

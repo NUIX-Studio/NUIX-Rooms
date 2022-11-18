@@ -5599,6 +5599,106 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1677080976
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4087886525450307594, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_Name
+      value: TV
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525450307605, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525450307605, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0054989
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525450307605, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0054989
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525450307605, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.0054989
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525450307605, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.059798606
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525450307605, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.3361202
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525450307605, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.5064473
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525450307605, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99465454
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525450307605, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.10165466
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525450307605, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.004832097
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525450307605, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.017474484
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525450307605, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -11.657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525450307605, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525450307605, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -2.092
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525571301412, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_text
+      value: "In this scene you can:\n1. Define a speech command \n2. Use this command
+        to control light."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525571301413, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525571301413, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525571301413, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525571301413, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525571301413, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087886525571301413, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: eefe8432c71fea84b8a070a6b6264551, type: 3}
 --- !u!1 &1696514713
 GameObject:
   m_ObjectHideFlags: 0
@@ -6953,8 +7053,10 @@ MonoBehaviour:
   sttItemDescription: {fileID: 1866545084}
   cameraItemDescription: {fileID: 1867392336}
   weightScalerItemDescription: {fileID: 641241914}
+  sceneLoaderItemDescription: {fileID: 0}
   itemService: {fileID: 1775890981}
   test: 0
+  itemsToCreate0: 0
   itemsToCreate1: 0
   itemsToCreate2: 0
   itemsToCreate3: 0

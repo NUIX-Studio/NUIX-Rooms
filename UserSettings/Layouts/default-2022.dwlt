@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1349
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 53
+  controlID: 54
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 54
+  controlID: 55
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 55
+  controlID: 56
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -317,22 +317,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Oculus/Interaction/Samples/Textures
+    - Assets/NUIX-Rooms/Scenes/Samples
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Oculus/Interaction/Samples/Textures
+  - Assets/NUIX-Rooms/Scenes/Samples
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Projects\NUIX\NUIX-Rooms - Android
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 1436}
-    m_SelectedIDs: a4900000
-    m_LastClickedID: 37028
-    m_ExpandedIDs: 000000000a9000000c9000000e90000010900000129000001490000016900000189000001a9000001c9000001e900000209000002290000024900000269000002890000068900000869000008cca000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 111}
+    m_SelectedIDs: aa940000
+    m_LastClickedID: 38058
+    m_ExpandedIDs: 0000000066940000689400006a9400006c9400006e94000070940000729400007494000076940000789400007a9400007c9400007e94000080940000829400008494000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -360,7 +360,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000000a9000000c9000000e90000010900000129000001490000016900000189000001a9000001c9000001e9000002090000022900000249000002690000028900000
+    m_ExpandedIDs: 0000000066940000689400006a9400006c9400006e94000070940000729400007494000076940000789400007a9400007c9400007e940000809400008294000084940000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -488,9 +488,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: e0c60000bc82ffffbe82ffffda97ffffb2c60000b4c70000aac80000c2c700007ac800000ac900007aa5ffffa6c600002ec70000e49dffff4ec80000
-      m_LastClickedID: 51322
-      m_ExpandedIDs: bc82ffff0690ffff7ca5ffffdca7ffff18a8ffff7eabffffecb6ffff68bbffffe4bfffffa8c6ffff84cdffff90d4ffff50d9ffffb6ddffff66e7ffff2efbffffe0c6000042c70000aac80000e2c8000038c90000e4c90000
+      m_SelectedIDs: a0990000
+      m_LastClickedID: 0
+      m_ExpandedIDs: cc90ffffa6cfffff2efbffffa89a0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -772,9 +772,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.1127322, y: 1.2087089, z: 0.41268617}
+    m_Target: {x: -0.1639129, y: 0.9407859, z: 1.5413634}
     speed: 2
-    m_Value: {x: -0.1127322, y: 1.2087089, z: 0.41268617}
+    m_Value: {x: -0.1639129, y: 0.9407859, z: 1.5413634}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -820,13 +820,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.025058903, y: -0.036555547, z: -0.0034398558, w: -0.9996067}
+    m_Target: {x: -0.04131748, y: 0.021801088, z: -0.0050165197, w: -0.9995115}
     speed: 2
-    m_Value: {x: -0.025049137, y: -0.038032297, z: -0.0034002415, w: -0.9989566}
+    m_Value: {x: -0.04129208, y: 0.021787683, z: -0.005013435, w: -0.9988969}
   m_Size:
-    m_Target: 0.32301652
+    m_Target: 1.351967
     speed: 2
-    m_Value: 0.3091067
+    m_Value: 1.351967
   m_Ortho:
     m_Target: 0
     speed: 2

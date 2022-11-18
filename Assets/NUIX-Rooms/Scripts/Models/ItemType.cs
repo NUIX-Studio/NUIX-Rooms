@@ -11,5 +11,6 @@ public enum ItemType
     POSE,
     STT,
     CAMERA,
-    WEIGHTSCALER
+    WEIGHTSCALER,
+    SCENELOADER
 }
