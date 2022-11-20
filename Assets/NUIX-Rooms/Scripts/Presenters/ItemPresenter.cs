@@ -424,7 +424,7 @@ public class ItemPresenter : MonoBehaviour
 
     public void CreateItems1()
     {
-        GameObject light = CreateItem(lightItemDescription, new Pose(new Vector3(-0.6f, 0.77f, 0.7f), Quaternion.identity));
+        GameObject light = CreateItem(lightItemDescription, new Pose(new Vector3(0f, 0.77f, 0.7f), Quaternion.identity));
         GameObject button = CreateItem(buttonItemDescription, new Pose(new Vector3(0f, 0.782f, 0.369f), Quaternion.identity));
         GameObject textplate = CreateItem(textPlateItemDescription, new Pose(new Vector3(0.1f, 0.782f, 0.269f), Quaternion.identity));
     }

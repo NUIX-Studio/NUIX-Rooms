@@ -12287,7 +12287,7 @@ MonoBehaviour:
   itemID: 
   receiverMethods: []
   keyboard: {fileID: 5173079404872383816}
-  plateText: {fileID: 5173079405768798180}
+  Plate: {fileID: 5173079405768798180}
 --- !u!1 &5173079405133850457
 GameObject:
   m_ObjectHideFlags: 0
