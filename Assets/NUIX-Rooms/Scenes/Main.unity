@@ -7016,7 +7016,6 @@ MonoBehaviour:
   weightScalerItemDescription: {fileID: 641241914}
   sceneLoaderItemDescription: {fileID: 1788389852}
   itemService: {fileID: 1775890981}
-  test: 1
   itemsToCreate0: 1
   itemsToCreate1: 0
   itemsToCreate2: 0
@@ -9875,10 +9874,6 @@ PrefabInstance:
     - target: {fileID: 7486196531137042821, guid: fdf9363935b4f124886836b682df87ef, type: 3}
       propertyPath: m_Name
       value: OculusInteractionSampleRig
-      objectReference: {fileID: 0}
-    - target: {fileID: 7486196531137042821, guid: fdf9363935b4f124886836b682df87ef, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

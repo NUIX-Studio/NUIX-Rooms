@@ -76,11 +76,6 @@ public class ItemPresenter : MonoBehaviour
     /// </summary>
     public Dictionary<string, ItemViewController> itemViewControllers;
 
-    /// <summary>
-    /// Will be removed when release
-    /// </summary>
-    public bool test = false;
-
 
     [SerializeField] public bool itemsToCreate0;
     [SerializeField] public bool itemsToCreate1;
@@ -99,7 +94,6 @@ public class ItemPresenter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (test) TestMethod();
         if (itemsToCreate0) CreateItems0();
         if (itemsToCreate1) CreateItems1();
         if (itemsToCreate2) CreateItems2();
@@ -392,27 +386,6 @@ public class ItemPresenter : MonoBehaviour
     //{
     //    GetItemViewController(actionData.receiverID).CallMethod(actionData.receiverMethod, actionData.receiverArgs.Cast<object>().ToArray());
     //}
-
-    // TODO: Move to unitTests
-    private void TestMethod()
-    {
-        CreateItem(lightItemDescription, new Pose(new Vector3(-0.6f, 0.77f, 0.7f), Quaternion.identity));
-        CreateItem(buttonItemDescription, new Pose(new Vector3(-0.6f, 0.785f, 0.2f), Quaternion.identity));
-        CreateItem(videoItemDescription, new Pose(new Vector3(0f, 0.785f, 0.2f), Quaternion.identity));
-        
-
-        //string actionID = Guid.NewGuid().ToString();
-        //ActionData actionData = new ActionData(actionID,
-        //    button.GetComponent<ItemViewController>().itemID,
-        //    "Press",
-        //    new List<string>(),
-        //    light.GetComponent<ItemViewController>().itemID,
-        //    "Toggle",
-        //    new List<string>()
-        //    );
-        //button.GetComponent<ItemViewController>().UpdateSenderMethod(actionData);
-        //itemService.AddActionData(actionData);
-    }
 
     /// <summary>
     /// Load an ActionData into the scene and cache it
