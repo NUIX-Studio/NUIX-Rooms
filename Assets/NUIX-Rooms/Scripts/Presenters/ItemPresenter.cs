@@ -1,4 +1,5 @@
 using Oculus.Interaction.Samples;
+using Oculus.Platform.Samples.VrHoops;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -261,9 +262,10 @@ public class ItemPresenter : MonoBehaviour
         else
         {
             Debug.Log("Item " + itemData.itemID + " of type " + itemData.itemType + " already exists in the scene");
-            itemViewControllers[itemData.itemID].SetPosition(storedPosition);
-            itemViewControllers[itemData.itemID].SetRotation(storedRotation);
+            //itemViewControllers[itemData.itemID].SetPosition(storedPosition);
+            //itemViewControllers[itemData.itemID].SetRotation(storedRotation);
             // TODO: update the parameters
+            UpdateItemGameObject(pose, itemData);
         }
     }
 
@@ -362,6 +364,7 @@ public class ItemPresenter : MonoBehaviour
                     break;
                 }
         }
+        instantiatedItem.gameObject.tag = "Item";
         instantiatedItem.GetComponent<ItemViewController>().itemID = itemData.itemID;
         instantiatedItem.GetComponent<ItemViewController>().itemPresenter = this;
         itemViewControllers.Add(itemData.itemID, instantiatedItem.GetComponent<ItemViewController>());
@@ -378,89 +381,87 @@ public class ItemPresenter : MonoBehaviour
     /// <param name="pose">The pose to instantiate item at</param>
     /// <param name="itemData">itemdata to be used. The position from itemdata won't be used</param>
     /// <returns></returns>
-    public GameObject UpdateItemGameObject(Pose pose, ItemData itemData)
+    public void UpdateItemGameObject(Pose pose, ItemData itemData)
     {
-        GameObject instantiatedItem;
+        GameObject instantiatedItem = itemViewControllers[itemData.itemID].gameObject;
 
-        Vector3 storedPosition = pose.position;
-        Quaternion storedRotation = pose.rotation;
+        // This is very time-ineffective function
+        // We are going to iterate through all the gameobjects in the scene
+        // Search for the gameobject whose itemviewcontroller itemid is equal to itemid
+        // TODO: change gameobjects names to contain itemid.
+        // Then just search for a gameobject by name, it will reduce complexity to contant time
+        var objects = GameObject.FindGameObjectsWithTag("Item");
+        var objectCount = objects.Length;
+        foreach (var obj in objects)
+        {
+            continue;
+        }
+
+
+        itemViewControllers[itemData.itemID].SetPosition(pose.position);
+        itemViewControllers[itemData.itemID].SetRotation(pose.rotation);
 
         switch (itemData.itemType)
         {
             case ItemType.TEXTPLATE:
                 {
-                    instantiatedItem = Instantiate(textPlateItemDescription.itemPrefab, storedPosition, storedRotation);
                     instantiatedItem.GetComponent<TextPlateItemViewController>().PlateText = ((TextPlateItemData)itemData).text;
                     instantiatedItem.GetComponent<TextPlateItemViewController>().IsKeyBoardActive = ((TextPlateItemData)itemData).isKeyboardOpen;
                     break;
                 }
             case ItemType.LIGHT:
                 {
-                    instantiatedItem = Instantiate(lightItemDescription.itemPrefab, storedPosition, storedRotation);
                     instantiatedItem.GetComponentInChildren<Light>().enabled = ((LightItemData)itemData).isTurnedON;
                     instantiatedItem.GetComponent<LightItemViewController>().SetColor(((LightItemData)itemData).colorIndex);
                     break;
                 }
             case ItemType.BUTTON:
                 {
-                    instantiatedItem = Instantiate(buttonItemDescription.itemPrefab, storedPosition, storedRotation);
                     // change button type
                     break;
                 }
             case ItemType.IMAGE:
                 {
-                    instantiatedItem = Instantiate(imageItemDescription.itemPrefab, storedPosition, storedRotation);
                     instantiatedItem.GetComponent<ImageItemViewController>().SetImage(((ImageItemData)itemData).imageIndex);
                     break;
                 }
             case ItemType.VIDEO:
                 {
-                    instantiatedItem = Instantiate(videoItemDescription.itemPrefab, storedPosition, storedRotation);
                     instantiatedItem.GetComponent<VideoItemViewController>().SetVideoClip(((VideoItemData)itemData).videoClipIndex);
                     break;
                 }
             case ItemType.AUDIO:
                 {
-                    instantiatedItem = Instantiate(audioItemDescription.itemPrefab, storedPosition, storedRotation);
                     instantiatedItem.GetComponent<AudioItemViewController>().SetAudioClip(((AudioItemData)itemData).audioClipIndex);
                     break;
                 }
             case ItemType.POSE:
                 {
-                    instantiatedItem = Instantiate(poseItemDescription.itemPrefab, storedPosition, storedRotation);
                     break;
                 }
             case ItemType.STT:
                 {
-                    instantiatedItem = Instantiate(sttItemDescription.itemPrefab, storedPosition, storedRotation);
                     break;
                 }
             case ItemType.CAMERA:
                 {
-                    instantiatedItem = Instantiate(cameraItemDescription.itemPrefab, storedPosition, storedRotation);
                     break;
                 }
             case ItemType.WEIGHTSCALER:
                 {
-                    instantiatedItem = Instantiate(weightScalerItemDescription.itemPrefab, storedPosition, storedRotation);
                     instantiatedItem.GetComponent<WeightScalerItemViewController>().SetRequiredWeight(((WeightScalerItemData)itemData).requiredWeight);
                     break;
                 }
             case ItemType.SCENELOADER:
                 {
-                    instantiatedItem = Instantiate(sceneLoaderItemDescription.itemPrefab, storedPosition, storedRotation);
                     break;
                 }
             default:
                 {
-                    instantiatedItem = Instantiate(defaultItemDescription.itemPrefab, storedPosition, storedRotation);
                     break;
                 }
         }
-        instantiatedItem.GetComponent<ItemViewController>().itemID = itemData.itemID;
-        instantiatedItem.GetComponent<ItemViewController>().itemPresenter = this;
-        itemViewControllers.Add(itemData.itemID, instantiatedItem.GetComponent<ItemViewController>());
-        return instantiatedItem;
+        return;
 
     }
 
