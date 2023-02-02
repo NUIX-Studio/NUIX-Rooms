@@ -261,6 +261,9 @@ public class ItemPresenter : MonoBehaviour
         else
         {
             Debug.Log("Item " + itemData.itemID + " of type " + itemData.itemType + " already exists in the scene");
+            itemViewControllers[itemData.itemID].SetPosition(storedPosition);
+            itemViewControllers[itemData.itemID].SetRotation(storedRotation);
+            // TODO: update the parameters
         }
     }
 
@@ -281,6 +284,101 @@ public class ItemPresenter : MonoBehaviour
     /// <param name="itemData">itemdata to be used. The position from itemdata won't be used</param>
     /// <returns></returns>
     public GameObject CreateItemGameObject(Pose pose, ItemData itemData)
+    {
+        GameObject instantiatedItem;
+
+        Vector3 storedPosition = pose.position;
+        Quaternion storedRotation = pose.rotation;
+
+        switch (itemData.itemType)
+        {
+            case ItemType.TEXTPLATE:
+                {
+                    instantiatedItem = Instantiate(textPlateItemDescription.itemPrefab, storedPosition, storedRotation);
+                    instantiatedItem.GetComponent<TextPlateItemViewController>().PlateText = ((TextPlateItemData)itemData).text;
+                    instantiatedItem.GetComponent<TextPlateItemViewController>().IsKeyBoardActive = ((TextPlateItemData)itemData).isKeyboardOpen;
+                    break;
+                }
+            case ItemType.LIGHT:
+                {
+                    instantiatedItem = Instantiate(lightItemDescription.itemPrefab, storedPosition, storedRotation);
+                    instantiatedItem.GetComponentInChildren<Light>().enabled = ((LightItemData)itemData).isTurnedON;
+                    instantiatedItem.GetComponent<LightItemViewController>().SetColor(((LightItemData)itemData).colorIndex);
+                    break;
+                }
+            case ItemType.BUTTON:
+                {
+                    instantiatedItem = Instantiate(buttonItemDescription.itemPrefab, storedPosition, storedRotation);
+                    // change button type
+                    break;
+                }
+            case ItemType.IMAGE:
+                {
+                    instantiatedItem = Instantiate(imageItemDescription.itemPrefab, storedPosition, storedRotation);
+                    instantiatedItem.GetComponent<ImageItemViewController>().SetImage(((ImageItemData)itemData).imageIndex);
+                    break;
+                }
+            case ItemType.VIDEO:
+                {
+                    instantiatedItem = Instantiate(videoItemDescription.itemPrefab, storedPosition, storedRotation);
+                    instantiatedItem.GetComponent<VideoItemViewController>().SetVideoClip(((VideoItemData)itemData).videoClipIndex);
+                    break;
+                }
+            case ItemType.AUDIO:
+                {
+                    instantiatedItem = Instantiate(audioItemDescription.itemPrefab, storedPosition, storedRotation);
+                    instantiatedItem.GetComponent<AudioItemViewController>().SetAudioClip(((AudioItemData)itemData).audioClipIndex);
+                    break;
+                }
+            case ItemType.POSE:
+                {
+                    instantiatedItem = Instantiate(poseItemDescription.itemPrefab, storedPosition, storedRotation);
+                    break;
+                }
+            case ItemType.STT:
+                {
+                    instantiatedItem = Instantiate(sttItemDescription.itemPrefab, storedPosition, storedRotation);
+                    break;
+                }
+            case ItemType.CAMERA:
+                {
+                    instantiatedItem = Instantiate(cameraItemDescription.itemPrefab, storedPosition, storedRotation);
+                    break;
+                }
+            case ItemType.WEIGHTSCALER:
+                {
+                    instantiatedItem = Instantiate(weightScalerItemDescription.itemPrefab, storedPosition, storedRotation);
+                    instantiatedItem.GetComponent<WeightScalerItemViewController>().SetRequiredWeight(((WeightScalerItemData)itemData).requiredWeight);
+                    break;
+                }
+            case ItemType.SCENELOADER:
+                {
+                    instantiatedItem = Instantiate(sceneLoaderItemDescription.itemPrefab, storedPosition, storedRotation);
+                    break;
+                }
+            default:
+                {
+                    instantiatedItem = Instantiate(defaultItemDescription.itemPrefab, storedPosition, storedRotation);
+                    break;
+                }
+        }
+        instantiatedItem.GetComponent<ItemViewController>().itemID = itemData.itemID;
+        instantiatedItem.GetComponent<ItemViewController>().itemPresenter = this;
+        itemViewControllers.Add(itemData.itemID, instantiatedItem.GetComponent<ItemViewController>());
+        return instantiatedItem;
+
+    }
+
+
+
+
+    /// <summary>
+    /// Update an item at selected pose and using the cached itemdata
+    /// </summary>
+    /// <param name="pose">The pose to instantiate item at</param>
+    /// <param name="itemData">itemdata to be used. The position from itemdata won't be used</param>
+    /// <returns></returns>
+    public GameObject UpdateItemGameObject(Pose pose, ItemData itemData)
     {
         GameObject instantiatedItem;
 
