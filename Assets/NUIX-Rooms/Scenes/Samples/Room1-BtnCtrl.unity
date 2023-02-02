@@ -5604,7 +5604,6 @@ GameObject:
   - component: {fileID: 1775890982}
   - component: {fileID: 1775890981}
   - component: {fileID: 1775890980}
-  - component: {fileID: 1775890983}
   m_Layer: 0
   m_Name: NUIXBus
   m_TagString: Untagged
@@ -5679,26 +5678,7 @@ MonoBehaviour:
   weightScalerItemDescription: {fileID: 641241914}
   sceneLoaderItemDescription: {fileID: 0}
   itemService: {fileID: 1775890981}
-  test: 0
   itemsToCreate0: 0
-  itemsToCreate1: 0
-  itemsToCreate2: 0
-  itemsToCreate3: 0
-  itemsToCreate4: 0
-  itemsToCreate5: 0
---- !u!114 &1775890983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775890977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bee201630c16634b835dac76eb50abc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemPresenter: {fileID: 1775890982}
   itemsToCreate1: 0
   itemsToCreate2: 0
   itemsToCreate3: 0
