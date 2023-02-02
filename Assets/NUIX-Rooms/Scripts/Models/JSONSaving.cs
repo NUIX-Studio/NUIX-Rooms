@@ -4,6 +4,8 @@ using System.IO;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
+using System.Threading.Tasks;
 
 /// <summary>
 /// Used to Serialize/deserialize item data and action data
@@ -11,6 +13,8 @@ using UnityEngine.SceneManagement;
 public class JSONSaving : MonoBehaviour
 {
 
+    bool isSavingData = false;
+    bool isLoadingData = false;
     private string path;
     private string persistentPath;
 
@@ -39,8 +43,15 @@ public class JSONSaving : MonoBehaviour
     /// <summary>
     /// Serialize Data in ItemService. The created JSON is stored in the Assets folder
     /// </summary>
-    public void SaveData()
+    public async Task SaveDataAsync()
     {
+        
+
+        while (isLoadingData)
+        {
+            await Task.Delay(25);
+        }
+        isSavingData = true;
         /// Should call itemService instead
         itemPresenter.RetrieveItemsParams();
         print("saving data");
@@ -55,6 +66,7 @@ public class JSONSaving : MonoBehaviour
         File.WriteAllText(savePath, json);
         //using StreamWriter writer = new(savePath);
         //writer.Write(json);
+        isSavingData = false;
     }
 
     /// <summary>
@@ -77,12 +89,19 @@ public class JSONSaving : MonoBehaviour
     /// </summary>
     public void InstantiateData()
     {
-        InvokeRepeating(nameof(InstantiateAndUpdateData), 0f, 1f); 
+        InvokeRepeating(nameof(InstantiateAndUpdateDataAsync), 0f, 1f);
+        InvokeRepeating(nameof(SaveDataAsync), 0f, 0.05f);
     }
 
-    private void InstantiateAndUpdateData()
+    private async Task InstantiateAndUpdateDataAsync()
     {
+        while (isSavingData)
+        {
+            await Task.Delay(25);
+        }
+        isLoadingData = true;
         LoadData();
+        isLoadingData = false;
         itemPresenter.AddItemsToScene();
     }
 }

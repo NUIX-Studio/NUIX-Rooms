@@ -172,6 +172,7 @@ public class ItemPresenter : MonoBehaviour
     }
 
 
+
     // TODO: Move partly into ItemViewController (ex. gettext, getstate etc)
     /// <summary>
     /// Get the parameters of Items from ItemViewControllers and cache them
@@ -180,14 +181,16 @@ public class ItemPresenter : MonoBehaviour
     {
         // Consider replace the iteration through lists to enumerable.concat
 
-        foreach (ItemData itemData in itemService.GetItems().ConcatItemsData())
+        foreach (var itemData in itemService.GetItems().ConcatItemsData())
         {
             var itemDataOld = itemData.DeepCopy();
             SaveItemTransform(itemData.itemID);
             itemData.userID = userID;
             if (itemDataOld.JsonCompare(itemData))
             {
-                itemData.inUseTime = (itemData.inUseTime > 0) ? itemData.inUseTime - 1 : 0;
+                int inUseTime = itemData.inUseTime;
+                inUseTime = (inUseTime < 5) ? inUseTime : 5;
+                itemData.inUseTime = (inUseTime > 0) ? inUseTime - 1 : 0;
             }
             else
             {
@@ -198,39 +201,139 @@ public class ItemPresenter : MonoBehaviour
 
         foreach (TextPlateItemData itemData in itemService.GetItems().textPlateItemsData)
         {
+
+            var itemDataOld = itemData.DeepCopy();
+            
+
             itemData.text = ((TextPlateItemViewController)GetItemViewController(itemData.itemID)).PlateText;
             itemData.isKeyboardOpen = ((TextPlateItemViewController)GetItemViewController(itemData.itemID)).IsKeyBoardActive;
+
+
+            if (itemDataOld.JsonCompare(itemData))
+            {
+                int inUseTime = itemData.inUseTime;
+                inUseTime = (inUseTime < 5) ? inUseTime : 5;
+                itemData.inUseTime = (inUseTime > 0) ? inUseTime - 1 : 0;
+            }
+            else
+            {
+                itemData.inUseTime++;
+            }
+
         }
 
         foreach (LightItemData itemData in itemService.GetItems().lightItemsData)
         {
+
+            var itemDataOld = itemData.DeepCopy();
+
+
             itemData.isTurnedON = ((LightItemViewController)GetItemViewController(itemData.itemID)).itemLight.enabled;
             itemData.colorIndex = ((LightItemViewController)GetItemViewController(itemData.itemID)).colorIndex;
+
+
+            if (itemDataOld.JsonCompare(itemData))
+            {
+                int inUseTime = itemData.inUseTime;
+                inUseTime = (inUseTime < 5) ? inUseTime : 5;
+                itemData.inUseTime = (inUseTime > 0) ? inUseTime - 1 : 0;
+            }
+            else
+            {
+                itemData.inUseTime++;
+            }
+
         }
 
         foreach (ButtonItemData itemData in itemService.GetItems().buttonItemsData)
         {
+            var itemDataOld = itemData.DeepCopy();
+
             itemData.type = 0;
+
+            if (itemDataOld.JsonCompare(itemData))
+            {
+                int inUseTime = itemData.inUseTime;
+                inUseTime = (inUseTime < 5) ? inUseTime : 5;
+                itemData.inUseTime = (inUseTime > 0) ? inUseTime - 1 : 0;
+            }
+            else
+            {
+                itemData.inUseTime++;
+            }
         }
 
         foreach (ImageItemData itemData in itemService.GetItems().imageItemsData)
         {
+            var itemDataOld = itemData.DeepCopy();
+
+
             itemData.imageIndex = ((ImageItemViewController)GetItemViewController(itemData.itemID)).imageIndex;
+
+            if (itemDataOld.JsonCompare(itemData))
+            {
+                int inUseTime = itemData.inUseTime;
+                inUseTime = (inUseTime < 5) ? inUseTime : 5;
+                itemData.inUseTime = (inUseTime > 0) ? inUseTime - 1 : 0;
+            }
+            else
+            {
+                itemData.inUseTime++;
+            }
         }
 
         foreach (VideoItemData itemData in itemService.GetItems().videoItemsData)
         {
+            var itemDataOld = itemData.DeepCopy();
+
             itemData.videoClipIndex = ((VideoItemViewController)GetItemViewController(itemData.itemID)).videoClipIndex;
+
+            if (itemDataOld.JsonCompare(itemData))
+            {
+                int inUseTime = itemData.inUseTime;
+                inUseTime = (inUseTime < 5) ? inUseTime : 5;
+                itemData.inUseTime = (inUseTime > 0) ? inUseTime - 1 : 0;
+            }
+            else
+            {
+                itemData.inUseTime++;
+            }
         }
 
         foreach (AudioItemData itemData in itemService.GetItems().audioItemsData)
         {
+            var itemDataOld = itemData.DeepCopy();
+
             itemData.audioClipIndex = ((AudioItemViewController)GetItemViewController(itemData.itemID)).audioClipIndex;
+
+            if (itemDataOld.JsonCompare(itemData))
+            {
+                int inUseTime = itemData.inUseTime;
+                inUseTime = (inUseTime < 5) ? inUseTime : 5;
+                itemData.inUseTime = (inUseTime > 0) ? inUseTime - 1 : 0;
+            }
+            else
+            {
+                itemData.inUseTime++;
+            }
         }
 
         foreach (WeightScalerItemData itemData in itemService.GetItems().weightScalerItemsData)
         {
+            var itemDataOld = itemData.DeepCopy();
+
             itemData.requiredWeight = ((WeightScalerItemViewController)GetItemViewController(itemData.itemID)).GetRequredWeight();
+
+            if (itemDataOld.JsonCompare(itemData))
+            {
+                int inUseTime = itemData.inUseTime;
+                inUseTime = (inUseTime < 5) ? inUseTime : 5;
+                itemData.inUseTime = (inUseTime > 0) ? inUseTime - 1 : 0;
+            }
+            else
+            {
+                itemData.inUseTime++;
+            }
         }
     }
 
@@ -278,7 +381,8 @@ public class ItemPresenter : MonoBehaviour
             //itemViewControllers[itemData.itemID].SetPosition(storedPosition);
             //itemViewControllers[itemData.itemID].SetRotation(storedRotation);
             // TODO: update the parameters
-            if (itemData.userID != userID) UpdateItemGameObject(pose, itemData);
+            //if (itemData.userID == userID)
+            UpdateItemGameObject(pose, itemData);
         }
     }
 
@@ -395,6 +499,10 @@ public class ItemPresenter : MonoBehaviour
     /// <returns></returns>
     public void UpdateItemGameObject(Pose pose, ItemData itemData)
     {
+
+        // Don't update because the item is currently operated by the user
+        if (itemData.inUseTime > 0) return;
+
         GameObject instantiatedItem = itemViewControllers[itemData.itemID].gameObject;
 
         // This is very time-ineffective function
