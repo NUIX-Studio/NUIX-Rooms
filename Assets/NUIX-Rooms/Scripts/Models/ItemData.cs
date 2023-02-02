@@ -18,12 +18,15 @@ public class ItemData
     public float rotation_z;
     public float rotation_w;
     public ItemType itemType;
+    public string userID; // unique id of device; can be set to local as well
+    public int inUseTime; // storing time in milliseconds is not supported by JSON format.
+                            // thus, we increment when in use, and decrement when not
 
 
     public ItemData(ItemType itemType = ItemType.DEFAULT, 
         float position_x = 0f, float position_y = 0f, float position_z = 0f, 
         float rotation_x = 0f, float rotation_y = 0f, float rotation_z = 0f, float rotation_w = 0f,
-        string itemID = "")
+        string itemID = "", string userID = "", int inUse = 0)
     {
         this.position_x = position_x;
         this.position_y = position_y;
@@ -35,6 +38,8 @@ public class ItemData
         this.itemType = itemType;
 
         this.itemID = itemID;   //Guid.NewGuid().ToString(); ;
+        this.userID = userID;
+        this.inUseTime = inUse;
     }
 
 
@@ -49,6 +54,35 @@ public class ItemData
             $"z = {string.Format("{0:0.00}", rotation_z)}, " +
             $"w = {string.Format("{0:0.00}", rotation_w)}";
     }
+
+    public ItemData DeepCopy()
+    {
+        ItemData newData = (ItemData) this.MemberwiseClone();
+        return newData; 
+    }
+
+    //public bool DeepCompare(ItemData another)
+    //{
+    //    if (ReferenceEquals(this, another)) return true;
+    //    if ((this == null) || (another == null)) return false;
+    //    //Compare two object's class, return false if they are difference
+    //    if (GetType() != another.GetType()) return false;
+
+    //    var result = true;
+    //    //Get all properties of obj
+    //    //And compare each other
+
+    //    var prop = GetType().GetProperties();
+
+    //    foreach (var property in GetType().GetProperties())
+    //    {
+    //        var objValue = property.GetValue(this);
+    //        var anotherValue = property.GetValue(another);
+    //        if (!objValue.Equals(anotherValue)) result = false;
+    //    }
+
+    //    return result;
+    //}
 
 }
 

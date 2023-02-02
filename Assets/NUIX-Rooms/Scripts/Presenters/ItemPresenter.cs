@@ -85,6 +85,8 @@ public class ItemPresenter : MonoBehaviour
     [SerializeField] public bool itemsToCreate4;
     [SerializeField] public bool itemsToCreate5;
 
+    private string userID;
+
 
     public ItemPresenter()
     {
@@ -95,6 +97,7 @@ public class ItemPresenter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        userID = SystemInfo.deviceUniqueIdentifier;
         if (itemsToCreate0) CreateItems0();
         if (itemsToCreate1) CreateItems1();
         if (itemsToCreate2) CreateItems2();
@@ -179,7 +182,17 @@ public class ItemPresenter : MonoBehaviour
 
         foreach (ItemData itemData in itemService.GetItems().ConcatItemsData())
         {
+            var itemDataOld = itemData.DeepCopy();
             SaveItemTransform(itemData.itemID);
+            itemData.userID = userID;
+            if (itemDataOld.JsonCompare(itemData))
+            {
+                itemData.inUseTime = (itemData.inUseTime > 0) ? itemData.inUseTime - 1 : 0;
+            }
+            else
+            {
+                itemData.inUseTime++;
+            }
         }
 
 
@@ -265,7 +278,7 @@ public class ItemPresenter : MonoBehaviour
             //itemViewControllers[itemData.itemID].SetPosition(storedPosition);
             //itemViewControllers[itemData.itemID].SetRotation(storedRotation);
             // TODO: update the parameters
-            UpdateItemGameObject(pose, itemData);
+            if (itemData.userID != userID) UpdateItemGameObject(pose, itemData);
         }
     }
 
@@ -364,7 +377,6 @@ public class ItemPresenter : MonoBehaviour
                     break;
                 }
         }
-        instantiatedItem.gameObject.tag = "Item";
         instantiatedItem.GetComponent<ItemViewController>().itemID = itemData.itemID;
         instantiatedItem.GetComponent<ItemViewController>().itemPresenter = this;
         itemViewControllers.Add(itemData.itemID, instantiatedItem.GetComponent<ItemViewController>());
@@ -390,12 +402,12 @@ public class ItemPresenter : MonoBehaviour
         // Search for the gameobject whose itemviewcontroller itemid is equal to itemid
         // TODO: change gameobjects names to contain itemid.
         // Then just search for a gameobject by name, it will reduce complexity to contant time
-        var objects = GameObject.FindGameObjectsWithTag("Item");
-        var objectCount = objects.Length;
-        foreach (var obj in objects)
-        {
-            continue;
-        }
+        //var objects = gameobject.findgameobjectswithtag("item");
+        //var objectcount = objects.length;
+        //foreach (var obj in objects)
+        //{
+        //    continue;
+        //}
 
 
         itemViewControllers[itemData.itemID].SetPosition(pose.position);

@@ -77,6 +77,11 @@ public class JSONSaving : MonoBehaviour
     /// </summary>
     public void InstantiateData()
     {
+        InvokeRepeating(nameof(InstantiateAndUpdateData), 0f, 1f); 
+    }
+
+    private void InstantiateAndUpdateData()
+    {
         LoadData();
         itemPresenter.AddItemsToScene();
     }
