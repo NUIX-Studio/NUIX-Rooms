@@ -186,7 +186,7 @@ public class ItemPresenter : MonoBehaviour
             var itemDataOld = itemData.DeepCopy();
             SaveItemTransform(itemData.itemID);
             itemData.userID = userID;
-            if (itemDataOld.JsonCompare(itemData))
+            if (!itemDataOld.JsonCompare(itemData))
             {
                 int inUseTime = itemData.inUseTime;
                 inUseTime = (inUseTime < 5) ? inUseTime : 5;
@@ -500,7 +500,7 @@ public class ItemPresenter : MonoBehaviour
     {
 
         // Don't update because the item is currently operated by the user
-        if (itemData.inUseTime > 0) return;
+        //if (itemData.inUseTime > 0) return;
 
         GameObject instantiatedItem = itemViewControllers[itemData.itemID].gameObject;
 
