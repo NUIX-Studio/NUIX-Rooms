@@ -46,7 +46,7 @@ public class ItemService : MonoBehaviour
             ItemData localItemData = GetItemDataByID(itemData.itemID);
             if (localItemData.inUseTime == 0)
             {
-                localItemData = itemData;
+                UpdateItemData(itemData);
             }
         }
     }
@@ -80,6 +80,65 @@ public class ItemService : MonoBehaviour
         }
         return null;
     }
+
+    public void UpdateItemData(ItemData newItemData)
+    {
+        for (int i = 0; i < itemsData.textPlateItemsData.Count; i++)
+        {
+            if (itemsData.textPlateItemsData[i].itemID == newItemData.itemID)
+            {
+                itemsData.textPlateItemsData[i] = (TextPlateItemData) newItemData;
+            }
+        }
+
+        for (int i = 0; i < itemsData.lightItemsData.Count; i++)
+        {
+            if (itemsData.lightItemsData[i].itemID == newItemData.itemID)
+            {
+                itemsData.lightItemsData[i] = (LightItemData)newItemData;
+            }
+        }
+
+        for (int i = 0; i < itemsData.buttonItemsData.Count; i++)
+        {
+            if (itemsData.buttonItemsData[i].itemID == newItemData.itemID)
+            {
+                itemsData.buttonItemsData[i] = (ButtonItemData)newItemData;
+            }
+        }
+
+        for (int i = 0; i < itemsData.imageItemsData.Count; i++)
+        {
+            if (itemsData.imageItemsData[i].itemID == newItemData.itemID)
+            {
+                itemsData.imageItemsData[i] = (ImageItemData)newItemData;
+            }
+        }
+
+        for (int i = 0; i < itemsData.videoItemsData.Count; i++)
+        {
+            if (itemsData.videoItemsData[i].itemID == newItemData.itemID)
+            {
+                itemsData.videoItemsData[i] = (VideoItemData)newItemData;
+            }
+        }
+
+        for (int i = 0; i < itemsData.audioItemsData.Count; i++)
+        {
+            if (itemsData.audioItemsData[i].itemID == newItemData.itemID)
+            {
+                itemsData.audioItemsData[i] = (AudioItemData)newItemData;
+            }
+        }
+        for (int i = 0; i < itemsData.weightScalerItemsData.Count; i++)
+        {
+            if (itemsData.weightScalerItemsData[i].itemID == newItemData.itemID)
+            {
+                itemsData.weightScalerItemsData[i] = (WeightScalerItemData)newItemData;
+            }
+        }
+    }
+
 
     /// <summary>
     /// Search the cached actionData and return it, if found
