@@ -5662,8 +5662,7 @@ MonoBehaviour:
   LogText: {fileID: 5927847527097373295}
   itemService: {fileID: 1775890981}
   itemPresenter: {fileID: 1775890982}
-  serverUrl: http://183.173.113.8:5000/api/senditems
-  isServer: 
+  serverUrl: http://183.173.113.8:5000/api/
 --- !u!114 &1775890981
 MonoBehaviour:
   m_ObjectHideFlags: 0

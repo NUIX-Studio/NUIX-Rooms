@@ -28,9 +28,6 @@ public class JSONSaving : MonoBehaviour
     [SerializeField]
     public string serverUrl;
 
-    [SerializeField]
-    public string isServer;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -100,6 +97,7 @@ public class JSONSaving : MonoBehaviour
         InvokeRepeating(nameof(InstantiateAndUpdateDataAsync), 0f, 1f);
         InvokeRepeating(nameof(SaveDataAsync), 0f, 0.05f);
         InvokeRepeating(nameof(PushDataToServer), 1f, 5f);
+        InvokeRepeating(nameof(PullDataFromServer), 0.5f, 5f);
     }
 
     private async Task InstantiateAndUpdateDataAsync()
@@ -123,7 +121,7 @@ public class JSONSaving : MonoBehaviour
         // We send the items stored parames, but not retrieve them to reduce computation costs
         string json = JsonUtility.ToJson(itemService.GetItems());
 
-        var req = new UnityWebRequest(serverUrl, "POST");
+        var req = new UnityWebRequest(serverUrl + "postitems", "POST");
         byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
         req.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
         req.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
@@ -144,8 +142,13 @@ public class JSONSaving : MonoBehaviour
 
     public void PullDataFromServer()
     {
-        var req = new UnityWebRequest(serverUrl, "GET");
-        req.SendWebRequest();
+        StartCoroutine(PullDataFromServerCoroutine());
+    }
+
+    IEnumerator PullDataFromServerCoroutine()
+    {
+        var req = new UnityWebRequest(serverUrl + "getitems", "GET");
+        yield return req.SendWebRequest();
 
         if (req.result == UnityWebRequest.Result.Success)
         {
