@@ -32,6 +32,7 @@ public class JSONSaving : MonoBehaviour
     void Start()
     {
         SetPaths();
+        InstantiateData();
     }
 
     private void SetPaths()
