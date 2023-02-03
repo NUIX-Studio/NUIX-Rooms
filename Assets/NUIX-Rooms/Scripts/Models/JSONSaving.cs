@@ -6,6 +6,8 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using System;
 using System.Threading.Tasks;
+using OVRSimpleJSON;
+using UnityEngine.Networking;
 
 /// <summary>
 /// Used to Serialize/deserialize item data and action data
@@ -22,6 +24,12 @@ public class JSONSaving : MonoBehaviour
 
     public ItemService itemService;
     public ItemPresenter itemPresenter;
+
+    [SerializeField]
+    public string serverUrl;
+
+    [SerializeField]
+    public string isServer;
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +99,7 @@ public class JSONSaving : MonoBehaviour
     {
         InvokeRepeating(nameof(InstantiateAndUpdateDataAsync), 0f, 1f);
         InvokeRepeating(nameof(SaveDataAsync), 0f, 0.05f);
+        InvokeRepeating(nameof(PushDataToServer), 1f, 5f);
     }
 
     private async Task InstantiateAndUpdateDataAsync()
@@ -103,5 +112,51 @@ public class JSONSaving : MonoBehaviour
         LoadData();
         isLoadingData = false;
         itemPresenter.AddItemsToScene();
+    }
+
+    public void PushDataToServer()
+    {
+        StartCoroutine(PushDataToServerCoroutine());
+    }
+    IEnumerator PushDataToServerCoroutine()
+    { 
+        // We send the items stored parames, but not retrieve them to reduce computation costs
+        string json = JsonUtility.ToJson(itemService.GetItems());
+
+        var req = new UnityWebRequest(serverUrl, "POST");
+        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
+        req.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+        req.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        req.SetRequestHeader("Content-Type", "application/json");
+
+        //Send the request then wait here until it returns
+        yield return req.SendWebRequest();
+
+        if (req.result == UnityWebRequest.Result.Success)
+        {
+            Debug.Log("Received: " + req.downloadHandler.text);
+        }
+        else
+        {
+            Debug.Log("Error While Sending: " + req.error);
+        }
+    }
+
+    public void PullDataFromServer()
+    {
+        var req = new UnityWebRequest(serverUrl, "GET");
+        req.SendWebRequest();
+
+        if (req.result == UnityWebRequest.Result.Success)
+        {
+            Debug.Log("Received: " + req.downloadHandler.text);
+            var text = req.downloadHandler.text;
+            itemService.SetItemsFromServer(JsonUtility.FromJson<ItemsData>(text));
+        }
+        else
+        {
+            Debug.Log("Error While Sending: " + req.error);
+        }
+
     }
 }

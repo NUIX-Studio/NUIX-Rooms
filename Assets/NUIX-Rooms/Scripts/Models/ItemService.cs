@@ -37,6 +37,33 @@ public class ItemService : MonoBehaviour
     }
 
 
+    public void SetItemsFromServer(ItemsData serverItemsData)
+    {
+        // we keep those items whose current inUseTime > 0,
+        // the rest take from server
+        foreach (ItemData itemData in serverItemsData.ConcatItemsData())
+        {
+            ItemData localItemData = GetItemDataByID(itemData.itemID);
+            if (localItemData.inUseTime == 0)
+            {
+                localItemData = itemData;
+            }
+        }
+    }
+
+    public void SetItemsFromClient(ItemsData clientItemsData)
+    {
+        foreach(ItemData itemData in clientItemsData.ConcatItemsData())
+        {
+            if (itemData.inUseTime > 0)
+            {
+                ItemData serverItemData = GetItemDataByID(itemData.itemID);
+                serverItemData = itemData;
+                serverItemData.inUseTime = 0;
+            }
+        }
+    }
+
     /// <summary>
     /// Search the cached itemData and return it, if found
     /// </summary>
