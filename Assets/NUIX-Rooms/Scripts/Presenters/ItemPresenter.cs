@@ -377,7 +377,6 @@ public class ItemPresenter : MonoBehaviour
         }
         else
         {
-            Debug.Log("Item " + itemData.itemID + " of type " + itemData.itemType + " already exists in the scene");
             //itemViewControllers[itemData.itemID].SetPosition(storedPosition);
             //itemViewControllers[itemData.itemID].SetRotation(storedRotation);
             // TODO: update the parameters

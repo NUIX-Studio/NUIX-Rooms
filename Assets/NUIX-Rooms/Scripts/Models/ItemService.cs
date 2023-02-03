@@ -168,9 +168,5 @@ public class ItemService : MonoBehaviour
         {
             itemsData.actionData.Add(actionData);
         }
-        else
-        {
-            Debug.Log("ActionData already in the list!");
-        }
     }
 }

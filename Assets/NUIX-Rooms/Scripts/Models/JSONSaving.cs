@@ -60,13 +60,13 @@ public class JSONSaving : MonoBehaviour
         isSavingData = true;
         /// Should call itemService instead
         itemPresenter.RetrieveItemsParams();
-        print("saving data");
+        //print("saving data");
         string savePath = path;
 
-        Debug.Log("saving Data at " + savePath);
+        //Debug.Log("saving Data at " + savePath);
         if (LogText) LogText.text = "saving Data at " + savePath;
         string json = JsonUtility.ToJson(itemService.GetItems());
-        Debug.Log(json);
+        //Debug.Log(json);
         if (LogText) LogText.text += json;
 
         File.WriteAllText(savePath, json);
@@ -86,7 +86,7 @@ public class JSONSaving : MonoBehaviour
         string json = File.ReadAllText(path);
         
         itemService.SetItems(JsonUtility.FromJson<ItemsData>(json));
-        Debug.Log(itemService.GetItems().ToString());
+        //Debug.Log(itemService.GetItems().ToString());
         if (LogText) LogText.text += itemService.GetItems().ToString();
     }
 
@@ -95,10 +95,10 @@ public class JSONSaving : MonoBehaviour
     /// </summary>
     public void InstantiateData()
     {
-        InvokeRepeating(nameof(InstantiateAndUpdateDataAsync), 0f, 1f);
+        InvokeRepeating(nameof(InstantiateAndUpdateDataAsync), 0f, 0.5f);
         InvokeRepeating(nameof(SaveDataAsync), 0f, 0.05f);
-        InvokeRepeating(nameof(PushDataToServer), 1f, 5f);
-        InvokeRepeating(nameof(PullDataFromServer), 0.5f, 5f);
+        InvokeRepeating(nameof(PushDataToServer), 1f, 1f);
+        InvokeRepeating(nameof(PullDataFromServer), 0.5f, 1f);
     }
 
     private async Task InstantiateAndUpdateDataAsync()
@@ -133,7 +133,7 @@ public class JSONSaving : MonoBehaviour
 
         if (req.result == UnityWebRequest.Result.Success)
         {
-            Debug.Log("Received: " + req.downloadHandler.text);
+            //Debug.Log("Received: " + req.downloadHandler.text);
         }
         else
         {
@@ -149,11 +149,15 @@ public class JSONSaving : MonoBehaviour
     IEnumerator PullDataFromServerCoroutine()
     {
         var req = new UnityWebRequest(serverUrl + "getitems", "GET");
+
+        req.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        req.SetRequestHeader("Content-Type", "application/json");
+
         yield return req.SendWebRequest();
 
         if (req.result == UnityWebRequest.Result.Success)
         {
-            Debug.Log("Received: " + req.downloadHandler.text);
+            //Debug.Log("Received: " + req.downloadHandler.text);
             var text = req.downloadHandler.text;
             itemService.SetItemsFromServer(JsonUtility.FromJson<ItemsData>(text));
         }

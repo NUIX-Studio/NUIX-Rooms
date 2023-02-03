@@ -23,6 +23,6 @@ public class ButtonItemViewController: ItemViewController
     public void Press()
     {
         CallReceiverMethod(nameof(Press));
-        Debug.Log(itemID + " " + nameof(Press));
+        //Debug.Log(itemID + " " + nameof(Press));
     }
 }
